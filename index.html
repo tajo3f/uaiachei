@@ -1017,10 +1017,70 @@
            SISTEMA DE NOTIFICAÇÕES REALISTA
            ============================================================
         */
-        const f_nomes = ["Biel_027", "Thiago Silva", "Julia_M", "jp_ferreira", "Amanda_L", "Gui_Tech", "beatriz.oliveira", "Vinícius Jr", "Lucas_V", "Carla.S"];
-        const f_cidades = ["Afonso Cláudio", "São Paulo", "Vitória", "Cariacica", "Rio de Janeiro", "Curitiba", "Salvador", "Belo Horizonte"];
-        const f_acoes = ["acabou de garantir um achadinho!", "pegou uma promoção relâmpago!", "economizou R$ 45,00 agora!", "aproveitou o cupom de frete grátis!"];
-
+const f_nomes = ["Biel_027", "Thiago Silva", "Julia_M", "jp_ferreira", "Amanda_L", "Gui_Tech", "beatriz.oliveira", "Vinícius Jr", "Lucas_V", "Carla.S",
+"Rafa_Ofc", "Mariana Souza", "Felipe Costa", "Nathy_01", "João Pedro", "Camila Lima", "GustavoX", "Lari_Mendes", "Pedro Henrique", "Ana Clara",
+"Bruno_77", "Sophia Alves", "Matheus Lima", "Tata_028", "Gabriel Santos", "Isabela_M", "Daniel Rocha", "Mirella Souza", "Jean Carlos", "Fernanda A.",
+"Henrique_Dev", "Paula Moraes", "Caio Martins", "Yasmin_Real", "Murilo T", "Bianca_L", "Arthur V", "Kelly Silva", "Diego Souza", "Vanessa P.",
+"Leandro_027", "Talita M.", "Ricardo Lima", "Paty_Oficial", "Eduardo R", "Melissa Rocha", "Samuel V", "Natália Costa", "Ruan Tech", "Juliana F."];
+        
+const f_cidades = ["Afonso Cláudio", "Venda Nova do Imigrante", "Vitória", "Vila Velha", "Cariacica", "Serra", "Guarapari", "Linhares", "Colatina", "Aracruz",
+"Rio de Janeiro", "Niterói", "Duque de Caxias", "Nova Iguaçu", "Campos dos Goytacazes", "Volta Redonda", "Petrópolis", "Macaé", "Cabo Frio", "Angra dos Reis",
+"São Paulo", "Campinas", "Guarulhos", "Osasco", "Santos", "Sorocaba", "Ribeirão Preto", "São José dos Campos", "Barueri", "Jundiaí",
+"Belo Horizonte", "Contagem", "Betim", "Uberlândia", "Juiz de Fora", "Montes Claros", "Divinópolis", "Sete Lagoas", "Poços de Caldas", "Ipatinga",
+"Varginha", "Governador Valadares", "Taubaté", "São Gonçalo", "Itaboraí", "Mogi das Cruzes", "Maricá", "Nova Friburgo", "Vespasiano", "Santa Teresa"];
+        
+const f_acoes = [
+"acabou de garantir um achadinho!",
+"pegou uma promoção relâmpago!",
+"economizou R$ 45,00 agora!",
+"aproveitou o cupom de frete grátis!",
+"finalizou uma compra com desconto!",
+"comprou antes de esgotar!",
+"garantiu o último item disponível!",
+"acabou de aproveitar a oferta do dia!",
+"recebeu frete grátis na compra!",
+"economizou R$ 32,90 agora!",
+"pegou um super desconto exclusivo!",
+"garantiu preço baixo por tempo limitado!",
+"comprou com cashback especial!",
+"aproveitou a promoção surpresa!",
+"fechou pedido com preço imperdível!",
+"acabou de usar cupom secreto!",
+"garantiu desconto no carrinho!",
+"economizou R$ 59,90 agora!",
+"comprou com entrega grátis!",
+"aproveitou a chance antes de virar o preço!",
+"pegou uma oferta rara!",
+"finalizou a compra em minutos!",
+"comprou com desconto progressivo!",
+"garantiu item campeão de vendas!",
+"aproveitou preço promocional agora!",
+"economizou R$ 27,50 agora!",
+"acabou de comprar com mega desconto!",
+"pegou a oferta mais buscada!",
+"garantiu promoção exclusiva do app!",
+"comprou sem pagar frete!",
+"aproveitou cupom limitado!",
+"economizou R$ 73,00 agora!",
+"garantiu o produto queridinho do momento!",
+"acabou de pegar promoção flash!",
+"comprou com valor abaixo do normal!",
+"fechou pedido com vantagem extra!",
+"aproveitou saldo promocional!",
+"garantiu achado premium com desconto!",
+"pegou item em alta demanda!",
+"economizou R$ 18,90 agora!",
+"acabou de garantir desconto especial!",
+"comprou com oferta relâmpago ativa!",
+"aproveitou desconto de madrugada!",
+"garantiu item quase esgotado!",
+"finalizou pedido com super vantagem!",
+"pegou preço de oportunidade!",
+"comprou com cupom exclusivo!",
+"economizou R$ 64,99 agora!",
+"acabou de levar mais barato!",
+"aproveitou a melhor oferta disponível!"];
+        
         function triggerNotif() {
             const notif = document.getElementById('liveNotif');
             const txt = document.getElementById('notifText');
