@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uai, Achei na Shopee | Smart Engine v2.0</title>
+    <title>Uai, Achei na Shopee | Ofertas Para Todo Brasil</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -175,12 +175,12 @@
 
     <main>
         <section class="hero">
-            <div class="algo-status">Smart Engine: Active</div>
+            <div class="algo-status">Algoritmo Curador: ON</div>
             <div class="online-counter">
                 <span class="dot"></span>
                 <span id="user-count">...</span> usuários monitorando agora
             </div>
-            <h1><b>As melhores ofertas no</b> <br><span>BRASIL TODO</span></h1>
+            <h1><b>As melhores ofertas do</b> <br><span>BRASIL</span></h1>
             <p>Nosso algoritmo escaneia <strong>bugs de preços</strong> e ofertas exclusivas a cada segundo. O menor preço do país, agora no seu radar.</p>
         </section>
 
@@ -240,8 +240,18 @@
             { nome: "PRODUTO NOVO", old: "VALOR ANTIGO", new: "VALOR NOVO", img: "LINK DA IMAGEM", link: "LINK DA SHOPEE" }
         ];
 
-        const NOMES = ["André", "Beatriz", "Carlos", "Débora", "Enzo", "Flávia", "Gustavo", "Heloísa", "Igor", "Júlia"];
-        const CIDADES = ["São Paulo", "Rio de Janeiro", "BH", "Vitória", "Curitiba", "Salvador"];
+        const NOMES = [  "André Borges", "Tata", "Tusca", "Débora", "Enzo", "Flávia", "Gustavo", "Heloísa", "Igor", "Júlia",
+    "Lucas", "Mariana", "Rafael", "Camila", "Pedro", "Larissa", "Bruno", "Isabela", "Felipe", "Aline",
+    "Matheus", "Paulin", "Vinícius Marques", "Vinicin", "Amanda", "Daniel", "Bianca", "Thiago", "Letícia", "Gabriel", "Natália",
+    "João", "Laura", "Ricardo", "Patrícia", "Eduardo", "Juliana", "Diego", "Fernanda", "Caio", "Manuela",
+    "Arthur", "Nicole", "Henrique", "Valentina", "Samuel", "Carolina", "Davi", "Vitória", "Miguel", "Isadora"];
+        const CIDADES = ["Vitória", "Vila Velha", "Serra-ES", "Cariacica", "Viana", "Guarapari",
+    "Linhares", "Cachoeiro de Itapemirim", "São Mateus", "Colatina", "Aracruz",
+    "Nova Venécia", "Marataízes", "Itapemirim", "Fundão", "Santa Teresa",
+    "Afonso Cláudio", "Laranja da Terra", "Venda Nova do Imigrante",
+    "Santa Maria de Jetibá", "Domingos Martins", "Castelo", "Marechal Floriano",
+    "Baixo Guandu", "Sooretama", "Pinheiros", "Iúna", "Jerônimo Monteiro",
+    "Iconha", "Rio Bananal", "Pancas", "Rio de Janeiro", "Niterói", "São Gonçalo", "Duque de Caxias", "Nova Iguaçu","São Paulo", "Campinas", "Santos", "São Bernardo do Campo", "Osasco", "Guarulhos","Belo Horizonte", "Curitiba", "Salvador", "Recife", "Fortaleza"];
 
         function render() {
             document.getElementById('grid').innerHTML = PRODUTOS.map(p => `
