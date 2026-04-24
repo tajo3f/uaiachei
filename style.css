@@ -17,6 +17,25 @@ body{
   overflow-x:hidden;
 }
 
+/* Estilo base do card de depoimento */
+.test-card { 
+    background: var(--dark-card); 
+    padding: 50px; 
+    border-radius: 35px; 
+    border: 1px solid var(--border); 
+    text-align: left; 
+    /* A transição abaixo é essencial para o movimento ser suave e não um "pulo" */
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s;
+}
+
+/* Efeito ao passar o mouse */
+.test-card:hover {
+    /* O valor negativo (-20px) faz o elemento subir no eixo Y */
+    transform: translateY(-20px); 
+    border-color: var(--gold); /* Opcional: muda a borda para dourado ao subir */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); /* Adiciona uma sombra para dar profundidade */
+}
+
 /* =======================
 LOADER
 ======================= */
