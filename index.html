@@ -1,1138 +1,723 @@
+# UAI ACHEI NA SHOPEE — VERSÃO PROFISSIONAL CORRIGIDA (PARTE 1)
+
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uai, Achei na Shopee | O Maior Portal de Achadinhos do Brasil</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-    <style>
-        /* ============================================================
-           DESIGN SYSTEM & VARIÁVEIS TÉCNICAS
-           ============================================================
-        */
-        :root {
-            /* Palette Principal */
-            --primary: #FF4500; 
-            --primary-hover: #E63E00;
-            --primary-glow: rgba(255, 69, 0, 0.4);
-            
-            /* Palette de Luxo */
-            --gold: #D4AF37;
-            --gold-glow: rgba(212, 175, 55, 0.3);
-            
-            /* Grayscale / Dark Mode */
-            --dark-pure: #000000;
-            --dark-matte: #0D0D0D;
-            --dark-card: #161616;
-            --dark-hover: #1F1F1F;
-            
-            /* Status & Borders */
-            --border: rgba(255, 255, 255, 0.08);
-            --border-bright: rgba(255, 255, 255, 0.15);
-            --text-main: #FFFFFF;
-            --text-dim: #999999;
-            --text-muted: #666666;
-            --success: #00FF88;
-            
-            /* Efeitos */
-            --glass: rgba(13, 13, 13, 0.85);
-            --transition-ultra: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            --transition-fast: 0.3s ease;
-            --shadow-premium: 0 30px 60px rgba(0, 0, 0, 0.8);
-        }
-
-        /* ============================================================
-           RESET & BASE
-           ============================================================
-        */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        body {
-            background-color: var(--dark-pure);
-            color: var(--text-main);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition-fast);
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        button {
-            cursor: pointer;
-            border: none;
-            outline: none;
-            background: none;
-            transition: var(--transition-fast);
-        }
-
-        /* ============================================================
-           SCROLLBAR CUSTOMIZADA
-           ============================================================
-        */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--dark-pure);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(var(--primary), var(--gold));
-            border-radius: 20px;
-            border: 3px solid var(--dark-pure);
-        }
-
-        /* ============================================================
-           ANIMATED LOADER
-           ============================================================
-        */
-        #loader {
-            position: fixed;
-            inset: 0;
-            background: var(--dark-pure);
-            z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.8s ease, visibility 0.8s;
-        }
-
-        .loader-logo {
-            width: 180px;
-            margin-bottom: 30px;
-            filter: drop-shadow(0 0 10px var(--primary-glow));
-            animation: pulseLogo 2s infinite ease-in-out;
-        }
-
-        .loader-bar-container {
-            width: 280px;
-            height: 3px;
-            background: var(--border);
-            border-radius: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .loader-progress {
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--primary), var(--gold));
-            box-shadow: 0 0 15px var(--primary);
-            animation: fillProgress 2.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-        }
-
-        @keyframes fillProgress {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-
-        @keyframes pulseLogo {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.05); opacity: 1; }
-        }
-
-        /* ============================================================
-           LAYOUT: HEADER & NAVIGATION
-           ============================================================
-        */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 5000;
-            background: var(--glass);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-bottom: 1px solid var(--border);
-            padding: 20px 6%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        header.scrolled {
-            padding: 12px 6%;
-            background: rgba(0, 0, 0, 0.95);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .logo-wrapper img {
-            height: 55px;
-            width: auto;
-            transition: 0.4s;
-        }
-
-        header.scrolled .logo-wrapper img {
-            height: 45px;
-        }
-
-        .nav-desktop {
-            display: flex;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .nav-link {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            color: var(--primary);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: var(--primary);
-            transition: 0.3s;
-        }
-
-        .nav-link:hover::after, .nav-link.active::after {
-            width: 100%;
-        }
-
-        .cta-header {
-            background: var(--primary);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 100px;
-            font-weight: 800;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 10px 20px var(--primary-glow);
-        }
-
-        .cta-header:hover {
-            transform: translateY(-3px);
-            background: var(--primary-hover);
-            box-shadow: 0 15px 30px var(--primary-glow);
-        }
-
-        /* ============================================================
-           SEÇÃO: HERO (IMPACTO INICIAL)
-           ============================================================
-        */
-        .hero {
-            padding: 220px 6% 120px;
-            min-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(255, 69, 0, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 40%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            opacity: 0.05;
-            pointer-events: none;
-        }
-
-        .badge-hero {
-            background: rgba(255, 69, 0, 0.1);
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 8px 20px;
-            border-radius: 100px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 30px;
-            display: inline-block;
-        }
-
-        .hero h1 {
-            font-size: clamp(3.5rem, 10vw, 7.5rem);
-            font-weight: 800;
-            line-height: 0.85;
-            letter-spacing: -6px;
-            margin-bottom: 40px;
-        }
-
-        .hero h1 span {
-            color: var(--primary);
-            text-shadow: 0 0 50px var(--primary-glow);
-        }
-
-        .hero h1 em {
-            font-style: normal;
-            color: var(--gold);
-            display: block;
-        }
-
-        .hero p {
-            max-width: 800px;
-            font-size: 1.5rem;
-            color: var(--text-dim);
-            margin-bottom: 60px;
-            font-weight: 400;
-        }
-
-        /* ============================================================
-           SEÇÃO: CATEGORIAS EM DESTAQUE
-           ============================================================
-        */
-        .categories-strip {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 100px;
-            width: 100%;
-            max-width: 1200px;
-        }
-
-        .cat-box {
-            background: var(--dark-card);
-            border: 1px solid var(--border);
-            padding: 30px;
-            border-radius: 30px;
-            width: 220px;
-            text-align: center;
-            transition: var(--transition-ultra);
-        }
-
-        .cat-box i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .cat-box span {
-            font-weight: 800;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .cat-box:hover {
-            border-color: var(--primary);
-            transform: translateY(-10px);
-            background: var(--dark-hover);
-        }
-
-        /* ============================================================
-           FILTROS E BUSCA
-           ============================================================
-        */
-        .discovery-header {
-            padding: 80px 6% 40px;
-            background: var(--dark-matte);
-            border-radius: 60px 60px 0 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .search-bar-premium {
-            width: 100%;
-            max-width: 800px;
-            background: var(--dark-card);
-            border: 2px solid var(--border);
-            padding: 10px 30px;
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 40px;
-            transition: 0.3s;
-        }
-
-        .search-bar-premium:focus-within {
-            border-color: var(--primary);
-            box-shadow: 0 0 30px rgba(255, 69, 0, 0.15);
-        }
-
-        .search-bar-premium i {
-            font-size: 1.8rem;
-            color: var(--primary);
-        }
-
-        .search-bar-premium input {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            width: 100%;
-            outline: none;
-            padding: 15px 0;
-        }
-
-        /* ============================================================
-           GRID DE PRODUTOS (ESTILO PREMIUM)
-           ============================================================
-        */
-        .catalog-section {
-            background: var(--dark-matte);
-            padding-bottom: 120px;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 40px;
-            padding: 0 6%;
-        }
-
-        .card-achado {
-            background: var(--dark-card);
-            border: 1px solid var(--border);
-            border-radius: 45px;
-            padding: 25px;
-            transition: var(--transition-ultra);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-achado:hover {
-            transform: translateY(-15px) scale(1.02);
-            border-color: var(--primary);
-            box-shadow: var(--shadow-premium);
-        }
-
-        .card-img-container {
-            width: 100%;
-            aspect-ratio: 1/1;
-            border-radius: 35px;
-            overflow: hidden;
-            margin-bottom: 25px;
-            background: #222;
-            position: relative;
-        }
-
-        .card-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .card-achado:hover .card-img-container img {
-            transform: scale(1.15);
-        }
-
-        .card-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--primary);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 15px;
-            font-weight: 900;
-            font-size: 0.75rem;
-            z-index: 10;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .card-info h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            min-height: 3.5rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            line-height: 1.3;
-        }
-
-        .price-group {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 25px;
-        }
-
-        .price-old {
-            display: block;
-            color: var(--text-muted);
-            text-decoration: line-through;
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        .price-new {
-            display: block;
-            color: var(--success);
-            font-size: 2.2rem;
-            font-weight: 800;
-            line-height: 1;
-        }
-
-        .btn-buy {
-            width: 100%;
-            background: white;
-            color: black;
-            padding: 22px;
-            border-radius: 22px;
-            font-weight: 900;
-            font-size: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .card-achado:hover .btn-buy {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 15px 30px var(--primary-glow);
-        }
-
-        /* ============================================================
-           SEÇÃO: DEPOIMENTOS (SOCIAL PROOF)
-           ============================================================
-        */
-        .testimonials {
-            padding: 140px 6%;
-            background: var(--dark-pure);
-            text-align: center;
-        }
-
-        .testimonials h2 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: -2px;
-        }
-
-        .testimonials h2 span { color: var(--gold); }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-top: 80px;
-            max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .test-card {
-            background: var(--dark-card);
-            border: 1px solid var(--border);
-            padding: 50px;
-            border-radius: 40px;
-            text-align: left;
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s, border-color 0.5s;
-            position: relative;
-        }
-
-        /* EFEITO DE LEVANTE SOLICITADO */
-        .test-card:hover {
-            transform: translateY(-25px);
-            border-color: var(--gold);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
-        }
-
-        .test-card i.quotes {
-            position: absolute;
-            top: 40px;
-            right: 40px;
-            font-size: 3rem;
-            color: rgba(212, 175, 55, 0.1);
-        }
-
-        .stars-row {
-            color: var(--gold);
-            margin-bottom: 25px;
-            font-size: 1.2rem;
-        }
-
-        .test-card p {
-            font-size: 1.15rem;
-            color: var(--text-main);
-            font-weight: 500;
-            font-style: italic;
-            line-height: 1.7;
-            margin-bottom: 35px;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .user-avatar {
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            color: white;
-        }
-
-        .user-meta b {
-            display: block;
-            color: var(--gold);
-            font-size: 1.1rem;
-        }
-
-        /* ============================================================
-           NOTIFICAÇÕES AO VIVO (SISTEMA REALISTA)
-           ============================================================
-        */
-        .live-notif {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            background: white;
-            color: black;
-            padding: 20px 30px;
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-            z-index: 9999;
-            transform: translateY(250px);
-            transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            max-width: 400px;
-        }
-
-        .live-notif.show {
-            transform: translateY(0);
-        }
-
-        .notif-pulse {
-            width: 14px;
-            height: 14px;
-            background: var(--primary);
-            border-radius: 50%;
-            position: relative;
-        }
-
-        .notif-pulse::after {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            border: 2px solid var(--primary);
-            animation: pulseNotif 1.5s infinite;
-        }
-
-        @keyframes pulseNotif {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(2); opacity: 0; }
-        }
-
-        .notif-content b {
-            font-weight: 800;
-            color: var(--primary);
-        }
-
-        /* ============================================================
-           FOOTER (RODAPÉ PREMIUM)
-           ============================================================
-        */
-        footer {
-            padding: 120px 6% 60px;
-            background: var(--dark-matte);
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 80px;
-            margin-bottom: 80px;
-        }
-
-        .footer-logo {
-            height: 70px;
-            margin-bottom: 30px;
-        }
-
-        .footer-col h4 {
-            color: var(--primary);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 35px;
-        }
-
-        .footer-col li {
-            margin-bottom: 18px;
-            color: var(--text-dim);
-            font-weight: 600;
-        }
-
-        .footer-col li:hover {
-            color: white;
-            transform: translateX(5px);
-        }
-
-        .newsletter-footer {
-            background: var(--dark-card);
-            border: 1px solid var(--border);
-            padding: 10px;
-            border-radius: 20px;
-            display: flex;
-            margin-top: 20px;
-        }
-
-        .newsletter-footer input {
-            background: transparent;
-            border: none;
-            padding: 15px;
-            color: white;
-            flex: 1;
-            outline: none;
-        }
-
-        .newsletter-footer button {
-            background: var(--primary);
-            padding: 0 25px;
-            border-radius: 15px;
-            color: white;
-            font-weight: 800;
-        }
-
-        .copyright-bar {
-            text-align: center;
-            padding-top: 40px;
-            border-top: 1px solid var(--border);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        /* ============================================================
-           RESPONSIVIDADE (MOBILE OPTIMIZATION)
-           ============================================================
-        */
-        @media (max-width: 1200px) {
-            .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
-            .hero h1 { font-size: 5rem; }
-        }
-
-        @media (max-width: 900px) {
-            .nav-desktop { display: none; }
-            .testimonial-grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 4rem; letter-spacing: -3px; }
-            .cat-box { width: 100%; }
-            .live-notif { left: 20px; right: 20px; bottom: 20px; }
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Uai Achei na Shopee | Achadinhos Reais</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+<style>
+
+/* =====================================================
+RESET
+===================================================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Plus Jakarta Sans',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#000;
+color:#fff;
+overflow-x:hidden;
+}
+
+/* =====================================================
+VARIÁVEIS
+===================================================== */
+
+:root{
+--laranja:#ff4500;
+--laranja2:#ff5a1f;
+--verde:#00ff88;
+--cinza:#999;
+--cinza2:#666;
+--card:#141414;
+--card2:#1d1d1d;
+--borda:rgba(255,255,255,.08);
+}
+
+/* =====================================================
+HEADER
+===================================================== */
+
+header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+z-index:999;
+padding:18px 6%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,.88);
+backdrop-filter:blur(12px);
+border-bottom:1px solid var(--borda);
+}
+
+.logo{
+height:58px;
+}
+
+nav{
+display:flex;
+gap:35px;
+align-items:center;
+}
+
+nav a{
+color:#fff;
+text-decoration:none;
+font-weight:700;
+font-size:14px;
+position:relative;
+}
+
+nav a::after{
+content:'';
+position:absolute;
+left:0;
+bottom:-6px;
+width:0;
+height:2px;
+background:var(--laranja);
+transition:.3s;
+}
+
+nav a:hover::after{
+width:100%;
+}
+
+.btn-insta{
+background:var(--laranja);
+padding:12px 22px;
+border-radius:100px;
+font-weight:800;
+text-decoration:none;
+color:#fff;
+font-size:14px;
+}
+
+/* =====================================================
+HERO
+===================================================== */
+
+.hero{
+padding:180px 6% 90px;
+text-align:center;
+}
+
+.badge{
+display:inline-block;
+padding:10px 18px;
+border-radius:100px;
+background:rgba(255,69,0,.12);
+border:1px solid var(--laranja);
+color:var(--laranja);
+font-weight:800;
+font-size:12px;
+margin-bottom:28px;
+}
+
+.hero h1{
+font-size:72px;
+line-height:1;
+font-weight:800;
+margin-bottom:25px;
+}
+
+.hero h1 span{
+color:var(--laranja);
+}
+
+.hero p{
+max-width:800px;
+margin:auto;
+font-size:22px;
+color:var(--cinza);
+line-height:1.6;
+}
+
+/* =====================================================
+CATEGORIAS
+===================================================== */
+
+.categorias{
+margin-top:70px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+gap:18px;
+}
+
+.cat{
+background:var(--card);
+border:1px solid var(--borda);
+padding:28px 20px;
+border-radius:24px;
+text-align:center;
+transition:.3s;
+}
+
+.cat:hover{
+transform:translateY(-8px);
+border-color:var(--laranja);
+}
+
+.cat i{
+font-size:38px;
+display:block;
+margin-bottom:14px;
+color:var(--laranja);
+
+/* CORREÇÃO ÍCONES SUMINDO */
+opacity:1 !important;
+visibility:visible !important;
+transform:none !important;
+}
+
+.cat span{
+font-weight:800;
+font-size:14px;
+}
+
+/* =====================================================
+BUSCA
+===================================================== */
+
+.busca{
+padding:50px 6%;
+}
+
+.busca-box{
+background:#111;
+border:1px solid var(--borda);
+border-radius:20px;
+padding:0 20px;
+display:flex;
+align-items:center;
+gap:15px;
+max-width:800px;
+margin:auto;
+}
+
+.busca-box i{
+font-size:24px;
+color:var(--laranja);
+}
+
+.busca-box input{
+width:100%;
+height:60px;
+background:none;
+border:none;
+outline:none;
+color:#fff;
+font-size:16px;
+}
+
+/* =====================================================
+PRODUTOS
+===================================================== */
+
+.produtos{
+padding:10px 6% 100px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:24px;
+}
+
+/* CORREÇÃO:
+produtos menores e mais elegantes
+*/
+
+.card{
+background:var(--card);
+border:1px solid var(--borda);
+border-radius:26px;
+padding:18px;
+transition:.35s;
+display:flex;
+flex-direction:column;
+}
+
+.card:hover{
+transform:translateY(-10px);
+border-color:var(--laranja);
+}
+
+.card img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:18px;
+margin-bottom:15px;
+}
+
+.tag{
+background:var(--laranja);
+padding:7px 12px;
+border-radius:100px;
+font-size:12px;
+font-weight:800;
+display:inline-block;
+margin-bottom:12px;
+}
+
+.card h3{
+font-size:17px;
+line-height:1.4;
+margin-bottom:14px;
+
+/* CORREÇÃO nome aparecendo todo */
+min-height:auto;
+display:block;
+overflow:visible;
+}
+
+.old{
+color:var(--cinza2);
+text-decoration:line-through;
+font-size:14px;
+display:block;
+}
+
+.new{
+color:var(--verde);
+font-size:28px;
+font-weight:800;
+display:block;
+margin-bottom:16px;
+}
+
+.card a{
+text-decoration:none;
+background:#fff;
+color:#000;
+text-align:center;
+padding:14px;
+border-radius:14px;
+font-weight:800;
+}
+
+.card a:hover{
+background:var(--laranja);
+color:#fff;
+}
+
+/* =====================================================
+INSTAGRAM CTA FOOTER
+===================================================== */
+
+footer{
+padding:90px 6%;
+background:#0d0d0d;
+border-top:1px solid var(--borda);
+text-align:center;
+}
+
+footer h2{
+font-size:38px;
+margin-bottom:18px;
+}
+
+footer p{
+color:var(--cinza);
+max-width:700px;
+margin:auto;
+line-height:1.7;
+margin-bottom:30px;
+}
+
+footer a{
+display:inline-block;
+padding:16px 28px;
+background:var(--laranja);
+border-radius:100px;
+text-decoration:none;
+color:#fff;
+font-weight:800;
+}
+
+/* =====================================================
+NOTIFICAÇÃO
+===================================================== */
+
+.notif{
+position:fixed;
+right:25px;
+bottom:25px;
+background:#fff;
+color:#000;
+padding:18px 22px;
+border-radius:20px;
+box-shadow:0 20px 50px rgba(0,0,0,.45);
+z-index:9999;
+transform:translateY(180px);
+transition:.4s;
+max-width:320px;
+}
+
+.notif.show{
+transform:translateY(0);
+}
+
+/* =====================================================
+RESPONSIVO
+===================================================== */
+
+@media(max-width:900px){
+
+nav{
+display:none;
+}
+
+.hero h1{
+font-size:48px;
+}
+
+.hero p{
+font-size:18px;
+}
+
+footer h2{
+font-size:28px;
+}
+
+}
+
+</style>
 </head>
+
 <body>
 
-    <div id="loader">
-        <img src="https://i.postimg.cc/NfMGQByv/Chat-GPT-Image-24-de-abr-de-2026-11-15-07.png" class="loader-logo" alt="Logo Uai Achei">
-        <div class="loader-bar-container">
-            <div class="loader-progress"></div>
-        </div>
-    </div>
+<header>
 
-    <div class="live-notif" id="liveNotif">
-        <div class="notif-pulse"></div>
-        <div class="notif-content">
-            <p id="notifText">Carregando ofertas...</p>
-        </div>
-    </div>
+<img src="https://i.postimg.cc/NfMGQByv/Chat-GPT-Image-24-de-abr-de-2026-11-15-07.png" class="logo">
 
-    <header id="mainHeader">
-        <a href="#" class="logo-wrapper">
-            <img src="https://i.postimg.cc/NfMGQByv/Chat-GPT-Image-24-de-abr-de-2026-11-15-07.png" alt="Uai Achei">
-        </a>
+<nav>
+<a href="#">Início</a>
+<a href="#produtos">Achadinhos</a>
+<a href="#insta">Instagram</a>
+</nav>
 
-        <nav class="nav-desktop">
-            <a href="#inicio" class="nav-link active">Início</a>
-            <a href="#achadinhos" class="nav-link">Achadinhos</a>
-            <a href="#depoimentos" class="nav-link">Depoimentos</a>
-            <a href="#contato" class="nav-link">Suporte</a>
-        </nav>
+<a class="btn-insta" target="_blank"
+href="https://www.instagram.com/uaiacheibr">
+@uaiacheibr
+</a>
 
-        <a href="https://instagram.com" target="_blank" class="cta-header">
-            <i class="ph ph-instagram-logo"></i> @UAIACHEIBR
-        </a>
-    </header>
+</header>
 
-    <main>
-        <section class="hero" id="inicio">
-            <div class="badge-hero">🔥 O MAIOR PORTAL DE ACHADOS DA SHOPEE</div>
-            <h1>A Curadoria <span>Mais Insana</span> <em>Do Brasil.</em></h1>
-            <p>Nós testamos milhares de produtos diariamente para você não cair em ciladas. Qualidade premium, preço de atacado e segurança total.</p>
-            
-            <div class="categories-strip">
-                <div class="cat-box">
-                    <i class="ph ph-device-mobile"></i>
-                    <span>Tecnologia</span>
-                </div>
-                <div class="cat-box">
-                    <i class="ph ph-house-line"></i>
-                    <span>Casa & Decor</span>
-                </div>
-                <div class="cat-box">
-                    <i class="ph ph-sketch-logo"></i>
-                    <span>Utilitários</span>
-                </div>
-                <div class="cat-box">
-                    <i class="ph ph-dress"></i>
-                    <span>Moda</span>
-                </div>
-                <div class="cat-box">
-                    <i class="ph ph-game-controller"></i>
-                    <span>Gamer</span>
-                </div>
-            </div>
-        </section>
+<section class="hero">
 
-        <section class="catalog-section" id="achadinhos">
-            <div class="discovery-header">
-                <div class="search-bar-premium">
-                    <i class="ph ph-magnifying-glass"></i>
-                    <input type="text" id="searchInput" placeholder="Busque por um produto, marca ou categoria...">
-                </div>
-            </div>
+<div class="badge">
+🔥 O MAIOR PORTAL DE ACHADINHOS
+</div>
 
-            <div class="product-grid" id="masterGrid">
-                </div>
-        </section>
+<h1>
+Os Melhores <span>Achados</span><br>
+da Shopee
+</h1>
 
-        <section class="testimonials" id="depoimentos">
-            <h2>O Que Dizem os <span>Achadores</span></h2>
-            <div class="testimonial-grid">
-                
-                <div class="test-card">
-                    <i class="ph ph-quotes quotes"></i>
-                    <div class="stars-row">★★★★★</div>
-                    <p>"A curadoria é perfeita. Todos os itens que comprei até hoje são de excelente qualidade e chegaram rápido."</p>
-                    <div class="user-info">
-                        <div class="user-avatar">F</div>
-                        <div class="user-meta">
-                            <b>@flamen_guista010</b>
-                            <small>Comprador Verificado</small>
-                        </div>
-                    </div>
-                </div>
+<p>
+Produtos escolhidos a dedo, promoções reais e ofertas que valem a pena.
+</p>
 
-                <div class="test-card">
-                    <i class="ph ph-quotes quotes"></i>
-                    <div class="stars-row">★★★★★</div>
-                    <p>"Finalmente uma página que realmente testa os links antes de postar. Economizei muito no meu setup gamer."</p>
-                    <div class="user-info">
-                        <div class="user-avatar">J</div>
-                        <div class="user-meta">
-                            <b>@jottape028</b>
-                            <small>Comprador Verificado</small>
-                        </div>
-                    </div>
-                </div>
+<div class="categorias">
 
-                <div class="test-card">
-                    <i class="ph ph-quotes quotes"></i>
-                    <div class="stars-row">★★★★★</div>
-                    <p>"O Instagram deles é o meu vício diário. Só promoção top de verdade! Recomendo para todo mundo."</p>
-                    <div class="user-info">
-                        <div class="user-avatar">A</div>
-                        <div class="user-meta">
-                            <b>@alynaofc</b>
-                            <small>Compradora Verificada</small>
-                        </div>
-                    </div>
-                </div>
+<div class="cat">
+<i class="ph ph-device-mobile"></i>
+<span>Tecnologia</span>
+</div>
 
-            </div>
-        </section>
-    </main>
+<div class="cat">
+<i class="ph ph-house"></i>
+<span>Casa</span>
+</div>
 
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <img src="https://i.postimg.cc/NfMGQByv/Chat-GPT-Image-24-de-abr-de-2026-11-15-07.png" class="footer-logo" alt="Uai Achei">
-                <p style="color: var(--text-dim); line-height: 1.8;">Transformamos sua experiência de compra na Shopee. Menos buscas cansativas, mais economia real e produtos testados por especialistas.</p>
-            </div>
-            
-            <div class="footer-col">
-                <h4>Menu</h4>
-                <ul>
-                    <li>Início</li>
-                    <li>Achadinhos</li>
-                    <li>Depoimentos</li>
-                    <li>Termos de Uso</li>
-                </ul>
-            </div>
+<div class="cat">
+<i class="ph ph-t-shirt"></i>
+<span>Moda</span>
+</div>
 
-            <div class="footer-col">
-                <h4>Categorias</h4>
-                <ul>
-                    <li>Eletrônicos</li>
-                    <li>Casa & Cozinha</li>
-                    <li>Estilo de Vida</li>
-                    <li>Promoções</li>
-                </ul>
-            </div>
+<div class="cat">
+<i class="ph ph-game-controller"></i>
+<span>Gamer</span>
+</div>
 
-            <div class="footer-col">
-                <h4>Newsletter</h4>
-                <p style="color: var(--text-muted); font-size: 0.85rem;">Receba cupons bugados e ofertas relâmpago no seu e-mail.</p>
-                <div class="newsletter-footer">
-                    <input type="email" placeholder="Seu melhor e-mail">
-                    <button>OK</button>
-                </div>
-            </div>
-        </div>
+<div class="cat">
+<i class="ph ph-bag"></i>
+<span>Utilidades</span>
+</div>
 
-        <div class="copyright-bar">
-            © 2026 Uai, Achei na Shopee - Todos os direitos reservados. Links afiliados oficiais.
-        </div>
-    </footer>
+</div>
 
-    <script>
-        /* ============================================================
-           LÓGICA DO BANCO DE DADOS (30 PRODUTOS)
-           ============================================================
-        */
-        const PRODUTOS_DATABASE = [];
-        
-        // Loop para gerar 30 slots de produtos editáveis
-        for(let i = 1; i <= 30; i++) {
-            PRODUTOS_DATABASE.push({
-                id: i,
-                titulo: `PRODUTO ACHADINHO #${i < 10 ? '0'+i : i}`,
-                precoDe: "R$ 00,00",
-                precoPor: "R$ 00,00",
-                imagem: "https://via.placeholder.com/600", // Substituir pelas URLs reais
-                link: "https://shopee.com.br", // Link do afiliado
-                tag: "OFERTA"
-            });
-        }
+</section>
 
-        /* ============================================================
-           MOTOR DE RENDERIZAÇÃO
-           ============================================================
-        */
-        function renderCatalogo(lista) {
-            const grid = document.getElementById('masterGrid');
-            grid.innerHTML = '';
-            
-            lista.forEach(prod => {
-                const card = `
-                    <div class="card-achado" data-aos="fade-up">
-                        <div class="card-badge">${prod.tag}</div>
-                        <div class="card-img-container">
-                            <img src="${prod.imagem}" alt="${prod.titulo}" loading="lazy">
-                        </div>
-                        <div class="card-info">
-                            <h3>${prod.titulo}</h3>
-                            <div class="price-group">
-                                <div>
-                                    <span class="price-old">${prod.precoDe}</span>
-                                    <span class="price-new">${prod.precoPor}</span>
-                                </div>
-                            </div>
-                            <a href="${prod.link}" target="_blank" class="btn-buy">
-                                <i class="ph ph-shopping-cart"></i> COMPRAR NA SHOPEE
-                            </a>
-                        </div>
-                    </div>
-                `;
-                grid.innerHTML += card;
-            });
-        }
+<section class="busca">
 
-        /* ============================================================
-           SISTEMA DE BUSCA EM TEMPO REAL
-           ============================================================
-        */
-        const searchInput = document.getElementById('searchInput');
-        searchInput.addEventListener('input', (e) => {
-            const termo = e.target.value.toLowerCase();
-            const filtrados = PRODUTOS_DATABASE.filter(p => 
-                p.titulo.toLowerCase().includes(termo)
-            );
-            renderCatalogo(filtrados);
-        });
+<div class="busca-box">
+<i class="ph ph-magnifying-glass"></i>
+<input type="text" id="buscar" placeholder="Buscar produto...">
+</div>
 
-        /* ============================================================
-           SISTEMA DE NOTIFICAÇÕES REALISTA
-           ============================================================
-        */
-const f_nomes = ["Biel_027", "Thiago Silva", "Julia_M", "jp_ferreira", "Amanda_L", "Gui_Tech", "beatriz.oliveira", "Vinícius Jr", "Lucas_V", "Carla.S",
-"Rafa_Ofc", "Mariana Souza", "Felipe Costa", "Nathy_01", "João Pedro", "Camila Lima", "GustavoX", "Lari_Mendes", "Pedro Henrique", "Ana Clara",
-"Bruno_77", "Sophia Alves", "Matheus Lima", "Tata_028", "Gabriel Santos", "Isabela_M", "Daniel Rocha", "Mirella Souza", "Jean Carlos", "Fernanda A.",
-"Henrique_Dev", "Paula Moraes", "Caio Martins", "Yasmin_Real", "Murilo T", "Bianca_L", "Arthur V", "Kelly Silva", "Diego Souza", "Vanessa P.",
-"Leandro_027", "Talita M.", "Ricardo Lima", "Paty_Oficial", "Eduardo R", "Melissa Rocha", "Samuel V", "Natália Costa", "Ruan Tech", "Juliana F."];
-        
-const f_cidades = ["Afonso Cláudio", "Venda Nova do Imigrante", "Vitória", "Vila Velha", "Cariacica", "Serra", "Guarapari", "Linhares", "Colatina", "Aracruz",
-"Rio de Janeiro", "Niterói", "Duque de Caxias", "Nova Iguaçu", "Campos dos Goytacazes", "Volta Redonda", "Petrópolis", "Macaé", "Cabo Frio", "Angra dos Reis",
-"São Paulo", "Campinas", "Guarulhos", "Osasco", "Santos", "Sorocaba", "Ribeirão Preto", "São José dos Campos", "Barueri", "Jundiaí",
-"Belo Horizonte", "Contagem", "Betim", "Uberlândia", "Juiz de Fora", "Montes Claros", "Divinópolis", "Sete Lagoas", "Poços de Caldas", "Ipatinga",
-"Varginha", "Governador Valadares", "Taubaté", "São Gonçalo", "Itaboraí", "Mogi das Cruzes", "Maricá", "Nova Friburgo", "Vespasiano", "Santa Teresa"];
-        
-const f_acoes = [
-"acabou de garantir um achadinho!",
-"pegou uma promoção relâmpago!",
-"economizou R$ 45,00 agora!",
-"aproveitou o cupom de frete grátis!",
-"finalizou uma compra com desconto!",
-"comprou antes de esgotar!",
-"garantiu o último item disponível!",
-"acabou de aproveitar a oferta do dia!",
-"recebeu frete grátis na compra!",
-"economizou R$ 32,90 agora!",
-"pegou um super desconto exclusivo!",
-"garantiu preço baixo por tempo limitado!",
-"comprou com cashback especial!",
-"aproveitou a promoção surpresa!",
-"fechou pedido com preço imperdível!",
-"acabou de usar cupom secreto!",
-"garantiu desconto no carrinho!",
-"economizou R$ 59,90 agora!",
-"comprou com entrega grátis!",
-"aproveitou a chance antes de virar o preço!",
-"pegou uma oferta rara!",
-"finalizou a compra em minutos!",
-"comprou com desconto progressivo!",
-"garantiu item campeão de vendas!",
-"aproveitou preço promocional agora!",
-"economizou R$ 27,50 agora!",
-"acabou de comprar com mega desconto!",
-"pegou a oferta mais buscada!",
-"garantiu promoção exclusiva do app!",
-"comprou sem pagar frete!",
-"aproveitou cupom limitado!",
-"economizou R$ 73,00 agora!",
-"garantiu o produto queridinho do momento!",
-"acabou de pegar promoção flash!",
-"comprou com valor abaixo do normal!",
-"fechou pedido com vantagem extra!",
-"aproveitou saldo promocional!",
-"garantiu achado premium com desconto!",
-"pegou item em alta demanda!",
-"economizou R$ 18,90 agora!",
-"acabou de garantir desconto especial!",
-"comprou com oferta relâmpago ativa!",
-"aproveitou desconto de madrugada!",
-"garantiu item quase esgotado!",
-"finalizou pedido com super vantagem!",
-"pegou preço de oportunidade!",
-"comprou com cupom exclusivo!",
-"economizou R$ 64,99 agora!",
-"acabou de levar mais barato!",
-"aproveitou a melhor oferta disponível!"];
-        
-        function triggerNotif() {
-            const notif = document.getElementById('liveNotif');
-            const txt = document.getElementById('notifText');
-            
-            const n = f_nomes[Math.floor(Math.random() * f_nomes.length)];
-            const c = f_cidades[Math.floor(Math.random() * f_cidades.length)];
-            const a = f_acoes[Math.floor(Math.random() * f_acoes.length)];
-            
-            txt.innerHTML = `<b>${n}</b> de ${c} ${a}`;
-            
-            notif.classList.add('show');
-            
-            setTimeout(() => {
-                notif.classList.remove('show');
-            }, 5000);
+</section>
 
-            // Intervalo aleatório para parecer real (entre 8s e 20s)
-            const randomTime = Math.floor(Math.random() * (20000 - 8000 + 1)) + 8000;
-            setTimeout(triggerNotif, randomTime);
-        }
+<section class="produtos" id="produtos">
 
-        /* ============================================================
-           INICIALIZAÇÃO & EFEITOS DE SCROLL
-           ============================================================
-        */
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('mainHeader');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+<!-- PRODUTOS FÁCEIS DE EDITAR -->
 
-        window.addEventListener('load', () => {
-            // Loader logic
-            setTimeout(() => {
-                const loader = document.getElementById('loader');
-                loader.style.opacity = '0';
-                setTimeout(() => {
-                    loader.style.visibility = 'hidden';
-                    renderCatalogo(PRODUTOS_DATABASE);
-                    triggerNotif();
-                    
-                    // GSAP Animações de Entrada
-                    gsap.from(".hero h1", { y: 100, opacity: 0, duration: 1.2, ease: "power4.out" });
-                    gsap.from(".hero p", { y: 50, opacity: 0, duration: 1.2, delay: 0.3 });
-                    gsap.from(".cat-box", { scale: 0.5, opacity: 0, duration: 1, stagger: 0.1, delay: 0.5 });
-                }, 800);
-            }, 2500);
-        });
+<div class="card">
+<span class="tag">OFERTA</span>
+<img src="https://picsum.photos/500?1">
+<h3>FONE BLUETOOTH PREMIUM</h3>
+<span class="old">R$ 199,90</span>
+<span class="new">R$ 79,90</span>
+<a target="_blank" href="#">COMPRAR</a>
+</div>
 
-    </script>
+<div class="card">
+<span class="tag">TOP</span>
+<img src="https://picsum.photos/500?2">
+<h3>SMARTWATCH MODERNO</h3>
+<span class="old">R$ 249,90</span>
+<span class="new">R$ 99,90</span>
+<a target="_blank" href="#">COMPRAR</a>
+</div>
+
+<div class="card">
+<span class="tag">DESCONTO</span>
+<img src="https://picsum.photos/500?3">
+<h3>LUMINÁRIA LED QUARTO GAMER</h3>
+<span class="old">R$ 89,90</span>
+<span class="new">R$ 39,90</span>
+<a target="_blank" href="#">COMPRAR</a>
+</div>
+
+   ```html id="k4s8pw"
+
+<!-- ==========================================
+PARTE 2
+Cole abaixo da última DIV de produto
+========================================== -->
+
+<div class="card">
+<span class="tag">FLASH</span>
+<img src="https://picsum.photos/500?4">
+<h3>SUPORTE CELULAR VEICULAR</h3>
+<span class="old">R$ 59,90</span>
+<span class="new">R$ 24,90</span>
+<a target="_blank" href="#">COMPRAR</a>
+</div>
+
+<div class="card">
+<span class="tag">OFERTA</span>
+<img src="https://picsum.photos/500?5">
+<h3>CAIXA DE SOM BLUETOOTH</h3>
+<span class="old">R$ 159,90</span>
+<span class="new">R$ 74,90</span>
+<a target="_blank" href="#">COMPRAR</a>
+</div>
+
+<div class="card">
+<span class="tag">TOP</span>
+<img src="https://picsum.photos/500?6">
+<h3>KIT ORGANIZADOR DE COZINHA</h3>
+<span class="old">R$ 89,90</span>
+<span class="new">R$ 37,90</span>
+<a target="_blank" href="#">COMPRAR</a>
+</div>
+
+<div class="card">
+<span class="tag">PROMO</span>
+<img src="https://picsum.photos/500?7">
+<h3>MINI ASPIRADOR PORTÁTIL</h3>
+<span class="old">R$ 139,90</span>
+<span class="new">R$ 58,90</span>
+<a target="_blank" href="#">COMPRAR</a>
+</div>
+
+<div class="card">
+<span class="tag">OFERTA</span>
+<img src="https://picsum.photos/500?8">
+<h3>TECLADO GAMER RGB MECÂNICO</h3>
+<span class="old">R$ 249,90</span>
+<span class="new">R$ 119,90</span>
+<a target="_blank" href="#">COMPRAR</a>
+</div>
+
+<div class="card">
+<span class="tag">TOP</span>
+<img src="https://picsum.photos/500?9">
+<h3>MOUSE GAMER LED</h3>
+<span class="old">R$ 99,90</span>
+<span class="new">R$ 42,90</span>
+<a target="_blank" href="#">COMPRAR</a>
+</div>
+
+<div class="card">
+<span class="tag">FLASH</span>
+<img src="https://picsum.photos/500?10">
+<h3>ANEL DE LUZ PROFISSIONAL</h3>
+<span class="old">R$ 129,90</span>
+<span class="new">R$ 49,90</span>
+<a target="_blank" href="#">COMPRAR</a>
+</div>
+
+</section>
+
+<!-- ==========================================
+RODAPÉ COM INSTAGRAM
+========================================== -->
+
+<footer id="insta">
+
+<h2>Siga no Instagram</h2>
+
+<p>
+Receba ofertas novas todos os dias, promoções relâmpago,
+cupons secretos e os melhores achadinhos direto no seu Instagram.
+</p>
+
+<a target="_blank"
+href="https://www.instagram.com/uaiacheibr">
+SEGUIR @uaiacheibr
+</a>
+
+</footer>
+
+<!-- ==========================================
+NOTIFICAÇÃO
+========================================== -->
+
+<div class="notif" id="notif">
+Alguém acabou de comprar um achadinho 🔥
+</div>
+
+<!-- ==========================================
+JAVASCRIPT FINAL
+========================================== -->
+
+<script>
+
+/* ==========================================
+BUSCA DE PRODUTOS
+========================================== */
+
+const campoBusca = document.getElementById("buscar");
+const cards = document.querySelectorAll(".card");
+
+campoBusca.addEventListener("keyup", function(){
+
+let termo = this.value.toLowerCase();
+
+cards.forEach(card => {
+
+let titulo = card.querySelector("h3").innerText.toLowerCase();
+
+if(titulo.includes(termo)){
+card.style.display = "flex";
+}else{
+card.style.display = "none";
+}
+
+});
+
+});
+
+/* ==========================================
+NOTIFICAÇÃO AUTOMÁTICA
+========================================== */
+
+const notif = document.getElementById("notif");
+
+const nomes = [
+"Thiago","Amanda","JP","Julia","Carlos",
+"Fernanda","Lucas","Mariana","Pedro","Camila"
+];
+
+const cidades = [
+"Vitória","Afonso Cláudio","Vila Velha",
+"Serra","Cariacica","Rio de Janeiro",
+"São Paulo","Belo Horizonte"
+];
+
+const frases = [
+"acabou de comprar um produto!",
+"garantiu promoção relâmpago!",
+"aproveitou frete grátis!",
+"pegou um mega desconto!",
+"comprou antes de acabar!"
+];
+
+function mostrarNotif(){
+
+let nome = nomes[Math.floor(Math.random()*nomes.length)];
+let cidade = cidades[Math.floor(Math.random()*cidades.length)];
+let frase = frases[Math.floor(Math.random()*frases.length)];
+
+notif.innerHTML =
+"<b>" + nome + "</b> de " + cidade + " " + frase;
+
+notif.classList.add("show");
+
+setTimeout(()=>{
+notif.classList.remove("show");
+},4000);
+
+}
+
+setInterval(mostrarNotif,9000);
+
+/* ==========================================
+HEADER SOMBRA AO ROLAR
+========================================== */
+
+window.addEventListener("scroll", ()=>{
+
+const header = document.querySelector("header");
+
+if(window.scrollY > 20){
+header.style.boxShadow = "0 10px 30px rgba(0,0,0,.35)";
+}else{
+header.style.boxShadow = "none";
+}
+
+});
+
+/* ==========================================
+CORREÇÃO EXTRA ÍCONES
+========================================== */
+
+window.addEventListener("load", ()=>{
+
+document.querySelectorAll(".cat i").forEach(icon=>{
+icon.style.opacity = "1";
+icon.style.visibility = "visible";
+});
+
+});
+
+</script>
+
 </body>
 </html>
+```
+ 
