@@ -2,234 +2,262 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Uai, Achei na Shopee | O Maior Portal de Achadinhos do Brasil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uai, Achei na Shopee | O Gigante do Sudeste</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Inter:wght@900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
     <style>
         :root {
-            --primary: #FF4500; 
-            --dark-pure: #000000;
-            --dark-matte: #080808;
-            --dark-card: #111111;
-            --border: rgba(255, 255, 255, 0.12);
+            --primary: #FF4500;
+            --primary-glow: rgba(255, 69, 0, 0.4);
+            --bg-dark: #000000;
+            --card-bg: rgba(15, 15, 15, 0.9);
+            --glass-border: rgba(255, 255, 255, 0.1);
             --text-main: #FFFFFF;
-            --text-dim: #CCCCCC;
+            --text-dim: #999999;
             --success: #00FF88;
-            --insta: #E1306C;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        html, body { width: 100%; overflow-x: hidden; background-color: var(--dark-pure); color: var(--text-main); }
+        body { background: var(--bg-dark); color: var(--text-main); overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* HEADER */
+        /* HEADER PREMIUM */
         header {
-            position: fixed; top: 0; width: 100%; z-index: 9999; 
-            background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); 
-            border-bottom: 2px solid var(--border); padding: 20px 4%;
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(15px);
+            padding: 1.2rem 6%; border-bottom: 1px solid var(--glass-border);
             display: flex; justify-content: space-between; align-items: center;
         }
-        .logo-nav { height: clamp(40px, 8vw, 70px); width: auto; }
-        .btn-insta { background: var(--primary); color: white; padding: 12px 25px; border-radius: 100px; font-weight: 800; text-decoration: none; font-size: 1rem; }
-
-        /* HERO GIGANTE */
-        .hero {
-            padding: clamp(150px, 25vh, 220px) 4% 80px; text-align: center;
-            background: radial-gradient(circle at 50% 35%, rgba(255, 69, 0, 0.2) 0%, transparent 65%);
+        .logo-img { height: clamp(45px, 8vw, 65px); filter: drop-shadow(0 0 8px rgba(255,255,255,0.2)); }
+        .btn-header-insta { 
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743);
+            padding: 12px 25px; border-radius: 12px; color: white; text-decoration: none;
+            font-weight: 800; font-size: 0.9rem; transition: 0.3s;
         }
-        .hero h1 { font-size: clamp(3rem, 12vw, 11rem); font-weight: 800; line-height: 0.8; letter-spacing: -5px; margin-bottom: 30px; }
-        .hero h1 span { color: var(--primary); text-shadow: 0 0 80px rgba(255, 69, 0, 0.5); }
-        .hero p { max-width: 1200px; margin: 0 auto 50px; font-size: clamp(1.2rem, 3vw, 2.4rem); color: var(--text-dim); line-height: 1.2; }
 
-        /* BARRA DE AÇÕES RÁPIDAS */
-        .action-bar {
-            display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 60px; padding: 0 4%;
+        /* HERO - IMPACTO TOTAL */
+        .hero {
+            padding: 180px 6% 80px; text-align: center;
+            background: radial-gradient(circle at 50% 30%, rgba(255, 69, 0, 0.15) 0%, transparent 70%);
+        }
+        .hero-badge {
+            background: rgba(255, 69, 0, 0.1); color: var(--primary);
+            padding: 10px 25px; border-radius: 100px; border: 1px solid var(--primary);
+            font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;
+            display: inline-block; margin-bottom: 30px;
+        }
+        .hero h1 { 
+            font-family: 'Inter', sans-serif; font-size: clamp(3rem, 12vw, 10rem); 
+            line-height: 0.85; margin-bottom: 30px; letter-spacing: -5px;
+        }
+        .hero h1 span { color: var(--primary); }
+        .hero p { max-width: 900px; margin: 0 auto 50px; font-size: clamp(1.1rem, 2.5vw, 2rem); color: var(--text-dim); }
+
+        /* AÇÕES RÁPIDAS */
+        .actions-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px; max-width: 1400px; margin: 0 auto 100px; padding: 0 6%;
         }
         .action-card {
-            background: var(--dark-card); border: 1px solid var(--border); padding: 25px 40px; border-radius: 30px;
-            display: flex; align-items: center; gap: 15px; transition: 0.3s; cursor: pointer;
+            background: var(--card-bg); border: 1px solid var(--glass-border);
+            padding: 30px; border-radius: 25px; display: flex; align-items: center; gap: 20px;
+            transition: 0.4s; cursor: pointer;
         }
-        .action-card:hover { border-color: var(--primary); transform: translateY(-5px); }
-        .action-card i { font-size: 2rem; color: var(--primary); }
-        .action-card span { font-weight: 800; font-size: 1.1rem; }
+        .action-card:hover { border-color: var(--primary); transform: translateY(-10px); background: #111; }
+        .action-card i { font-size: 2.5rem; color: var(--primary); }
+        .action-card b { font-size: 1.2rem; display: block; }
+        .action-card span { color: var(--text-dim); font-size: 0.9rem; }
 
         /* CATALOGO */
-        .catalog { 
-            padding: 80px 4% 120px; background: var(--dark-matte); border-radius: 60px 60px 0 0;
-            position: relative; z-index: 10;
-        }
-        .section-title { font-size: clamp(2rem, 7vw, 5rem); font-weight: 800; text-align: center; margin-bottom: 60px; }
+        .catalog { padding: 100px 6%; background: #050505; border-radius: 60px 60px 0 0; }
+        .section-title { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; margin-bottom: 60px; letter-spacing: -2px; }
 
-        .product-grid { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
-            gap: 50px; max-width: 2200px; margin: 0 auto;
+        .product-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px; max-width: 1800px; margin: 0 auto;
         }
+
+        .product-card {
+            background: var(--card-bg); border: 1px solid var(--glass-border);
+            border-radius: 40px; padding: 30px; transition: 0.4s; position: relative;
+        }
+        .product-card:hover { border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
         
-        .card-achado {
-            background: var(--dark-card); border: 2px solid var(--border); border-radius: 45px; padding: 35px;
-            display: flex; flex-direction: column; transition: 0.4s;
+        .card-label {
+            position: absolute; top: 30px; left: 30px; background: var(--primary);
+            color: white; padding: 6px 15px; border-radius: 10px; font-weight: 800; font-size: 0.7rem; z-index: 10;
         }
-        .card-achado:hover { border-color: var(--primary); transform: scale(1.02); }
-        .card-img { width: 100%; aspect-ratio: 1/1; border-radius: 30px; overflow: hidden; margin-bottom: 30px; background: #1a1a1a; }
-        .card-img img { width: 100%; height: 100%; object-fit: cover; }
-        .card-achado h3 { font-size: 1.8rem; font-weight: 800; margin-bottom: 20px; line-height: 1.1; height: 4rem; overflow: hidden; }
-        .old-p { color: #555; text-decoration: line-through; font-size: 1.3rem; display: block; }
-        .new-p { color: var(--success); font-size: 4rem; font-weight: 800; margin-bottom: 30px; display: block; line-height: 1; }
-        .btn-link { width: 100%; background: #FFF; color: #000; padding: 25px; border-radius: 20px; font-weight: 900; text-align: center; font-size: 1.4rem; text-decoration: none; }
 
-        /* QUEM SOMOS & PROVAS */
-        .extra-info { padding: 120px 4%; background: #000; border-top: 1px solid var(--border); }
-        .info-grid { max-width: 1800px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 80px; }
-        .info-box h2 { font-size: 3.5rem; font-weight: 800; margin-bottom: 30px; color: var(--primary); }
-        .info-box p { font-size: 1.4rem; color: var(--text-dim); line-height: 1.6; }
-        .proof-card { background: var(--dark-card); padding: 30px; border-radius: 30px; margin-bottom: 25px; border: 1px solid var(--border); }
-
-        /* NOTIFICAÇÃO TURBO */
-        .live-notif {
-            position: fixed; bottom: 30px; right: 30px; left: 30px; max-width: 500px; margin: 0 auto;
-            background: white; color: black; padding: 20px 30px; border-radius: 30px;
-            display: flex; align-items: center; gap: 15px; z-index: 99999;
-            transform: translateY(300px); transition: 0.6s cubic-bezier(0.17, 0.84, 0.44, 1);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+        .product-img {
+            width: 100%; aspect-ratio: 1/1; border-radius: 25px; overflow: hidden; margin-bottom: 25px;
+            background: #1a1a1a;
         }
-        .live-notif.show { transform: translateY(0); }
-        .notif-icon { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-        
-        footer { padding: 80px 4%; text-align: center; color: #444; border-top: 1px solid var(--border); font-weight: 700; }
+        .product-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+        .product-card:hover .product-img img { transform: scale(1.1); }
+
+        .product-card h3 { font-size: 1.6rem; font-weight: 800; margin-bottom: 15px; line-height: 1.2; height: 3.8rem; overflow: hidden; }
+        .old-price { color: #555; text-decoration: line-through; font-size: 1.2rem; }
+        .new-price { color: var(--success); font-size: 3.8rem; font-weight: 900; display: block; line-height: 1; margin-bottom: 25px; }
+
+        .btn-buy {
+            display: block; width: 100%; background: #fff; color: #000; padding: 22px;
+            border-radius: 20px; text-align: center; text-decoration: none; font-weight: 900;
+            font-size: 1.2rem; transition: 0.3s;
+        }
+        .btn-buy:hover { background: var(--primary); color: #fff; }
+
+        /* NOTIFICAÇÃO VIVA */
+        .live-toast {
+            position: fixed; bottom: 30px; left: 30px; background: white; color: black;
+            padding: 15px 25px; border-radius: 20px; display: flex; align-items: center; gap: 15px;
+            z-index: 2000; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transform: translateX(-150%); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .live-toast.active { transform: translateX(0); }
+        .toast-icon { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; }
 
         @media (max-width: 768px) {
-            .action-bar { flex-direction: column; }
-            .hero h1 { font-size: 4rem; }
+            .hero h1 { font-size: 4rem; letter-spacing: -2px; }
+            .product-grid { grid-template-columns: 1fr; }
+            header { padding: 1rem 4%; }
+            .nav-hide { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <div class="live-notif" id="liveNotif">
-        <div class="notif-icon" id="notifIcon"></div>
+    <div class="live-toast" id="liveToast">
+        <div class="toast-icon" id="toastIcon"></div>
         <div>
-            <p id="notifText" style="font-size: 1rem; font-weight: 700; color: #000;"></p>
-            <p id="notifTime" style="font-size: 0.8rem; color: #666;">agora mesmo</p>
+            <p id="toastUser" style="font-weight: 800; font-size: 0.9rem;"></p>
+            <p id="toastMsg" style="font-size: 0.8rem; color: #666;"></p>
         </div>
     </div>
 
     <header>
-        <img src="https://i.postimg.cc/NfMGQByv/Chat-GPT-Image-24-de-abr-de-2026-11-15-07.png" class="logo-nav">
-        <a href="https://www.instagram.com/uaiacheibr" target="_blank" class="btn-insta">@UAIACHEIBR</a>
+        <img src="https://i.postimg.cc/NfMGQByv/Chat-GPT-Image-24-de-abr-de-2026-11-15-07.png" class="logo-img" alt="Uai Achei">
+        <div style="display: flex; gap: 20px; align-items: center;">
+            <a href="https://www.instagram.com/uaiacheibr" target="_blank" class="btn-header-insta">@UAIACHEIBR</a>
+        </div>
     </header>
 
     <main>
         <section class="hero">
-            <h1>A Curadoria <span>Mais Insana</span></h1>
-            <p>O Robô do Uai Achei varre a Shopee 24h por dia atrás de bugs de preço e promoções secretas para o Sudeste.</p>
-            
-            <div class="action-bar">
-                <div class="action-card"><i class="ph-fill ph-ticket"></i><span>Resgatar Cupons</span></div>
-                <div class="action-card"><i class="ph-fill ph-instagram-logo"></i><span>Seguir no Insta</span></div>
-                <div class="action-card"><i class="ph-fill ph-lightning"></i><span>Ofertas Relâmpago</span></div>
-            </div>
+            <div class="hero-badge">Algoritmo Anti-Preço Alto</div>
+            <h1>UAI, ACHEI NA <br><span>SHOPEE</span></h1>
+            <p>O maior portal de curadoria do Sudeste. Encontramos bugs de preço e promoções que duram poucos minutos.</p>
         </section>
+
+        <div class="actions-grid">
+            <div class="action-card">
+                <i class="ph-fill ph-ticket"></i>
+                <div><b>Cupons Ativos</b><span>Resgate agora mesmo</span></div>
+            </div>
+            <div class="action-card">
+                <i class="ph-fill ph-instagram-logo"></i>
+                <div><b>Comunidade Insta</b><span>Siga para ver os bugs</span></div>
+            </div>
+            <div class="action-card">
+                <i class="ph-fill ph-lightning"></i>
+                <div><b>Alertas VIP</b><span>Ofertas relâmpago 24h</span></div>
+            </div>
+        </div>
 
         <section class="catalog">
-            <h2 class="section-title">🔥 Achadinhos de Hoje</h2>
-            <div class="product-grid" id="productGrid"></div>
-        </section>
-
-        <section class="extra-info">
-            <div class="info-grid">
-                <div class="info-box">
-                    <h2>O Portal</h2>
-                    <p>Nascido no coração de Minas Gerais, o <b>Uai Achei</b> se tornou a maior autoridade em garimpo digital. Nossa tecnologia monitora variações de centavos para garantir que você nunca pague o preço cheio.</p>
+            <h2 class="section-title">Achadinhos <span>de Hoje</span></h2>
+            <div class="product-grid" id="productGrid">
                 </div>
-                <div class="info-box">
-                    <h2>Feedback da Galera</h2>
-                    <div class="proof-card">
-                        <p style="font-style: italic; margin-bottom: 10px;">"O fone chegou em Cariacica em 4 dias. Preço de bug mesmo!"</p>
-                        <span style="color: var(--success); font-weight: 800;">— Lucas Andrade</span>
-                    </div>
-                    <div class="proof-card">
-                        <p style="font-style: italic; margin-bottom: 10px;">"Moro no RJ e sempre pego os cupons aqui. Economizo muito."</p>
-                        <span style="color: var(--success); font-weight: 800;">— Mariana Silva</span>
-                    </div>
-                </div>
-            </div>
         </section>
     </main>
 
-    <footer>
-        <p>© 2026 Uai, Achei na Shopee - Do Sudeste para o Brasil</p>
-    </footer>
-
     <script>
-        // LISTAS GIGANTES DE DADOS
-        const NOMES = ["Gabriel", "Juliana", "Thiago", "Amanda", "Lucas", "Fernanda", "Ricardo", "Beatriz", "João", "Ellen", "Mateus", "Larissa", "Rodrigo", "Camila", "André", "Isabela", "Bruno", "Letícia", "Vitor", "Patrícia", "Vinícius", "Renata", "Marcelo", "Tatiana", "Gustavo", "Priscila", "Felipe", "Daniela", "Rafael", "Mônica", "Diego", "Bárbara", "Samuel", "Vanessa", "Hugo", "Aline", "Igor", "Bianca", "Otávio", "Sabrina", "Caio", "Jéssica", "Arthur", "Carol", "Eduardo", "Débora", "Yuri", "Natália", "Leonardo", "Talita", "Douglas", "Clara", "Fábio", "Raquel", "Murilo", "Erica", "Wesley", "Gisele"];
+        const PRODUTOS = [
+            { 
+                id: 1, 
+                tag: "MAIS VENDIDO",
+                nome: "Corretor de Postura Premium – Suporte Lombar", 
+                precoAntigo: "R$ 39,99", 
+                precoNovo: "R$ 14,88", 
+                img: "https://down-br.img.susercontent.com/file/br-11134207-7r98o-lwyhrg9sci4f9e.webp", 
+                link: "https://s.shopee.com.br/4LFgvmMQZY" 
+            },
+            { 
+                id: 2, 
+                tag: "NOVIDADE",
+                nome: "NOVO PRODUTO GARIMPADO", 
+                precoAntigo: "R$ 99,90", 
+                precoNovo: "R$ 47,00", 
+                img: "https://down-br.img.susercontent.com/file/br-11134207-7r98o-lwyhrg9sci4f9e.webp", 
+                link: "https://s.shopee.com.br/4LFgvmMQZY" 
+            }
+        ];
+
+        const NOMES = ["Gabriel", "Juliana", "Thiago", "Amanda", "Lucas", "Fernanda", "Ricardo", "Beatriz", "João", "Ellen", "Mateus", "Larissa", "Rodrigo", "Camila", "André", "Isabela", "Bruno", "Letícia", "Vitor", "Patrícia", "Vinícius", "Renata", "Marcelo", "Tatiana", "Gustavo", "Priscila", "Felipe", "Daniela", "Rafael", "Mônica", "Diego", "Bárbara", "Samuel", "Vanessa", "Hugo", "Aline", "Igor", "Bianca", "Otávio", "Sabrina", "Caio", "Jéssica", "Arthur", "Carol", "Eduardo", "Débora", "Yuri", "Natália", "Leonardo", "Talita", "Douglas", "Clara", "Fábio", "Raquel", "Murilo", "Erica", "Wesley", "Gisele", "Marcos", "Flávia", "Henrique", "Paola", "Sérgio"];
         
         const CIDADES = [
-            "Vitória, ES", "Vila Velha, ES", "Cariacica, ES", "Serra, ES", "Guarapari, ES", "Linhares, ES", "Colatina, ES", "Cachoeiro, ES",
-            "Rio de Janeiro, RJ", "Niterói, RJ", "Duque de Caxias, RJ", "Belford Roxo, RJ", "Petrópolis, RJ", "Campos, RJ", "Angra dos Reis, RJ",
-            "São Paulo, SP", "Campinas, SP", "Santos, SP", "São Bernardo, SP", "Osasco, SP", "Ribeirão Preto, SP", "Sorocaba, SP",
-            "Belo Horizonte, MG", "Uberlândia, MG", "Contagem, MG", "Juiz de Fora, MG", "Betim, MG", "Ipatinga, MG", "Sete Lagoas, MG"
+            "Vitória, ES", "Vila Velha, ES", "Serra, ES", "Cariacica, ES", "Guarapari, ES", "Colatina, ES", "Linhares, ES", "Afonso Cláudio, ES",
+            "Rio de Janeiro, RJ", "Niterói, RJ", "Petrópolis, RJ", "Búzios, RJ", "Angra dos Reis, RJ", "Duque de Caxias, RJ",
+            "São Paulo, SP", "Campinas, SP", "Santos, SP", "São Bernardo, SP", "Osasco, SP", "Ribeirão Preto, SP",
+            "Belo Horizonte, MG", "Uberlândia, MG", "Contagem, MG", "Juiz de Fora, MG", "Betim, MG", "Ipatinga, MG"
         ];
 
-        const ACOES = [
-            { txt: "acabou de comprar!", icon: "ph-fill ph-shopping-cart", bg: "#00FF88" },
-            { txt: "resgatou um cupom de 50%!", icon: "ph-fill ph-ticket", bg: "#FF4500" },
-            { txt: "começou a seguir no Instagram!", icon: "ph-fill ph-instagram-logo", bg: "#E1306C" },
-            { txt: "garantiu uma oferta relâmpago!", icon: "ph-fill ph-lightning", bg: "#FFD700" }
+        const TIPOS_ACAO = [
+            { txt: "acabou de comprar!", icon: "ph-fill ph-shopping-cart", color: "#00FF88" },
+            { txt: "resgatou um cupom de 50%!", icon: "ph-fill ph-ticket", color: "#FF4500" },
+            { txt: "seguiu no Instagram!", icon: "ph-fill ph-instagram-logo", color: "#E1306C" },
+            { txt: "entrou no grupo VIP!", icon: "ph-fill ph-users-three", color: "#007AFF" }
         ];
 
-        const PRODUTOS = [
-            { id: 1, nome: "Corretor de Postura Premium – Suporte Lombar", precoAntigo: "R$ 39,99", precoNovo: "R$ 14,88", img: "https://down-br.img.susercontent.com/file/br-11134207-7r98o-lwyhrg9sci4f9e.webp", link: "https://s.shopee.com.br/4LFgvmMQZY" },
-            { id: 2, nome: "Fone Bluetooth AirDots 3 Pro - Original", precoAntigo: "R$ 180,00", precoNovo: "R$ 89,90", img: "https://down-br.img.susercontent.com/file/sg-11134201-22100-v7s8o7x7x7x7x7.webp", link: "#" },
-            { id: 3, nome: "Kit Cozinha Utensílios de Silicone - 12 Peças", precoAntigo: "R$ 120,00", precoNovo: "R$ 54,90", img: "https://down-br.img.susercontent.com/file/9b1076f8a85f4e1f8a85f4e1f8a85f4e.webp", link: "#" },
-            { id: 4, nome: "Projetor Portátil Magic Cube 4K", precoAntigo: "R$ 590,00", precoNovo: "R$ 299,00", img: "https://down-br.img.susercontent.com/file/3a1c6e7d8f9a0b1c2d3e4f5g6h7j8k9l.webp", link: "#" }
-        ];
-
-        function renderizar() {
+        function renderProdutos() {
             const grid = document.getElementById('productGrid');
             grid.innerHTML = PRODUTOS.map(p => `
-                <div class="card-achado">
-                    <div class="card-img"><img src="${p.img}" onerror="this.src='https://via.placeholder.com/500?text=Imagem+Indisponível'"></div>
+                <div class="product-card">
+                    <span class="card-label">${p.tag}</span>
+                    <div class="product-img">
+                        <img src="${p.img}" alt="${p.nome}" onerror="this.src='https://via.placeholder.com/500?text=Imagem+Indisponivel'">
+                    </div>
                     <h3>${p.nome}</h3>
-                    <span class="old-p">${p.precoAntigo}</span>
-                    <span class="new-p">${p.precoNovo}</span>
-                    <a href="${p.link}" target="_blank" class="btn-link">RESGATAR OFERTA</a>
+                    <div class="prices">
+                        <span class="old-price">${p.precoAntigo}</span>
+                        <span class="new-price">${p.precoNovo}</span>
+                    </div>
+                    <a href="${p.link}" target="_blank" class="btn-buy">APROVEITAR AGORA</a>
                 </div>
             `).join('');
         }
 
-        function mostrarNotificacao() {
-            const el = document.getElementById('liveNotif');
-            const txt = document.getElementById('notifText');
-            const iconBox = document.getElementById('notifIcon');
-            
+        function triggerNotif() {
+            const toast = document.getElementById('liveToast');
+            const user = document.getElementById('toastUser');
+            const msg = document.getElementById('toastMsg');
+            const icon = document.getElementById('toastIcon');
+
             const nome = NOMES[Math.floor(Math.random() * NOMES.length)];
             const cidade = CIDADES[Math.floor(Math.random() * CIDADES.length)];
-            const acao = ACOES[Math.floor(Math.random() * ACOES.length)];
+            const acao = TIPOS_ACAO[Math.floor(Math.random() * TIPOS_ACAO.length)];
+
+            user.innerText = nome;
+            msg.innerText = `de ${cidade} ${acao.txt}`;
+            icon.style.backgroundColor = acao.color;
+            icon.innerHTML = `<i class="${acao.icon}"></i>`;
+
+            toast.classList.add('active');
+            setTimeout(() => toast.classList.remove('active'), 5000);
             
-            txt.innerHTML = `<b>${nome}</b> de ${cidade} <br>${acao.txt}`;
-            iconBox.innerHTML = `<i class="${acao.icon}" style="color: white;"></i>`;
-            iconBox.style.backgroundColor = acao.bg;
-
-            el.classList.add('show');
-            setTimeout(() => el.classList.remove('show'), 5000);
-
-            const proximo = Math.random() * (15000 - 8000) + 8000;
-            setTimeout(mostrarNotificacao, proximo);
+            setTimeout(triggerNotif, Math.random() * (15000 - 8000) + 8000);
         }
 
         window.onload = () => {
-            renderizar();
-            setTimeout(mostrarNotificacao, 3000);
-            gsap.from(".hero h1", { opacity: 0, y: 100, duration: 1.5, ease: "power4.out" });
-            gsap.from(".action-card", { opacity: 0, scale: 0.5, stagger: 0.2, duration: 1, delay: 0.5 });
-            gsap.from(".card-achado", { opacity: 0, y: 50, stagger: 0.1, duration: 1, delay: 0.8 });
-        };
+            renderProdutos();
+            setTimeout(triggerNotif, 3000);
+            
+            gsap.from(".hero h1", { opacity: 0, y: 100, duration: 1.2, ease: "power4.out" });
+            gsap.from(".product-card", { opacity: 0, y: 50, stagger: 0.2, duration: 1, delay: 0.5 });
+        }
     </script>
 </body>
 </html>
