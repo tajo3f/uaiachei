@@ -1,153 +1,267 @@
+<!--
+ARQUIVO: index.html
+
+COMO EDITAR (SUPER FÁCIL):
+
+1) TROCAR INSTAGRAM:
+Procure por:
+SEU_INSTAGRAM_AQUI
+
+2) TROCAR PRODUTOS:
+Cada produto está marcado assim:
+
+<!-- PRODUTO 1 INÍCIO -->
+NOME_PRODUTO_1
+PRECO_ANTIGO_1
+PRECO_ATUAL_1
+LINK_PRODUTO_1
+IMG_PRODUTO_1
+<!-- PRODUTO 1 FIM -->
+
+Só substituir pelo seu conteúdo.
+
+3) DUPLICAR PRODUTOS:
+Copie um bloco produto inteiro e troque os números.
+-->
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Uai, Achei na Shopee | Achadinhos e Promoções</title>
-<meta name="description" content="Os melhores achadinhos da internet. Promoções reais, produtos virais e ofertas para todo Brasil.">
+<meta name="description" content="Achadinhos reais, promoções e ofertas para todo Brasil.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
+<!-- LOADER -->
 <div id="loader">
   <div class="spinner"></div>
   <h2>Carregando Achadinhos...</h2>
 </div>
 
+<!-- HEADER -->
 <header id="header">
-  <div class="logo">🛍️ Uai, Achei na Shopee</div>
+
+  <div class="logo">
+    🛍️ Uai, Achei na Shopee
+  </div>
 
   <nav>
     <a href="#inicio">Início</a>
     <a href="#produtos">Achadinhos</a>
     <a href="#categorias">Categorias</a>
-    <a href="#vendidos">Mais Vendidos</a>
-    <a href="#promocoes">Promoções</a>
     <a href="#contato">Contato</a>
   </nav>
 
-  <a href="#produtos" class="btn-header">Ver Ofertas</a>
+  <!-- INSTAGRAM -->
+  <a href="https://instagram.com/SEU_INSTAGRAM_AQUI" target="_blank" class="btn-header">
+    Instagram
+  </a>
+
 </header>
 
+<!-- HERO -->
 <section class="hero" id="inicio">
+
   <div class="hero-text">
-    <span class="tag">🔥 Brasil inteiro comprando</span>
+    <span class="tag">🔥 Ofertas atualizadas</span>
+
     <h1>Os Achadinhos Mais Insanos da Internet</h1>
-    <p>Produtos selecionados, promoções reais e ofertas que acabam rápido.</p>
+
+    <p>
+      Produtos selecionados, promoções reais e ofertas que acabam rápido.
+    </p>
 
     <div class="hero-buttons">
-      <a href="#produtos" class="btn-main">Ver Promoções</a>
-      <a href="#" class="btn-outline">Instagram</a>
+
+      <a href="#produtos" class="btn-main">
+        Ver Promoções
+      </a>
+
+      <a href="https://instagram.com/SEU_INSTAGRAM_AQUI" target="_blank" class="btn-outline">
+        Instagram Oficial
+      </a>
+
     </div>
   </div>
 
   <div class="hero-image">
-    <div class="floating-card">👜 Bolsa Premium</div>
-    <div class="floating-card">🏠 Casa Moderna</div>
-    <div class="floating-card">🎧 Fone Bluetooth</div>
-    <div class="floating-card">🏍️ Acessórios Moto</div>
+    <div class="floating-card">👜 Moda</div>
+    <div class="floating-card">🏠 Casa</div>
+    <div class="floating-card">🎧 Tech</div>
+    <div class="floating-card">🔥 Promoções</div>
   </div>
+
 </section>
 
+<!-- CATEGORIAS -->
 <section class="categories" id="categorias">
+
 <h2>Categorias em Alta</h2>
 
 <div class="grid-cat">
+
 <div class="cat">👜 Feminino</div>
 <div class="cat">🏠 Casa</div>
-<div class="cat">🏍️ Moto</div>
-<div class="cat">🏋️ Esporte</div>
 <div class="cat">📱 Tecnologia</div>
-<div class="cat">🛏️ Cama & Banho</div>
+<div class="cat">🏍️ Moto</div>
 <div class="cat">🎁 Utilidades</div>
 <div class="cat">🔥 Promoções</div>
+
 </div>
 </section>
 
+<!-- PRODUTOS -->
 <section class="products" id="produtos">
-<h2>Produtos em Destaque</h2>
+
+<h2>Achadinhos do Momento</h2>
 
 <div class="grid-products">
 
+<!-- PRODUTO 1 INÍCIO -->
 <div class="product">
-<span class="badge">TOP VENDAS</span>
-<h3>Mesa de Cabeceira Moderna</h3>
-<p class="old">R$ 249,90</p>
-<p class="price">R$ 139,90</p>
-<button>Quero Esse</button>
-</div>
 
-<div class="product">
-<span class="badge">TOP VENDAS</span>
-<h3>Bolsa Feminina Premium</h3>
-<p class="old">R$ 189,90</p>
-<p class="price">R$ 79,90</p>
-<button>Quero Esse</button>
-</div>
+<span class="badge">TOP</span>
 
-<div class="product">
-<span class="badge">TOP VENDAS</span>
-<h3>Fone Bluetooth</h3>
-<p class="old">R$ 119,90</p>
-<p class="price">R$ 49,90</p>
-<button>Quero Esse</button>
-</div>
+<img src="IMG_PRODUTO_1" class="product-img">
 
-<div class="product">
-<span class="badge">TOP VENDAS</span>
-<h3>Suporte Moto Celular</h3>
-<p class="old">R$ 99,90</p>
-<p class="price">R$ 39,90</p>
+<h3>NOME_PRODUTO_1</h3>
+
+<p class="old">PRECO_ANTIGO_1</p>
+
+<p class="price">PRECO_ATUAL_1</p>
+
+<a href="LINK_PRODUTO_1" target="_blank">
 <button>Quero Esse</button>
+</a>
+
 </div>
+<!-- PRODUTO 1 FIM -->
+
+
+
+<!-- PRODUTO 2 INÍCIO -->
+<div class="product">
+
+<span class="badge">TOP</span>
+
+<img src="IMG_PRODUTO_2" class="product-img">
+
+<h3>NOME_PRODUTO_2</h3>
+
+<p class="old">PRECO_ANTIGO_2</p>
+
+<p class="price">PRECO_ATUAL_2</p>
+
+<a href="LINK_PRODUTO_2" target="_blank">
+<button>Quero Esse</button>
+</a>
+
+</div>
+<!-- PRODUTO 2 FIM -->
+
+
+
+<!-- PRODUTO 3 INÍCIO -->
+<div class="product">
+
+<span class="badge">TOP</span>
+
+<img src="IMG_PRODUTO_3" class="product-img">
+
+<h3>NOME_PRODUTO_3</h3>
+
+<p class="old">PRECO_ANTIGO_3</p>
+
+<p class="price">PRECO_ATUAL_3</p>
+
+<a href="LINK_PRODUTO_3" target="_blank">
+<button>Quero Esse</button>
+</a>
+
+</div>
+<!-- PRODUTO 3 FIM -->
+
+
+
+<!-- PRODUTO 4 INÍCIO -->
+<div class="product">
+
+<span class="badge">TOP</span>
+
+<img src="IMG_PRODUTO_4" class="product-img">
+
+<h3>NOME_PRODUTO_4</h3>
+
+<p class="old">PRECO_ANTIGO_4</p>
+
+<p class="price">PRECO_ATUAL_4</p>
+
+<a href="LINK_PRODUTO_4" target="_blank">
+<button>Quero Esse</button>
+</a>
+
+</div>
+<!-- PRODUTO 4 FIM -->
 
 </div>
 </section>
 
+<!-- BENEFÍCIOS -->
 <section class="benefits">
+
 <div>🚚 Enviamos para todo Brasil</div>
 <div>🔒 Compra segura</div>
 <div>🔥 Promoções diárias</div>
 <div>⭐ Produtos selecionados</div>
-<div>⏰ Ofertas limitadas</div>
+
 </section>
 
-<section class="testimonials">
-<h2>Quem Compra Recomenda</h2>
-
-<div class="slider">
-<div class="slide active">“Comprei e chegou certinho 😍”</div>
-<div class="slide">“Site bonito e ofertas reais”</div>
-<div class="slide">“Já economizei muito aqui”</div>
-</div>
-</section>
-
-<section class="counter">
-<div><span data-target="10000">0</span>+<p>Visitantes</p></div>
-<div><span data-target="3000">0</span>+<p>Produtos vistos</p></div>
-<div><span data-target="2500">0</span>+<p>Clientes felizes</p></div>
-</section>
-
+<!-- CTA -->
 <section class="cta">
+
 <h2>Não perca os próximos achadinhos!</h2>
 
 <div class="cta-buttons">
-<a href="#">Instagram</a>
-<a href="#">WhatsApp</a>
-<a href="#produtos">Ver Promoções</a>
+
+<a href="https://instagram.com/SEU_INSTAGRAM_AQUI" target="_blank">
+Instagram
+</a>
+
+<a href="#produtos">
+Ver Promoções
+</a>
+
 </div>
+
 </section>
 
+<!-- FOOTER -->
 <footer id="contato">
+
 <h3>🛍️ Uai, Achei na Shopee</h3>
-<p>Os melhores achados da internet.</p>
-<p>© 2026 Todos os direitos reservados.</p>
+
+<p>
+Os melhores achados da internet.
+</p>
+
+<p>
+© 2026 Todos os direitos reservados.
+</p>
+
 </footer>
 
 <script src="script.js"></script>
+
 </body>
 </html>
