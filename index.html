@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uai, Achei na Shopee | Premium Selection</title>
+    <title>Uai, Achei na Shopee | Ofertas</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -20,291 +20,144 @@
             --text-alt: #A0A0A0;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--bg); color: var(--text-main); overflow-x: hidden; }
 
-        body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            overflow-x: hidden;
-        }
-
-        /* --- HEADER GLASSMORPHISM --- */
         header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(12px);
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--glass-border);
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
         }
 
-        .logo {
-            font-weight: 800;
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
+        .logo { font-weight: 800; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; }
         .logo span { color: var(--primary); }
 
-        .search-container {
-            position: relative;
-            width: 40%;
-        }
-
+        .search-container { position: relative; width: 40%; }
         .search-container input {
-            width: 100%;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            padding: 10px 20px 10px 45px;
-            border-radius: 12px;
-            color: white;
-            transition: 0.3s;
+            width: 100%; background: var(--glass); border: 1px solid var(--glass-border);
+            padding: 10px 20px 10px 45px; border-radius: 12px; color: white; transition: 0.3s;
         }
+        .search-container input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 15px var(--primary-glow); }
+        .search-container i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-alt); }
 
-        .search-container input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 15px var(--primary-glow);
-        }
+        .hero { padding: 150px 5% 60px; text-align: center; background: radial-gradient(circle at top center, #1a0b00 0%, #050505 70%); }
+        .hero h1 { font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.1; margin-bottom: 20px; }
+        .hero h1 span { background: linear-gradient(90deg, #FF4500, #FFA500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .search-container i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-alt);
-        }
+        .filters { display: flex; justify-content: center; gap: 10px; margin-bottom: 50px; flex-wrap: wrap; }
+        .filter-btn { background: var(--glass); border: 1px solid var(--glass-border); color: white; padding: 8px 20px; border-radius: 30px; cursor: pointer; transition: 0.3s; }
+        .filter-btn.active, .filter-btn:hover { background: var(--primary); border-color: var(--primary); }
 
-        /* --- HERO SECTION --- */
-        .hero {
-            padding: 150px 5% 80px;
-            text-align: center;
-            background: radial-gradient(circle at top center, #1a0b00 0%, #050505 70%);
-        }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; padding: 0 5% 100px; }
+        .card { background: var(--card-bg); border-radius: 24px; padding: 15px; border: 1px solid var(--glass-border); transition: 0.4s; position: relative; }
+        .card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 18px; margin-bottom: 15px; }
+        .card .category { font-size: 0.7rem; text-transform: uppercase; color: var(--primary); font-weight: 700; }
+        .card h3 { font-size: 1.1rem; margin: 5px 0 15px; height: 50px; overflow: hidden; }
 
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 span {
-            background: linear-gradient(90deg, #FF4500, #FFA500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* --- FILTROS --- */
-        .filters {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 50px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-
-        /* --- GRID DE PRODUTOS --- */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            padding: 0 5% 100px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 24px;
-            padding: 15px;
-            border: 1px solid var(--glass-border);
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-
-        .card img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            border-radius: 18px;
-            margin-bottom: 15px;
-        }
-
-        .card .category {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            color: var(--primary);
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .card h3 {
-            font-size: 1.1rem;
-            margin: 5px 0 15px;
-            height: 50px;
-            overflow: hidden;
-        }
-
-        .price-box {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
-
-        .old-price {
-            font-size: 0.9rem;
-            text-decoration: line-through;
-            color: var(--text-alt);
-        }
-
-        .new-price {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: #22c55e;
-        }
+        .price-box { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
+        .old-price { font-size: 0.9rem; text-decoration: line-through; color: var(--text-alt); }
+        .new-price { font-size: 1.3rem; font-weight: 800; color: #22c55e; }
 
         .btn-buy {
-            width: 100%;
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-            transition: 0.3s;
+            width: 100%; background: var(--primary); color: white; border: none; padding: 14px;
+            border-radius: 14px; font-weight: 700; cursor: pointer; display: flex;
+            align-items: center; justify-content: center; gap: 10px; text-decoration: none;
         }
 
-        .btn-buy:hover {
-            filter: brightness(1.2);
-            gap: 15px;
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .search-container { display: none; } /* Oculto no mobile para limpar visual */
-            .hero { padding-top: 120px; }
-        }
+        @media (max-width: 768px) { .search-container { display: none; } .hero { padding-top: 120px; } }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">🛍️ Uai, <span>Achei!</span></div>
+        <a href="#" class="logo" id="headerLogo">🛍️ Carregando...</a>
         
         <div class="search-container">
             <i class="ph ph-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="Pesquisar achadinho...">
+            <input type="text" id="searchInput" placeholder="Pesquisar produto...">
         </div>
 
-        <a href="https://instagram.com/SEU_INSTAGRAM" target="_blank" style="color: white; text-decoration: none;">
+        <a href="#" id="instaHeader" target="_blank" style="color: white;">
             <i class="ph ph-instagram-logo" style="font-size: 1.8rem;"></i>
         </a>
     </header>
 
     <section class="hero">
-        <h1>Os Achadinhos Mais <br><span>Insanos da Shopee</span></h1>
-        <p style="color: var(--text-alt); max-width: 600px; margin: 0 auto 40px;">
-            Curadoria diária de produtos que facilitam sua vida com o menor preço garantido.
-        </p>
-
+        <h1 id="mainTitle">Os Melhores <span>Achadinhos</span></h1>
+        <p id="subTitle" style="color: var(--text-alt); max-width: 600px; margin: 0 auto 30px;">Curadoria de ofertas atualizada diariamente.</p>
+        
         <div class="filters">
             <button class="filter-btn active" onclick="filterCategory('todos')">Todos</button>
             <button class="filter-btn" onclick="filterCategory('tech')">Tecnologia</button>
-            <button class="filter-btn" onclick="filterCategory('casa')">Casa & Cozinha</button>
+            <button class="filter-btn" onclick="filterCategory('casa')">Casa</button>
             <button class="filter-btn" onclick="filterCategory('utilidades')">Utilidades</button>
         </div>
     </section>
 
-    <main class="products-grid" id="grid">
-        </main>
+    <main class="products-grid" id="grid"></main>
 
     <script>
-        // 1. SEUS DADOS AQUI (SUPER FÁCIL DE EDITAR)
-        const produtos = [
+        /**************************************************************
+         * 1. CONFIGURAÇÕES DA SUA LOJA (MUDE AQUI)
+         **************************************************************/
+        const CONFIG = {
+            nomeLoja: "Uai, Achei na Shopee",
+            instagramLink: "https://www.instagram.com/uaiacheibr",
+            tituloPrincipal: "Ofertas da Shopee",
+            subtitulo: "Produtos reais que facilitam sua vida no precinho."
+        };
+
+        /**************************************************************
+         * 2. LISTA DE PRODUTOS (MUITO FÁCIL DE ALTERAR)
+         * Categorias: 'tech', 'casa', 'utilidades'
+         **************************************************************/
+        const listaProdutos = [
             {
                 nome: "Mini Selador de Embalagens",
-                precoAntigo: "R$ 49,90",
-                precoAtual: "R$ 12,50",
+                precoDe: "R$ 49,90",
+                precoPor: "R$ 12,50",
                 categoria: "casa",
                 link: "LINK_DA_SHOPEE",
-                img: "https://via.placeholder.com/400"
+                foto: "https://via.placeholder.com/400"
             },
             {
                 nome: "Fone Gamer K9 Pro",
-                precoAntigo: "R$ 159,00",
-                precoAtual: "R$ 77,20",
+                precoDe: "R$ 159,00",
+                precoPor: "R$ 77,20",
                 categoria: "tech",
                 link: "LINK_DA_SHOPEE",
-                img: "https://via.placeholder.com/400"
+                foto: "https://via.placeholder.com/400"
             },
             {
                 nome: "Luminária de Monitor RGB",
-                precoAntigo: "R$ 120,00",
-                precoAtual: "R$ 54,90",
+                precoDe: "R$ 120,00",
+                precoPor: "R$ 54,90",
                 categoria: "tech",
                 link: "LINK_DA_SHOPEE",
-                img: "https://via.placeholder.com/400"
-            },
-            {
-                nome: "Pote Hermético Kit 6un",
-                precoAntigo: "R$ 89,00",
-                precoAtual: "R$ 39,90",
-                categoria: "casa",
-                link: "LINK_DA_SHOPEE",
-                img: "https://via.placeholder.com/400"
+                foto: "https://via.placeholder.com/400"
             }
         ];
 
-        // 2. LÓGICA DE RENDERIZAÇÃO
-        function displayProducts(items) {
+        // --- NÃO MEXA DAQUI PARA BAIXO (A MÁGICA ACONTECE SOZINHA) ---
+
+        // Aplica as configurações
+        document.getElementById('headerLogo').innerHTML = `🛍️ ${CONFIG.nomeLoja}`;
+        document.getElementById('instaHeader').href = CONFIG.instagramLink;
+        document.getElementById('mainTitle').innerHTML = `Os Melhores <span>${CONFIG.nomeLoja}</span>`;
+        document.getElementById('subTitle').innerText = CONFIG.subtitulo;
+
+        function render(itens) {
             const grid = document.getElementById('grid');
-            grid.innerHTML = items.map(p => `
+            grid.innerHTML = itens.map(p => `
                 <div class="card">
                     <span class="category">${p.categoria}</span>
-                    <img src="${p.img}" alt="${p.nome}" loading="lazy">
+                    <img src="${p.foto}" alt="${p.nome}" loading="lazy">
                     <h3>${p.nome}</h3>
                     <div class="price-box">
-                        <span class="old-price">${p.precoAntigo}</span>
-                        <span class="new-price">${p.precoAtual}</span>
+                        <span class="old-price">${p.precoDe}</span>
+                        <span class="new-price">${p.precoPor}</span>
                     </div>
                     <a href="${p.link}" target="_blank" class="btn-buy">
                         Eu quero esse <i class="ph ph-arrow-right"></i>
@@ -313,33 +166,25 @@
             `).join('');
         }
 
-        // 3. BUSCA REAL-TIME
         document.getElementById('searchInput').addEventListener('keyup', (e) => {
-            const search = e.target.value.toLowerCase();
-            const filtered = produtos.filter(p => p.nome.toLowerCase().includes(search));
-            displayProducts(filtered);
+            const busca = e.target.value.toLowerCase();
+            const filtrados = listaProdutos.filter(p => p.nome.toLowerCase().includes(busca));
+            render(filtrados);
         });
 
-        // 4. FILTRO POR CATEGORIA
         function filterCategory(cat) {
-            // Atualizar botões
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if(btn.innerText.toLowerCase().includes(cat) || (cat === 'todos' && btn.innerText === 'Todos')) {
-                    btn.classList.add('active');
-                }
-            });
-
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
             if(cat === 'todos') {
-                displayProducts(produtos);
+                render(listaProdutos);
             } else {
-                const filtered = produtos.filter(p => p.categoria === cat);
-                displayProducts(filtered);
+                const filtrados = listaProdutos.filter(p => p.categoria === cat);
+                render(filtrados);
             }
         }
 
-        // Inicializar
-        displayProducts(produtos);
+        render(listaProdutos);
     </script>
 </body>
 </html>
