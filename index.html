@@ -5,158 +5,224 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uai, Achei na Shopee | O Maior Portal de Achadinhos do Brasil</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <style>
-        /* CONFIGURAÇÕES DE DESIGN SYSTEM:
-           Foco em luxo, legibilidade e contraste elevado.
+        /* ============================================================
+           DESIGN SYSTEM & VARIÁVEIS TÉCNICAS
+           ============================================================
         */
         :root {
+            /* Palette Principal */
             --primary: #FF4500; 
+            --primary-hover: #E63E00;
             --primary-glow: rgba(255, 69, 0, 0.4);
+            
+            /* Palette de Luxo */
             --gold: #D4AF37;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+            
+            /* Grayscale / Dark Mode */
             --dark-pure: #000000;
             --dark-matte: #0D0D0D;
             --dark-card: #161616;
+            --dark-hover: #1F1F1F;
+            
+            /* Status & Borders */
             --border: rgba(255, 255, 255, 0.08);
+            --border-bright: rgba(255, 255, 255, 0.15);
             --text-main: #FFFFFF;
             --text-dim: #999999;
+            --text-muted: #666666;
             --success: #00FF88;
+            
+            /* Efeitos */
             --glass: rgba(13, 13, 13, 0.85);
-            --transition-smooth: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-ultra: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: 0.3s ease;
+            --shadow-premium: 0 30px 60px rgba(0, 0, 0, 0.8);
         }
 
-        /* RESET GLOBAL */
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
+        /* ============================================================
+           RESET & BASE
+           ============================================================
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        body { 
-            background-color: var(--dark-pure); 
-            color: var(--text-main); 
-            overflow-x: hidden; 
-            scroll-behavior: smooth; 
+        body {
+            background-color: var(--dark-pure);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        a { 
-            text-decoration: none; 
-            color: inherit; 
-            transition: var(--transition-smooth); 
+        html {
+            scroll-behavior: smooth;
         }
 
-        ul { 
-            list-style: none; 
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-fast);
         }
 
-        /* CUSTOM SCROLLBAR (ESTILO PREMIUM) */
-        ::-webkit-scrollbar { 
-            width: 8px; 
+        ul {
+            list-style: none;
         }
 
-        ::-webkit-scrollbar-track { 
-            background: var(--dark-pure); 
+        img {
+            max-width: 100%;
+            display: block;
         }
 
-        ::-webkit-scrollbar-thumb { 
-            background: var(--primary); 
-            border-radius: 10px; 
+        button {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            background: none;
+            transition: var(--transition-fast);
         }
 
-        /* ------------------------------------------------------------
-           SEÇÃO: LOADER DE ENTRADA
-           ------------------------------------------------------------
+        /* ============================================================
+           SCROLLBAR CUSTOMIZADA
+           ============================================================
+        */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-pure);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--gold));
+            border-radius: 20px;
+            border: 3px solid var(--dark-pure);
+        }
+
+        /* ============================================================
+           ANIMATED LOADER
+           ============================================================
         */
         #loader {
-            position: fixed; 
-            inset: 0; 
+            position: fixed;
+            inset: 0;
             background: var(--dark-pure);
-            z-index: 10000; 
-            display: flex; 
+            z-index: 10000;
+            display: flex;
             flex-direction: column;
-            justify-content: center; 
+            justify-content: center;
             align-items: center;
-            transition: 0.8s ease;
+            transition: opacity 0.8s ease, visibility 0.8s;
         }
 
-        .loader-bar { 
-            width: 240px; 
-            height: 2px; 
-            background: var(--border); 
-            margin-top: 25px; 
-            position: relative; 
-            overflow: hidden; 
+        .loader-logo {
+            width: 180px;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 10px var(--primary-glow));
+            animation: pulseLogo 2s infinite ease-in-out;
+        }
+
+        .loader-bar-container {
+            width: 280px;
+            height: 3px;
+            background: var(--border);
             border-radius: 10px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .loader-progress { 
-            position: absolute; 
-            width: 0%; 
-            height: 100%; 
-            background: var(--primary); 
-            box-shadow: 0 0 15px var(--primary); 
-            animation: load 2.5s ease forwards; 
+        .loader-progress {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+            box-shadow: 0 0 15px var(--primary);
+            animation: fillProgress 2.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
         }
 
-        @keyframes load { 
-            to { width: 100%; } 
+        @keyframes fillProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
         }
 
-        /* ------------------------------------------------------------
-           SEÇÃO: HEADER & NAVEGAÇÃO
-           ------------------------------------------------------------
+        @keyframes pulseLogo {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+
+        /* ============================================================
+           LAYOUT: HEADER & NAVIGATION
+           ============================================================
         */
         header {
-            position: fixed; 
-            top: 0; 
-            width: 100%; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             z-index: 5000;
-            background: var(--glass); 
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border); 
-            padding: 24px 6%;
-            display: flex; 
-            justify-content: space-between; 
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 6%;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            transition: padding 0.4s ease, background 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .brand { 
-            font-size: 1.8rem; 
-            font-weight: 800; 
-            letter-spacing: -1.5px; 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
+        header.scrolled {
+            padding: 12px 6%;
+            background: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .brand i { 
-            color: var(--primary); 
-            font-size: 2.4rem; 
+        .logo-wrapper img {
+            height: 55px;
+            width: auto;
+            transition: 0.4s;
         }
 
-        .brand span { 
-            color: var(--primary); 
+        header.scrolled .logo-wrapper img {
+            height: 45px;
         }
 
-        .nav-menu { 
-            display: flex; 
-            gap: 40px; 
+        .nav-desktop {
+            display: flex;
+            gap: 40px;
+            align-items: center;
         }
 
-        .nav-menu a { 
-            font-size: 0.95rem; 
-            font-weight: 600; 
-            color: var(--text-dim); 
+        .nav-link {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
             position: relative;
         }
 
-        .nav-menu a::after {
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
             content: '';
             position: absolute;
             bottom: -5px;
@@ -167,867 +233,846 @@
             transition: 0.3s;
         }
 
-        .nav-menu a:hover::after, 
-        .nav-menu a.active::after { 
-            width: 100%; 
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
         }
 
-        .nav-menu a:hover, 
-        .nav-menu a.active { 
-            color: var(--primary); 
-        }
-
-        .header-actions { 
-            display: flex; 
-            gap: 20px; 
-            align-items: center; 
-        }
-
-        .btn-insta-top { 
-            background: var(--primary); 
-            padding: 12px 24px; 
-            border-radius: 14px; 
-            font-weight: 700; 
-            font-size: 0.9rem; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
+        .cta-header {
+            background: var(--primary);
             color: white;
-            box-shadow: 0 10px 20px rgba(255, 69, 0, 0.2);
-        }
-
-        /* ------------------------------------------------------------
-           SEÇÃO: HERO (BANNER PRINCIPAL)
-           ------------------------------------------------------------
-        */
-        .hero-section {
-            padding: 240px 6% 140px; 
-            min-height: 100vh;
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            text-align: center;
-            background: radial-gradient(circle at top left, #2b1100 0%, transparent 45%),
-                        radial-gradient(circle at bottom right, #1a1a1a 0%, transparent 45%);
-        }
-
-        .floating-badge {
-            background: rgba(255, 69, 0, 0.1); 
-            border: 1px solid var(--primary);
-            color: var(--primary); 
-            padding: 10px 22px; 
+            padding: 12px 28px;
             border-radius: 100px;
-            font-size: 0.8rem; 
-            font-weight: 800; 
-            text-transform: uppercase;
-            margin-bottom: 35px; 
+            font-weight: 800;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px var(--primary-glow);
+        }
+
+        .cta-header:hover {
+            transform: translateY(-3px);
+            background: var(--primary-hover);
+            box-shadow: 0 15px 30px var(--primary-glow);
+        }
+
+        /* ============================================================
+           SEÇÃO: HERO (IMPACTO INICIAL)
+           ============================================================
+        */
+        .hero {
+            padding: 220px 6% 120px;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255, 69, 0, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 40%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        .badge-hero {
+            background: rgba(255, 69, 0, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 800;
             letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
             display: inline-block;
         }
 
-        .hero-section h1 { 
-            font-size: clamp(3.2rem, 10vw, 7rem); 
-            font-weight: 800; 
-            line-height: 0.9; 
-            margin-bottom: 35px; 
-            letter-spacing: -5px; 
+        .hero h1 {
+            font-size: clamp(3.5rem, 10vw, 7.5rem);
+            font-weight: 800;
+            line-height: 0.85;
+            letter-spacing: -6px;
+            margin-bottom: 40px;
         }
 
-        .hero-section h1 em { 
-            font-style: normal; 
-            color: var(--gold); 
-            text-shadow: 0 0 40px rgba(212, 175, 55, 0.4); 
+        .hero h1 span {
+            color: var(--primary);
+            text-shadow: 0 0 50px var(--primary-glow);
         }
 
-        .hero-section p { 
-            max-width: 850px; 
-            color: var(--text-dim); 
-            font-size: 1.4rem; 
-            margin-bottom: 60px; 
-            line-height: 1.5;
+        .hero h1 em {
+            font-style: normal;
+            color: var(--gold);
+            display: block;
         }
 
-        /* ESTATÍSTICAS */
-        .stats-grid {
-            display: grid; 
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 25px; 
-            width: 100%; 
+        .hero p {
+            max-width: 800px;
+            font-size: 1.5rem;
+            color: var(--text-dim);
+            margin-bottom: 60px;
+            font-weight: 400;
+        }
+
+        /* ============================================================
+           SEÇÃO: CATEGORIAS EM DESTAQUE
+           ============================================================
+        */
+        .categories-strip {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 100px;
+            width: 100%;
             max-width: 1200px;
         }
 
-        .stat-card { 
-            background: var(--dark-matte); 
-            border: 1px solid var(--border); 
-            padding: 30px; 
-            border-radius: 28px; 
-            text-align: left; 
-            transition: 0.3s;
-        }
-
-        .stat-card:hover {
-            border-color: var(--primary);
+        .cat-box {
             background: var(--dark-card);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 30px;
+            width: 220px;
+            text-align: center;
+            transition: var(--transition-ultra);
         }
 
-        .stat-card h4 { 
-            font-size: 2.2rem; 
-            color: var(--primary); 
-            margin-bottom: 8px; 
+        .cat-box i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: block;
         }
 
-        .stat-card p { 
-            font-size: 0.85rem; 
-            color: var(--text-dim); 
-            text-transform: uppercase; 
-            font-weight: 700; 
+        .cat-box span {
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* ------------------------------------------------------------
-           SEÇÃO: FERRAMENTA DE DESCOBERTA (FILTROS)
-           ------------------------------------------------------------
-        */
-        .discovery-tool { 
-            padding: 100px 6%; 
-            background: var(--dark-matte); 
-            border-radius: 60px 60px 0 0; 
-            margin-top: -60px; 
+        .cat-box:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px);
+            background: var(--dark-hover);
         }
 
-        .search-container-large { 
-            background: var(--dark-card); 
-            border: 1px solid var(--border); 
-            padding: 20px 35px;
-            border-radius: 24px; 
-            display: flex; 
-            align-items: center; 
-            gap: 25px; 
-            margin-bottom: 50px;
+        /* ============================================================
+           FILTROS E BUSCA
+           ============================================================
+        */
+        .discovery-header {
+            padding: 80px 6% 40px;
+            background: var(--dark-matte);
+            border-radius: 60px 60px 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .search-bar-premium {
+            width: 100%;
+            max-width: 800px;
+            background: var(--dark-card);
+            border: 2px solid var(--border);
+            padding: 10px 30px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
             transition: 0.3s;
         }
 
-        .search-container-large:focus-within {
+        .search-bar-premium:focus-within {
             border-color: var(--primary);
-            box-shadow: 0 0 30px rgba(255, 69, 0, 0.1);
+            box-shadow: 0 0 30px rgba(255, 69, 0, 0.15);
         }
 
-        .search-container-large input { 
-            background: transparent; 
-            border: none; 
-            color: white; 
-            flex: 1; 
-            font-size: 1.2rem; 
-            outline: none; 
+        .search-bar-premium i {
+            font-size: 1.8rem;
+            color: var(--primary);
         }
 
-        .search-container-large i { 
-            font-size: 1.8rem; 
-            color: var(--primary); 
-        }
-
-        .filter-pills { 
-            display: flex; 
-            gap: 15px; 
-            flex-wrap: wrap; 
-            margin-bottom: 70px; 
-            justify-content: center; 
-        }
-
-        .pill { 
-            padding: 14px 28px; 
-            border-radius: 100px; 
-            border: 1px solid var(--border);
-            cursor: pointer; 
-            font-weight: 600; 
-            font-size: 0.95rem; 
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .pill.active, .pill:hover { 
-            background: var(--primary); 
-            border-color: var(--primary); 
-            transform: translateY(-3px); 
-            box-shadow: 0 10px 20px rgba(255, 69, 0, 0.3);
+        .search-bar-premium input {
+            background: transparent;
+            border: none;
             color: white;
+            font-size: 1.2rem;
+            width: 100%;
+            outline: none;
+            padding: 15px 0;
         }
 
-        /* ------------------------------------------------------------
-           SEÇÃO: GRID DE PRODUTOS
-           ------------------------------------------------------------
+        /* ============================================================
+           GRID DE PRODUTOS (ESTILO PREMIUM)
+           ============================================================
         */
-        .product-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); 
-            gap: 40px; 
-            padding: 0 6% 120px; 
+        .catalog-section {
+            background: var(--dark-matte);
+            padding-bottom: 120px;
         }
 
-        .product-card {
-            background: var(--dark-card); 
-            border: 1px solid var(--border); 
-            border-radius: 40px;
-            padding: 24px; 
-            transition: var(--transition-smooth); 
-            position: relative; 
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 40px;
+            padding: 0 6%;
+        }
+
+        .card-achado {
+            background: var(--dark-card);
+            border: 1px solid var(--border);
+            border-radius: 45px;
+            padding: 25px;
+            transition: var(--transition-ultra);
+            position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
         }
 
-        .product-card:hover { 
-            transform: translateY(-15px); 
-            border-color: var(--primary); 
-            box-shadow: 0 40px 80px rgba(0,0,0,0.7); 
+        .card-achado:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-premium);
         }
-        
-        .img-box { 
-            width: 100%; 
-            aspect-ratio: 1/1; 
-            border-radius: 30px; 
-            overflow: hidden; 
-            margin-bottom: 30px; 
-            position: relative; 
+
+        .card-img-container {
+            width: 100%;
+            aspect-ratio: 1/1;
+            border-radius: 35px;
+            overflow: hidden;
+            margin-bottom: 25px;
             background: #222;
+            position: relative;
         }
 
-        .img-box img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            transition: 1s cubic-bezier(0.16, 1, 0.3, 1); 
+        .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .product-card:hover .img-box img { 
-            transform: scale(1.12); 
+        .card-achado:hover .card-img-container img {
+            transform: scale(1.15);
         }
 
-        .tag-promo { 
-            position: absolute; 
-            top: 20px; 
-            right: 20px; 
-            background: var(--primary); 
-            padding: 8px 16px; 
-            border-radius: 14px; 
-            font-weight: 800; 
-            font-size: 0.8rem; 
-            z-index: 5; 
+        .card-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
             color: white;
+            padding: 8px 16px;
+            border-radius: 15px;
+            font-weight: 900;
+            font-size: 0.75rem;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        .product-card h3 { 
-            font-size: 1.4rem; 
-            margin-bottom: 15px; 
-            font-weight: 700; 
-            line-height: 1.3; 
-            height: 3.6rem; 
-            display: -webkit-box; 
-            -webkit-line-clamp: 2; 
-            -webkit-box-orient: vertical; 
-            overflow: hidden; 
-        }
-        
-        .price-section { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            margin-bottom: 30px; 
+        .card-info h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            min-height: 3.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.3;
         }
 
-        .price-wrap { 
-            display: flex; 
-            flex-direction: column; 
+        .price-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 25px;
         }
 
-        .price-wrap .old { 
-            font-size: 1rem; 
-            color: var(--text-dim); 
-            text-decoration: line-through; 
-            margin-bottom: 2px;
-        }
-
-        .price-wrap .current { 
-            font-size: 2rem; 
-            font-weight: 800; 
-            color: var(--success); 
-        }
-
-        .btn-shopee { 
-            width: 100%; 
-            background: white; 
-            color: black; 
-            padding: 22px; 
-            border-radius: 20px;
-            font-weight: 800; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 12px;
-            transition: 0.4s; 
+        .price-old {
+            display: block;
+            color: var(--text-muted);
+            text-decoration: line-through;
             font-size: 1rem;
+            font-weight: 600;
         }
 
-        .product-card:hover .btn-shopee { 
-            background: var(--primary); 
-            color: white; 
-            box-shadow: 0 15px 30px rgba(255, 69, 0, 0.4);
+        .price-new {
+            display: block;
+            color: var(--success);
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1;
         }
 
-        /* ------------------------------------------------------------
-           SEÇÃO: PROVAS SOCIAIS & FAQ
-           ------------------------------------------------------------
+        .btn-buy {
+            width: 100%;
+            background: white;
+            color: black;
+            padding: 22px;
+            border-radius: 22px;
+            font-weight: 900;
+            font-size: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card-achado:hover .btn-buy {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 15px 30px var(--primary-glow);
+        }
+
+        /* ============================================================
+           SEÇÃO: DEPOIMENTOS (SOCIAL PROOF)
+           ============================================================
         */
-        .testimonials { 
-            padding: 120px 6%; 
-            background: var(--dark-matte); 
-            text-align: center; 
+        .testimonials {
+            padding: 140px 6%;
+            background: var(--dark-pure);
+            text-align: center;
         }
 
-        .testimonial-grid { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 35px; 
-            margin-top: 80px; 
+        .testimonials h2 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
         }
 
-        .test-card { 
-            background: var(--dark-card); 
-            padding: 50px; 
-            border-radius: 35px; 
-            border: 1px solid var(--border); 
-            text-align: left; 
-            transition: 0.4s;
+        .testimonials h2 span { color: var(--gold); }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
+        .test-card {
+            background: var(--dark-card);
+            border: 1px solid var(--border);
+            padding: 50px;
+            border-radius: 40px;
+            text-align: left;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s, border-color 0.5s;
+            position: relative;
+        }
+
+        /* EFEITO DE LEVANTE SOLICITADO */
         .test-card:hover {
+            transform: translateY(-25px);
             border-color: var(--gold);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
         }
 
-        .stars { 
-            color: var(--gold); 
-            margin-bottom: 20px; 
+        .test-card i.quotes {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            font-size: 3rem;
+            color: rgba(212, 175, 55, 0.1);
+        }
+
+        .stars-row {
+            color: var(--gold);
+            margin-bottom: 25px;
             font-size: 1.2rem;
         }
 
-        .faq-section { 
-            padding: 120px 20%; 
+        .test-card p {
+            font-size: 1.15rem;
+            color: var(--text-main);
+            font-weight: 500;
+            font-style: italic;
+            line-height: 1.7;
+            margin-bottom: 35px;
         }
 
-        .faq-item { 
-            background: var(--dark-card); 
-            border-radius: 24px; 
-            margin-bottom: 20px; 
-            overflow: hidden; 
-            border: 1px solid var(--border); 
-            transition: 0.3s;
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        .faq-question { 
-            padding: 30px; 
-            display: flex; 
-            justify-content: space-between; 
-            cursor: pointer; 
-            font-weight: 700; 
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: white;
+        }
+
+        .user-meta b {
+            display: block;
+            color: var(--gold);
             font-size: 1.1rem;
         }
 
-        .faq-answer { 
-            padding: 0 30px; 
-            max-height: 0; 
-            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
-            color: var(--text-dim); 
-            font-size: 1rem; 
-            line-height: 1.6;
+        /* ============================================================
+           NOTIFICAÇÕES AO VIVO (SISTEMA REALISTA)
+           ============================================================
+        */
+        .live-notif {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: white;
+            color: black;
+            padding: 20px 30px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            z-index: 9999;
+            transform: translateY(250px);
+            transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            max-width: 400px;
         }
 
-        .faq-item.active .faq-answer { 
-            padding: 0 30px 30px; 
-            max-height: 300px; 
+        .live-notif.show {
+            transform: translateY(0);
         }
 
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
+        .notif-pulse {
+            width: 14px;
+            height: 14px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .notif-pulse::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            animation: pulseNotif 1.5s infinite;
+        }
+
+        @keyframes pulseNotif {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        .notif-content b {
+            font-weight: 800;
             color: var(--primary);
         }
 
-        /* ------------------------------------------------------------
-           SEÇÃO: RODAPÉ (FOOTER)
-           ------------------------------------------------------------
+        /* ============================================================
+           FOOTER (RODAPÉ PREMIUM)
+           ============================================================
         */
-        footer { 
-            padding: 120px 6% 60px; 
-            background: var(--dark-matte); 
-            border-top: 1px solid var(--border); 
+        footer {
+            padding: 120px 6% 60px;
+            background: var(--dark-matte);
+            border-top: 1px solid var(--border);
         }
 
-        .footer-main { 
-            display: grid; 
-            grid-template-columns: 2.5fr 1fr 1fr 1.5fr; 
-            gap: 80px; 
-            margin-bottom: 100px; 
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 80px;
+            margin-bottom: 80px;
         }
 
-        .footer-col h4 { 
-            color: var(--primary); 
-            margin-bottom: 35px; 
-            text-transform: uppercase; 
-            font-size: 0.85rem; 
-            letter-spacing: 3px; 
+        .footer-logo {
+            height: 70px;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h4 {
+            color: var(--primary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 35px;
         }
 
         .footer-col li {
             margin-bottom: 18px;
             color: var(--text-dim);
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.3s;
+            font-weight: 600;
         }
 
         .footer-col li:hover {
             color: white;
-            padding-left: 5px;
-        }
-        
-        .newsletter-input { 
-            display: flex; 
-            background: var(--dark-card); 
-            padding: 10px; 
-            border-radius: 18px;
-            border: 1px solid var(--border); 
-            margin-top: 25px;
+            transform: translateX(5px);
         }
 
-        .newsletter-input input { 
-            background: transparent; 
-            border: none; 
-            padding: 12px; 
-            color: white; 
-            flex: 1; 
-            outline: none; 
-            font-size: 1rem;
+        .newsletter-footer {
+            background: var(--dark-card);
+            border: 1px solid var(--border);
+            padding: 10px;
+            border-radius: 20px;
+            display: flex;
+            margin-top: 20px;
         }
 
-        .newsletter-input button { 
-            background: var(--primary); 
-            border: none; 
-            padding: 12px 28px; 
-            border-radius: 14px; 
-            color: white; 
-            cursor: pointer; 
-            font-weight: 700; 
-            transition: 0.3s;
+        .newsletter-footer input {
+            background: transparent;
+            border: none;
+            padding: 15px;
+            color: white;
+            flex: 1;
+            outline: none;
         }
 
-        /* NOTIFICAÇÃO AO VIVO */
-        .live-notif {
-            position: fixed; 
-            bottom: 40px; 
-            right: 40px; 
-            background: white; 
-            color: black;
-            padding: 18px 30px; 
-            border-radius: 24px; 
-            display: flex; 
-            align-items: center; 
-            gap: 20px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6); 
-            z-index: 9999; 
-            transform: translateY(250px);
-            transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        .newsletter-footer button {
+            background: var(--primary);
+            padding: 0 25px;
+            border-radius: 15px;
+            color: white;
+            font-weight: 800;
         }
 
-        .live-notif.show { 
-            transform: translateY(0); 
+        .copyright-bar {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
         }
 
-        /* RESPONSIVIDADE EXTREMA */
+        /* ============================================================
+           RESPONSIVIDADE (MOBILE OPTIMIZATION)
+           ============================================================
+        */
         @media (max-width: 1200px) {
-            .footer-main { grid-template-columns: repeat(2, 1fr); gap: 50px; }
-            .faq-section { padding: 100px 10%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+            .hero h1 { font-size: 5rem; }
         }
 
         @media (max-width: 900px) {
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .nav-desktop { display: none; }
             .testimonial-grid { grid-template-columns: 1fr; }
-            .nav-menu { display: none; }
-            .hero-section h1 { font-size: 3.5rem; letter-spacing: -2px; }
-            header { padding: 20px 5%; }
-        }
-
-        @media (max-width: 600px) {
-            .stats-grid { grid-template-columns: 1fr; }
-            .product-grid { grid-template-columns: 1fr; }
-            .footer-main { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 4rem; letter-spacing: -3px; }
+            .cat-box { width: 100%; }
             .live-notif { left: 20px; right: 20px; bottom: 20px; }
         }
+
     </style>
 </head>
 <body>
 
     <div id="loader">
-        <h2 class="brand">🛍️ Uai, <span>Achei na Shopee!</span></h2>
-        <div class="loader-bar">
+        <img src="https://i.postimg.cc/NfMGQByv/Chat-GPT-Image-24-de-abr-de-2026-11-15-07.png" class="loader-logo" alt="Logo Uai Achei">
+        <div class="loader-bar-container">
             <div class="loader-progress"></div>
         </div>
     </div>
 
     <div class="live-notif" id="liveNotif">
-        <div style="width: 14px; height: 14px; background: var(--primary); border-radius: 50%; animation: pulse 1.5s infinite;"></div>
-        <p id="notifText">Alguém de São Paulo comprou agora!</p>
+        <div class="notif-pulse"></div>
+        <div class="notif-content">
+            <p id="notifText">Carregando ofertas...</p>
+        </div>
     </div>
 
     <header id="mainHeader">
-        <a href="#" class="brand">
-            <i class="ph ph-shopping-cart-simple"></i>
-            Uai, <span>Achei na Shopee</span>
+        <a href="#" class="logo-wrapper">
+            <img src="https://i.postimg.cc/NfMGQByv/Chat-GPT-Image-24-de-abr-de-2026-11-15-07.png" alt="Uai Achei">
         </a>
 
-        <nav class="nav-menu">
-            <a href="#inicio" class="active">Início</a>
-            <a href="#achadinhos">Achadinhos</a>
-            <a href="#depoimentos">Depoimentos</a>
-            <a href="#faq">Dúvidas</a>
+        <nav class="nav-desktop">
+            <a href="#inicio" class="nav-link active">Início</a>
+            <a href="#achadinhos" class="nav-link">Achadinhos</a>
+            <a href="#depoimentos" class="nav-link">Depoimentos</a>
+            <a href="#contato" class="nav-link">Suporte</a>
         </nav>
 
-        <div class="header-actions">
-            <a href="https://www.instagram.com/uaiacheibr" target="_blank" class="btn-insta-top">
-                <i class="ph ph-instagram-logo"></i> @uaiacheibr
-            </a>
-        </div>
+        <a href="https://instagram.com" target="_blank" class="cta-header">
+            <i class="ph ph-instagram-logo"></i> @UAIACHEIBR
+        </a>
     </header>
 
     <main>
-        
-        <section class="hero-section" id="inicio">
-            <div class="floating-badge">🚀 OFERTAS ATUALIZADAS EM TEMPO REAL</div>
-            <h1 id="heroH1">A Curadoria Mais <em>Insana</em> da Shopee</h1>
-            <p>Nós mineramos milhares de produtos diariamente para filtrar apenas o que realmente vale o seu dinheiro. Qualidade premium com preços de atacado.</p>
+        <section class="hero" id="inicio">
+            <div class="badge-hero">🔥 O MAIOR PORTAL DE ACHADOS DA SHOPEE</div>
+            <h1>A Curadoria <span>Mais Insana</span> <em>Do Brasil.</em></h1>
+            <p>Nós testamos milhares de produtos diariamente para você não cair em ciladas. Qualidade premium, preço de atacado e segurança total.</p>
             
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h4>+15k</h4>
-                    <p>Itens Minerados</p>
+            <div class="categories-strip">
+                <div class="cat-box">
+                    <i class="ph ph-device-mobile"></i>
+                    <span>Tecnologia</span>
                 </div>
-                <div class="stat-card">
-                    <h4>4.9/5</h4>
-                    <p>Média de Avaliações</p>
+                <div class="cat-box">
+                    <i class="ph ph-house-line"></i>
+                    <span>Casa & Decor</span>
                 </div>
-                <div class="stat-card">
-                    <h4>24h</h4>
-                    <p>Novos Achados</p>
+                <div class="cat-box">
+                    <i class="ph ph-sketch-logo"></i>
+                    <span>Utilitários</span>
                 </div>
-                <div class="stat-card">
-                    <h4>100%</h4>
-                    <p>Links Seguros</p>
+                <div class="cat-box">
+                    <i class="ph ph-dress"></i>
+                    <span>Moda</span>
+                </div>
+                <div class="cat-box">
+                    <i class="ph ph-game-controller"></i>
+                    <span>Gamer</span>
                 </div>
             </div>
         </section>
 
-        <section class="discovery-tool" id="achadinhos">
-            <div class="search-container-large">
-                <i class="ph ph-magnifying-glass"></i>
-                <input type="text" id="masterSearch" placeholder="Procure por um achadinho específico...">
+        <section class="catalog-section" id="achadinhos">
+            <div class="discovery-header">
+                <div class="search-bar-premium">
+                    <i class="ph ph-magnifying-glass"></i>
+                    <input type="text" id="searchInput" placeholder="Busque por um produto, marca ou categoria...">
+                </div>
             </div>
 
-            <div class="filter-pills">
-                <div class="pill active" data-cat="todos">Todos os Achados</div>
-                <div class="pill" data-cat="tecnologia">Tecnologia & Setup</div>
-                <div class="pill" data-cat="casa">Casa & Decoração</div>
-                <div class="pill" data-cat="utilidades">Utilidades Práticas</div>
-                <div class="pill" data-cat="feminino">Moda Feminina</div>
-                <div class="pill" data-cat="promo">Mega Promoções</div>
-            </div>
-
-            <div class="product-grid" id="mainGrid">
+            <div class="product-grid" id="masterGrid">
                 </div>
         </section>
 
         <section class="testimonials" id="depoimentos">
-    <h2 style="font-size: 3.5rem; margin-bottom: 25px;">O Que Dizem os <span>Achadores</span></h2>
-    <p style="color: var(--text-dim); max-width: 700px; margin: 0 auto;">Junte-se a milhares de brasileiros que economizam todos os meses através da nossa curadoria estratégica.</p>
-    
-    <div class="testimonial-grid">
-        <div class="test-card">
-            <div class="stars">★★★★★</div>
-            <p>"A curadoria é perfeita. Todos os itens que comprei até hoje são de excelente qualidade."</p>
-            <div style="margin-top: 25px; font-weight: 800; color: var(--gold);">@flamen_guista010</div>
-        </div>
+            <h2>O Que Dizem os <span>Achadores</span></h2>
+            <div class="testimonial-grid">
+                
+                <div class="test-card">
+                    <i class="ph ph-quotes quotes"></i>
+                    <div class="stars-row">★★★★★</div>
+                    <p>"A curadoria é perfeita. Todos os itens que comprei até hoje são de excelente qualidade e chegaram rápido."</p>
+                    <div class="user-info">
+                        <div class="user-avatar">F</div>
+                        <div class="user-meta">
+                            <b>@flamen_guista010</b>
+                            <small>Comprador Verificado</small>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="test-card">
-            <div class="stars">★★★★★</div>
-            <p>"Finalmente uma página que realmente testa os links antes de postar. Economizei muito no meu setup."</p>
-            <div style="margin-top: 25px; font-weight: 800; color: var(--gold);">@jottape028</div>
-        </div>
+                <div class="test-card">
+                    <i class="ph ph-quotes quotes"></i>
+                    <div class="stars-row">★★★★★</div>
+                    <p>"Finalmente uma página que realmente testa os links antes de postar. Economizei muito no meu setup gamer."</p>
+                    <div class="user-info">
+                        <div class="user-avatar">J</div>
+                        <div class="user-meta">
+                            <b>@jottape028</b>
+                            <small>Comprador Verificado</small>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="test-card">
-            <div class="stars">★★★★★</div>
-            <p>"O Instagram deles é o meu vício diário. Só promoção top de verdade!"</p>
-            <div style="margin-top: 25px; font-weight: 800; color: var(--gold);">@alynaofc</div>
-        </div>
-    </div>
-</section>
+                <div class="test-card">
+                    <i class="ph ph-quotes quotes"></i>
+                    <div class="stars-row">★★★★★</div>
+                    <p>"O Instagram deles é o meu vício diário. Só promoção top de verdade! Recomendo para todo mundo."</p>
+                    <div class="user-info">
+                        <div class="user-avatar">A</div>
+                        <div class="user-meta">
+                            <b>@alynaofc</b>
+                            <small>Compradora Verificada</small>
+                        </div>
+                    </div>
+                </div>
 
-        <section class="faq-section" id="faq">
-            <h2 style="text-align: center; font-size: 3rem; margin-bottom: 60px;">Perguntas <span>Frequentes</span></h2>
-            
-            <div class="faq-item">
-                <div class="faq-question">Os links de compra são seguros? <i class="ph ph-caret-down"></i></div>
-                <div class="faq-answer">Completamente. Todos os nossos links redirecionam você diretamente para a plataforma oficial da Shopee Brasil. Não processamos pagamentos nem solicitamos dados bancários no nosso portal.</div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">Como vocês selecionam os produtos? <i class="ph ph-caret-down"></i></div>
-                <div class="faq-answer">Nossa equipe utiliza algoritmos de varredura que analisam o histórico de preços (para evitar falsas promoções), a reputação do vendedor (mínimo 4.7 estrelas) e os comentários reais dos compradores.</div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">Quanto tempo demora a entrega? <i class="ph ph-caret-down"></i></div>
-                <div class="faq-answer">Como os links são de vendedores da Shopee, o prazo depende de cada loja. Vendedores locais (Brasil) costumam entregar entre 3 a 10 dias úteis.</div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">Como recebo alertas de promoções relâmpago? <i class="ph ph-caret-down"></i></div>
-                <div class="faq-answer">Você pode assinar nossa newsletter no rodapé ou entrar em nosso canal exclusivo do Telegram, onde postamos "cupons bugados" e ofertas que duram poucos minutos.</div>
             </div>
         </section>
-
     </main>
 
     <footer>
-        <div class="footer-main">
+        <div class="footer-grid">
             <div class="footer-col">
-                <h2 class="brand">🛍️ Uai, <span>Achei na Shopee!</span></h2>
-                <p style="color: var(--text-dim); margin-top: 25px; line-height: 1.6;">O maior ecossistema de ofertas inteligentes do Brasil. Transformamos sua forma de comprar online.</p>
-                <div class="newsletter-input">
-                    <input type="email" placeholder="Seu melhor e-mail...">
-                    <button>Assinar</button>
-                </div>
+                <img src="https://i.postimg.cc/NfMGQByv/Chat-GPT-Image-24-de-abr-de-2026-11-15-07.png" class="footer-logo" alt="Uai Achei">
+                <p style="color: var(--text-dim); line-height: 1.8;">Transformamos sua experiência de compra na Shopee. Menos buscas cansativas, mais economia real e produtos testados por especialistas.</p>
             </div>
             
             <div class="footer-col">
-                <h4>Navegação Eficiente</h4>
+                <h4>Menu</h4>
                 <ul>
-                    <li>Início do Portal</li>
-                    <li>Lista de Achadinhos</li>
-                    <li>Depoimentos Reais</li>
-                    <li>Dúvidas Frequentes</li>
+                    <li>Início</li>
+                    <li>Achadinhos</li>
+                    <li>Depoimentos</li>
+                    <li>Termos de Uso</li>
                 </ul>
             </div>
 
             <div class="footer-col">
-                <h4>Categorias Populares</h4>
+                <h4>Categorias</h4>
                 <ul>
-                    <li>Gamer & Setup</li>
-                    <li>Cozinha Prática</li>
-                    <li>Beleza & Estilo</li>
-                    <li>Smart Home</li>
+                    <li>Eletrônicos</li>
+                    <li>Casa & Cozinha</li>
+                    <li>Estilo de Vida</li>
+                    <li>Promoções</li>
                 </ul>
             </div>
 
             <div class="footer-col">
-                <h4>Nossas Redes</h4>
-                <ul>
-                    <li>Instagram Oficial</li>
-                    <li>Canal no Telegram</li>
-                    <li>Comunidade WhatsApp</li>
-                    <li>TikTok Trends</li>
-                </ul>
+                <h4>Newsletter</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">Receba cupons bugados e ofertas relâmpago no seu e-mail.</p>
+                <div class="newsletter-footer">
+                    <input type="email" placeholder="Seu melhor e-mail">
+                    <button>OK</button>
+                </div>
             </div>
         </div>
 
-        <div style="text-align: center; border-top: 1px solid var(--border); padding-top: 40px; color: var(--text-dim); font-size: 0.85rem;">
-            © 2026 Uai, Achei na Shopee - Todos os direitos reservados. Desenvolvido para máxima economia.
+        <div class="copyright-bar">
+            © 2026 Uai, Achei na Shopee - Todos os direitos reservados. Links afiliados oficiais.
         </div>
     </footer>
 
     <script>
-        /**************************************************************
-         * LOGICA DE DADOS: LISTA DE 50 PRODUTOS PADRONIZADOS
-         * Para facilitar a alteração, use o padrão de ID.
-         **************************************************************/
-        const DATABASE_PRODUTOS = [
-            { id: 1, nome: "NOME DO PRODUTO 01", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "tecnologia", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 2, nome: "NOME DO PRODUTO 02", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "utilidades", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 3, nome: "NOME DO PRODUTO 03", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "casa", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 4, nome: "NOME DO PRODUTO 04", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "tecnologia", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 5, nome: "NOME DO PRODUTO 05", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "utilidades", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 6, nome: "NOME DO PRODUTO 06", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "casa", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 7, nome: "NOME DO PRODUTO 07", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "feminino", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 8, nome: "NOME DO PRODUTO 08", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "promo", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 9, nome: "NOME DO PRODUTO 09", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "tecnologia", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 10, nome: "NOME DO PRODUTO 10", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "utilidades", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 11, nome: "NOME DO PRODUTO 11", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "casa", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 12, nome: "NOME DO PRODUTO 12", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "feminino", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 13, nome: "NOME DO PRODUTO 13", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "tecnologia", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 14, nome: "NOME DO PRODUTO 14", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "utilidades", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 15, nome: "NOME DO PRODUTO 15", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "casa", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 16, nome: "NOME DO PRODUTO 16", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "feminino", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 17, nome: "NOME DO PRODUTO 17", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "promo", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 18, nome: "NOME DO PRODUTO 18", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "tecnologia", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 19, nome: "NOME DO PRODUTO 19", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "casa", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 20, nome: "NOME DO PRODUTO 20", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "utilidades", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 21, nome: "NOME DO PRODUTO 21", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "tecnologia", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 22, nome: "NOME DO PRODUTO 22", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "casa", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 23, nome: "NOME DO PRODUTO 23", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "utilidades", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 24, nome: "NOME DO PRODUTO 24", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "feminino", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 25, nome: "NOME DO PRODUTO 25", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "promo", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 26, nome: "NOME DO PRODUTO 26", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "tecnologia", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 27, nome: "NOME DO PRODUTO 27", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "casa", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 28, nome: "NOME DO PRODUTO 28", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "utilidades", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 29, nome: "NOME DO PRODUTO 29", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "feminino", img: "https://via.placeholder.com/600", link: "#" },
-            { id: 30, nome: "NOME DO PRODUTO 30", precoAntigo: "R$ 00,00", precoAtual: "R$ 00,00", cat: "promo", img: "https://via.placeholder.com/600", link: "#" },
-        ];
-
-        /**************************************************************
-         * CORE ENGINE: RENDERIZAÇÃO E FILTROS
-         **************************************************************/
+        /* ============================================================
+           LÓGICA DO BANCO DE DADOS (30 PRODUTOS)
+           ============================================================
+        */
+        const PRODUTOS_DATABASE = [];
         
-        const gridElement = document.getElementById('mainGrid');
-        const searchInput = document.getElementById('masterSearch');
-        const filterPills = document.querySelectorAll('.pill');
+        // Loop para gerar 30 slots de produtos editáveis
+        for(let i = 1; i <= 30; i++) {
+            PRODUTOS_DATABASE.push({
+                id: i,
+                titulo: `PRODUTO ACHADINHO #${i < 10 ? '0'+i : i}`,
+                precoDe: "R$ 00,00",
+                precoPor: "R$ 00,00",
+                imagem: "https://via.placeholder.com/600", // Substituir pelas URLs reais
+                link: "https://shopee.com.br", // Link do afiliado
+                tag: "OFERTA"
+            });
+        }
 
-        /**
-         * Função responsável por desenhar os cards no HTML
-         * @param {Array} items - Lista de objetos de produtos
-         */
-        function renderProducts(items) {
-            gridElement.innerHTML = ''; // Limpa o grid antes de renderizar
+        /* ============================================================
+           MOTOR DE RENDERIZAÇÃO
+           ============================================================
+        */
+        function renderCatalogo(lista) {
+            const grid = document.getElementById('masterGrid');
+            grid.innerHTML = '';
             
-            if (items.length === 0) {
-                gridElement.innerHTML = `
-                    <div style="grid-column: 1/-1; padding: 100px; text-align: center; color: var(--text-dim);">
-                        <i class="ph ph-mask-sad" style="font-size: 4rem; margin-bottom: 20px; display: block; color: var(--primary);"></i>
-                        <p style="font-size: 1.2rem;">Ops! Nenhum achadinho encontrado para essa busca.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            items.forEach(product => {
+            lista.forEach(prod => {
                 const card = `
-                    <div class="product-card" data-aos="fade-up">
-                        <div class="tag-promo">PROMOÇÃO</div>
-                        <div class="img-box">
-                            <img src="${product.img}" alt="${product.nome}" loading="lazy">
+                    <div class="card-achado" data-aos="fade-up">
+                        <div class="card-badge">${prod.tag}</div>
+                        <div class="card-img-container">
+                            <img src="${prod.imagem}" alt="${prod.titulo}" loading="lazy">
                         </div>
-                        <div class="product-info">
-                            <p style="font-size: 0.75rem; color: var(--primary); font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">${product.cat}</p>
-                            <h3>${product.nome}</h3>
-                            <div class="price-section">
-                                <div class="price-wrap">
-                                    <span class="old">${product.precoAntigo}</span>
-                                    <span class="current">${product.precoAtual}</span>
+                        <div class="card-info">
+                            <h3>${prod.titulo}</h3>
+                            <div class="price-group">
+                                <div>
+                                    <span class="price-old">${prod.precoDe}</span>
+                                    <span class="price-new">${prod.precoPor}</span>
                                 </div>
                             </div>
-                            <a href="${product.link}" target="_blank" class="btn-shopee">
-                                COMPRAR NA SHOPEE <i class="ph ph-shopping-bag"></i>
+                            <a href="${prod.link}" target="_blank" class="btn-buy">
+                                <i class="ph ph-shopping-cart"></i> COMPRAR NA SHOPEE
                             </a>
                         </div>
                     </div>
                 `;
-                gridElement.innerHTML += card;
+                grid.innerHTML += card;
             });
         }
 
-        /**
-         * Função de Filtro Mestre (Combina Busca + Categorias)
-         */
-        function masterFilter() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const activeCategory = document.querySelector('.pill.active').dataset.cat;
-
-            const filteredList = DATABASE_PRODUTOS.filter(product => {
-                const matchesSearch = product.nome.toLowerCase().includes(searchTerm);
-                const matchesCategory = (activeCategory === 'todos' || product.cat === activeCategory);
-                return matchesSearch && matchesCategory;
-            });
-
-            renderProducts(filteredList);
-        }
-
-        // Listeners de Evento
-        searchInput.addEventListener('input', masterFilter);
-
-        filterPills.forEach(pill => {
-            pill.addEventListener('click', () => {
-                filterPills.forEach(p => p.classList.remove('active'));
-                pill.classList.add('active');
-                masterFilter();
-            });
+        /* ============================================================
+           SISTEMA DE BUSCA EM TEMPO REAL
+           ============================================================
+        */
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const termo = e.target.value.toLowerCase();
+            const filtrados = PRODUTOS_DATABASE.filter(p => 
+                p.titulo.toLowerCase().includes(termo)
+            );
+            renderCatalogo(filtrados);
         });
 
-        /**************************************************************
-         * COMPONENTES DE INTERFACE E EXPERIÊNCIA DO USUÁRIO
-         **************************************************************/
+        /* ============================================================
+           SISTEMA DE NOTIFICAÇÕES REALISTA
+           ============================================================
+        */
+        const f_nomes = ["Biel_027", "Thiago Silva", "Julia_M", "jp_ferreira", "Amanda_L", "Gui_Tech", "beatriz.oliveira", "Vinícius Jr", "Lucas_V", "Carla.S"];
+        const f_cidades = ["Afonso Cláudio", "São Paulo", "Vitória", "Cariacica", "Rio de Janeiro", "Curitiba", "Salvador", "Belo Horizonte"];
+        const f_acoes = ["acabou de garantir um achadinho!", "pegou uma promoção relâmpago!", "economizou R$ 45,00 agora!", "aproveitou o cupom de frete grátis!"];
 
-        // 1. FAQ ACORDEÃO
-        document.querySelectorAll('.faq-question').forEach(button => {
-            button.addEventListener('click', () => {
-                const currentItem = button.parentElement;
-                const isActive = currentItem.classList.contains('active');
-                
-                // Fecha outros itens (opcional)
-                document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('active'));
-                
-                if (!isActive) currentItem.classList.add('active');
-            });
-        });
-
-        // 2. NOTIFICAÇÃO DINÂMICA (SOCIAL PROOF)
-        const nomesFake = ["Aline", "Rodrigo", "Carla", "Marcos", "Beatriz", "Vinícius", "Sofia"];
-        const cidadesFake = ["Afonso Cláudio", "São Paulo", "Vitória", "Cariacica", "Serra", "Rio de Janeiro"];
-
-        function showFakeNotification() {
+        function triggerNotif() {
             const notif = document.getElementById('liveNotif');
-            const text = document.getElementById('notifText');
+            const txt = document.getElementById('notifText');
             
-            const randomNome = nomesFake[Math.floor(Math.random() * nomesFake.length)];
-            const randomCidade = cidadesFake[Math.floor(Math.random() * cidadesFake.length)];
+            const n = f_nomes[Math.floor(Math.random() * f_nomes.length)];
+            const c = f_cidades[Math.floor(Math.random() * f_cidades.length)];
+            const a = f_acoes[Math.floor(Math.random() * f_acoes.length)];
             
-            text.innerHTML = `<b>${randomNome}</b> de ${randomCidade} acabou de economizar!`;
+            txt.innerHTML = `<b>${n}</b> de ${c} ${a}`;
             
             notif.classList.add('show');
             
             setTimeout(() => {
                 notif.classList.remove('show');
             }, 5000);
+
+            // Intervalo aleatório para parecer real (entre 8s e 20s)
+            const randomTime = Math.floor(Math.random() * (20000 - 8000 + 1)) + 8000;
+            setTimeout(triggerNotif, randomTime);
         }
 
-        // 3. EFEITO DE SCROLL NO HEADER
+        /* ============================================================
+           INICIALIZAÇÃO & EFEITOS DE SCROLL
+           ============================================================
+        */
         window.addEventListener('scroll', () => {
             const header = document.getElementById('mainHeader');
-            if (window.scrollY > 80) {
-                header.style.padding = '15px 6%';
-                header.style.background = 'rgba(0, 0, 0, 0.98)';
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
             } else {
-                header.style.padding = '24px 6%';
-                header.style.background = 'var(--glass)';
+                header.classList.remove('scrolled');
             }
         });
 
-        /**************************************************************
-         * INICIALIZAÇÃO DO SISTEMA
-         **************************************************************/
         window.addEventListener('load', () => {
-            // Loader handling
+            // Loader logic
             setTimeout(() => {
                 const loader = document.getElementById('loader');
                 loader.style.opacity = '0';
-                setTimeout(() => loader.remove(), 800);
-                
-                // Render Inicial
-                renderProducts(DATABASE_PRODUTOS);
-                
-                // Loop de Notificações (A cada 15 segundos)
-                setInterval(showFakeNotification, 15000);
-
-                // Start Animations
-                gsap.from(".hero-section h1", { y: 100, opacity: 0, duration: 1.5, ease: "power4.out" });
-                gsap.from(".stat-card", { scale: 0.8, opacity: 0, duration: 1, stagger: 0.2, delay: 0.5 });
-            }, 2000);
+                setTimeout(() => {
+                    loader.style.visibility = 'hidden';
+                    renderCatalogo(PRODUTOS_DATABASE);
+                    triggerNotif();
+                    
+                    // GSAP Animações de Entrada
+                    gsap.from(".hero h1", { y: 100, opacity: 0, duration: 1.2, ease: "power4.out" });
+                    gsap.from(".hero p", { y: 50, opacity: 0, duration: 1.2, delay: 0.3 });
+                    gsap.from(".cat-box", { scale: 0.5, opacity: 0, duration: 1, stagger: 0.1, delay: 0.5 });
+                }, 800);
+            }, 2500);
         });
 
-        console.log("Portal 'Uai, Achei na Shopee' inicializado com sucesso. Versão Master 2.0");
     </script>
 </body>
 </html>
