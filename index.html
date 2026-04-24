@@ -3,261 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uai, Achei na Shopee | O Gigante do Sudeste</title>
+    <title>Uai, Achei na Shopee | Smart Engine v2.0</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Inter:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
     <style>
         :root {
             --primary: #FF4500;
-            --primary-glow: rgba(255, 69, 0, 0.4);
-            --bg-dark: #000000;
-            --card-bg: rgba(15, 15, 15, 0.9);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-main: #FFFFFF;
-            --text-dim: #999999;
-            --success: #00FF88;
+            --gradient: linear-gradient(135deg, #FF4500 0%, #FFA500 100%);
+            --bg: #000000;
+            --card: #111111;
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #FFFFFF;
+            --text-dim: #94a3b8;
+            --success: #22c55e;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background: var(--bg-dark); color: var(--text-main); overflow-x: hidden; scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-        /* HEADER PREMIUM */
+        /* HEADER */
         header {
             position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(15px);
-            padding: 1.2rem 6%; border-bottom: 1px solid var(--glass-border);
+            background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px);
+            padding: 0.8rem 6%; border-bottom: 1px solid var(--border);
             display: flex; justify-content: space-between; align-items: center;
         }
-        .logo-img { height: clamp(45px, 8vw, 65px); filter: drop-shadow(0 0 8px rgba(255,255,255,0.2)); }
-        .btn-header-insta { 
-            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743);
-            padding: 12px 25px; border-radius: 12px; color: white; text-decoration: none;
-            font-weight: 800; font-size: 0.9rem; transition: 0.3s;
+        .logo-img { height: 32px; filter: drop-shadow(0 0 8px rgba(255,69,0,0.3)); }
+        
+        .insta-btn { 
+            display: flex; align-items: center; gap: 8px;
+            color: #fff; text-decoration: none; font-weight: 700; font-size: 0.75rem; 
+            background: rgba(255, 255, 255, 0.05); border: 1px solid #333; 
+            padding: 8px 16px; border-radius: 100px; transition: 0.3s;
         }
+        .insta-btn:hover { background: #fff; color: #000; }
+        .insta-btn i { font-size: 1.1rem; }
 
-        /* HERO - IMPACTO TOTAL */
+        /* HERO */
         .hero {
-            padding: 180px 6% 80px; text-align: center;
-            background: radial-gradient(circle at 50% 30%, rgba(255, 69, 0, 0.15) 0%, transparent 70%);
+            padding: 150px 6% 40px;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
         }
-        .hero-badge {
-            background: rgba(255, 69, 0, 0.1); color: var(--primary);
-            padding: 10px 25px; border-radius: 100px; border: 1px solid var(--primary);
-            font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;
-            display: inline-block; margin-bottom: 30px;
-        }
-        .hero h1 { 
-            font-family: 'Inter', sans-serif; font-size: clamp(3rem, 12vw, 10rem); 
-            line-height: 0.85; margin-bottom: 30px; letter-spacing: -5px;
-        }
-        .hero h1 span { color: var(--primary); }
-        .hero p { max-width: 900px; margin: 0 auto 50px; font-size: clamp(1.1rem, 2.5vw, 2rem); color: var(--text-dim); }
 
-        /* AÇÕES RÁPIDAS */
-        .actions-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px; max-width: 1400px; margin: 0 auto 100px; padding: 0 6%;
+        .algo-status {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border);
+            padding: 8px 16px; border-radius: 100px;
+            font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 1px; color: #fff; margin-bottom: 20px;
         }
-        .action-card {
-            background: var(--card-bg); border: 1px solid var(--glass-border);
-            padding: 30px; border-radius: 25px; display: flex; align-items: center; gap: 20px;
-            transition: 0.4s; cursor: pointer;
+        
+        /* Contador de Usuários Online */
+        .online-counter {
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            font-size: 0.8rem; color: var(--success); font-weight: 600; margin-bottom: 30px;
         }
-        .action-card:hover { border-color: var(--primary); transform: translateY(-10px); background: #111; }
-        .action-card i { font-size: 2.5rem; color: var(--primary); }
-        .action-card b { font-size: 1.2rem; display: block; }
-        .action-card span { color: var(--text-dim); font-size: 0.9rem; }
+        .dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; box-shadow: 0 0 12px var(--success); animation: pulse 2s infinite; }
+
+        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.5; } 100% { transform: scale(1); opacity: 1; } }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.4rem, 8vw, 4rem);
+            line-height: 0.95; font-weight: 700; letter-spacing: -3px;
+            margin-bottom: 25px;
+        }
+        .hero h1 b { font-weight: 300; color: var(--text-dim); letter-spacing: -1px; }
+        .hero h1 span { 
+            background: var(--gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            display: block;
+        }
+
+        .hero p {
+            font-size: 1.1rem; color: var(--text-dim); font-weight: 400; line-height: 1.6;
+            max-width: 600px; margin: 0 auto;
+        }
 
         /* CATALOGO */
-        .catalog { padding: 100px 6%; background: #050505; border-radius: 60px 60px 0 0; }
-        .section-title { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; margin-bottom: 60px; letter-spacing: -2px; }
+        .catalog { padding: 20px 6% 60px; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
+        .section-title i { color: var(--primary); }
 
-        .product-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 40px; max-width: 1800px; margin: 0 auto;
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); 
+            gap: 20px; 
         }
 
-        .product-card {
-            background: var(--card-bg); border: 1px solid var(--glass-border);
-            border-radius: 40px; padding: 30px; transition: 0.4s; position: relative;
+        .card {
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 20px; padding: 16px; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; flex-direction: column;
         }
-        .product-card:hover { border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        
-        .card-label {
-            position: absolute; top: 30px; left: 30px; background: var(--primary);
-            color: white; padding: 6px 15px; border-radius: 10px; font-weight: 800; font-size: 0.7rem; z-index: 10;
+        .card:hover { 
+            border-color: rgba(255, 69, 0, 0.4); 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
-        .product-img {
-            width: 100%; aspect-ratio: 1/1; border-radius: 25px; overflow: hidden; margin-bottom: 25px;
-            background: #1a1a1a;
-        }
-        .product-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
-        .product-card:hover .product-img img { transform: scale(1.1); }
+        .img-box { width: 100%; aspect-ratio: 1/1; border-radius: 12px; overflow: hidden; margin-bottom: 15px; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        .product-card h3 { font-size: 1.6rem; font-weight: 800; margin-bottom: 15px; line-height: 1.2; height: 3.8rem; overflow: hidden; }
-        .old-price { color: #555; text-decoration: line-through; font-size: 1.2rem; }
-        .new-price { color: var(--success); font-size: 3.8rem; font-weight: 900; display: block; line-height: 1; margin-bottom: 25px; }
+        .card h3 { font-size: 0.9rem; font-weight: 600; height: 2.6rem; overflow: hidden; margin-bottom: 12px; }
+        .old { font-size: 0.75rem; color: var(--text-dim); text-decoration: line-through; }
+        .new { font-size: 1.8rem; font-weight: 800; color: var(--success); display: block; line-height: 1; margin-bottom: 15px; }
 
-        .btn-buy {
-            display: block; width: 100%; background: #fff; color: #000; padding: 22px;
-            border-radius: 20px; text-align: center; text-decoration: none; font-weight: 900;
-            font-size: 1.2rem; transition: 0.3s;
+        .buy-btn {
+            display: block; width: 100%; background: var(--gradient); color: #fff;
+            text-align: center; padding: 12px; border-radius: 12px;
+            font-size: 0.85rem; font-weight: 800; text-decoration: none; text-transform: uppercase;
         }
-        .btn-buy:hover { background: var(--primary); color: #fff; }
 
-        /* NOTIFICAÇÃO VIVA */
-        .live-toast {
-            position: fixed; bottom: 30px; left: 30px; background: white; color: black;
-            padding: 15px 25px; border-radius: 20px; display: flex; align-items: center; gap: 15px;
-            z-index: 2000; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            transform: translateX(-150%); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* DEPOIMENTOS */
+        .testimonials { padding: 60px 6%; background: rgba(255,255,255,0.02); border-top: 1px solid var(--border); }
+        .testimonials-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 20px; max-width: 1200px; margin: 0 auto;
         }
-        .live-toast.active { transform: translateX(0); }
-        .toast-icon { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; }
+        .testi-card {
+            background: var(--card); border: 1px solid var(--border); padding: 20px; border-radius: 20px;
+        }
+        .testi-user { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .user-avatar { width: 40px; height: 40px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--primary); border: 1px solid var(--primary); }
+        .testi-text { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; font-style: italic; }
+        .testi-stars { color: #FFD700; font-size: 0.8rem; margin-top: 8px; }
+
+        /* FOOTER */
+        footer { padding: 40px 6%; text-align: center; border-top: 1px solid var(--border); }
+        .footer-text { font-size: 0.75rem; color: var(--text-dim); }
+
+        /* TOAST */
+        .toast {
+            position: fixed; bottom: 30px; left: 30px; background: #fff; color: #000;
+            padding: 12px 20px; border-radius: 16px; z-index: 2000;
+            display: flex; align-items: center; gap: 12px; font-size: 0.8rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6); transform: translateX(-180%); transition: 0.6s;
+        }
+        .toast.active { transform: translateX(0); }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 4rem; letter-spacing: -2px; }
-            .product-grid { grid-template-columns: 1fr; }
-            header { padding: 1rem 4%; }
-            .nav-hide { display: none; }
+            .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .hero h1 { font-size: 2.5rem; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .toast { left: 15px; right: 15px; transform: translateY(200%); }
+            .toast.active { transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <div class="live-toast" id="liveToast">
-        <div class="toast-icon" id="toastIcon"></div>
-        <div>
-            <p id="toastUser" style="font-weight: 800; font-size: 0.9rem;"></p>
-            <p id="toastMsg" style="font-size: 0.8rem; color: #666;"></p>
-        </div>
+    <div class="toast" id="toast">
+        <i class="ph-fill ph-check-circle" style="color: var(--success); font-size: 1.2rem;"></i>
+        <div><b id="t-user"></b> <span id="t-msg"></span></div>
     </div>
 
     <header>
-        <img src="https://i.postimg.cc/NfMGQByv/Chat-GPT-Image-24-de-abr-de-2026-11-15-07.png" class="logo-img" alt="Uai Achei">
-        <div style="display: flex; gap: 20px; align-items: center;">
-            <a href="https://www.instagram.com/uaiacheibr" target="_blank" class="btn-header-insta">@UAIACHEIBR</a>
-        </div>
+        <img src="https://i.postimg.cc/NfMGQByv/Chat-GPT-Image-24-de-abr-de-2026-11-15-07.png" class="logo-img">
+        <a href="https://www.instagram.com/uaiacheibr" target="_blank" class="insta-btn">
+            <i class="ph-fill ph-instagram-logo"></i>
+            UAIACHEIBR
+        </a>
     </header>
 
     <main>
         <section class="hero">
-            <div class="hero-badge">Algoritmo Anti-Preço Alto</div>
-            <h1>UAI, ACHEI NA <br><span>SHOPEE</span></h1>
-            <p>O maior portal de curadoria do Sudeste. Encontramos bugs de preço e promoções que duram poucos minutos.</p>
+            <div class="algo-status">Smart Engine: Active</div>
+            <div class="online-counter">
+                <span class="dot"></span>
+                <span id="user-count">...</span> usuários monitorando agora
+            </div>
+            <h1><b>As melhores ofertas no</b> <br><span>BRASIL TODO</span></h1>
+            <p>Nosso algoritmo escaneia <strong>bugs de preços</strong> e ofertas exclusivas a cada segundo. O menor preço do país, agora no seu radar.</p>
         </section>
 
-        <div class="actions-grid">
-            <div class="action-card">
-                <i class="ph-fill ph-ticket"></i>
-                <div><b>Cupons Ativos</b><span>Resgate agora mesmo</span></div>
-            </div>
-            <div class="action-card">
-                <i class="ph-fill ph-instagram-logo"></i>
-                <div><b>Comunidade Insta</b><span>Siga para ver os bugs</span></div>
-            </div>
-            <div class="action-card">
-                <i class="ph-fill ph-lightning"></i>
-                <div><b>Alertas VIP</b><span>Ofertas relâmpago 24h</span></div>
-            </div>
-        </div>
-
         <section class="catalog">
-            <h2 class="section-title">Achadinhos <span>de Hoje</span></h2>
-            <div class="product-grid" id="productGrid">
+            <h2 class="section-title"><i class="ph-fill ph-lightning"></i> Achados Recentes</h2>
+            <div class="grid" id="grid"></div>
+        </section>
+
+        <section class="testimonials">
+            <h2 class="section-title" style="justify-content: center; margin-bottom: 40px;">
+                <i class="ph-fill ph-chat-circle-text"></i> O que dizem os caçadores
+            </h2>
+            <div class="testimonials-grid">
+                <div class="testi-card">
+                    <div class="testi-user">
+                        <div class="user-avatar">JP</div>
+                        <div>
+                            <p style="font-size: 0.9rem; font-weight: 700;">João Paulo</p>
+                            <div class="testi-stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="testi-text">"Peguei em um tênis esportivo R$50,00. Chegou em 7 dias aqui em Afonso Cláudio. O sistema de vcs é surreal!"</p>
                 </div>
+                <div class="testi-card">
+                    <div class="testi-user">
+                        <div class="user-avatar">MA</div>
+                        <div>
+                            <p style="font-size: 0.9rem; font-weight: 700;">Tamiris</p>
+                            <div class="testi-stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="testi-text">"Sempre fico de olho no algoritmo. Já economizei mais de 300 reais em compras de casa só esse mês."</p>
+                </div>
+                <div class="testi-card">
+                    <div class="testi-user">
+                        <div class="user-avatar">RF</div>
+                        <div>
+                            <p style="font-size: 0.9rem; font-weight: 700;">Rodrigo F.</p>
+                            <div class="testi-stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="testi-text">"O link direto facilita muito. Não precisa ficar procurando cupom, já cai no preço baixo."</p>
+                </div>
+            </div>
         </section>
     </main>
 
+    <footer>
+        <p class="footer-text">Uai, Achei na Shopee &copy; 2026 | Tecnologia e Monitoramento Nacional</p>
+    </footer>
+
     <script>
         const PRODUTOS = [
-            { 
-                id: 1, 
-                tag: "MAIS VENDIDO",
-                nome: "Corretor de Postura Premium – Suporte Lombar", 
-                precoAntigo: "R$ 39,99", 
-                precoNovo: "R$ 14,88", 
-                img: "https://down-br.img.susercontent.com/file/br-11134207-7r98o-lwyhrg9sci4f9e.webp", 
-                link: "https://s.shopee.com.br/4LFgvmMQZY" 
-            },
-            { 
-                id: 2, 
-                tag: "NOVIDADE",
-                nome: "NOVO PRODUTO GARIMPADO", 
-                precoAntigo: "R$ 99,90", 
-                precoNovo: "R$ 47,00", 
-                img: "https://down-br.img.susercontent.com/file/br-11134207-7r98o-lwyhrg9sci4f9e.webp", 
-                link: "https://s.shopee.com.br/4LFgvmMQZY" 
-            }
+            { nome: "Corretor de Postura Premium – Suporte Lombar", old: "R$ 39,99", new: "R$ 14,88", img: "https://down-br.img.susercontent.com/file/br-11134207-7r98o-lwyhrg9sci4f9e.webp", link: "https://s.shopee.com.br/4LFgvmMQZY" },
+            { nome: "PRODUTO NOVO", old: "VALOR ANTIGO", new: "VALOR NOVO", img: "LINK DA IMAGEM", link: "LINK DA SHOPEE" },
+            { nome: "PRODUTO NOVO", old: "VALOR ANTIGO", new: "VALOR NOVO", img: "LINK DA IMAGEM", link: "LINK DA SHOPEE" },
+            { nome: "PRODUTO NOVO", old: "VALOR ANTIGO", new: "VALOR NOVO", img: "LINK DA IMAGEM", link: "LINK DA SHOPEE" }
         ];
 
-        const NOMES = ["Gabriel", "Juliana", "Thiago", "Amanda", "Lucas", "Fernanda", "Ricardo", "Beatriz", "João", "Ellen", "Mateus", "Larissa", "Rodrigo", "Camila", "André", "Isabela", "Bruno", "Letícia", "Vitor", "Patrícia", "Vinícius", "Renata", "Marcelo", "Tatiana", "Gustavo", "Priscila", "Felipe", "Daniela", "Rafael", "Mônica", "Diego", "Bárbara", "Samuel", "Vanessa", "Hugo", "Aline", "Igor", "Bianca", "Otávio", "Sabrina", "Caio", "Jéssica", "Arthur", "Carol", "Eduardo", "Débora", "Yuri", "Natália", "Leonardo", "Talita", "Douglas", "Clara", "Fábio", "Raquel", "Murilo", "Erica", "Wesley", "Gisele", "Marcos", "Flávia", "Henrique", "Paola", "Sérgio"];
-        
-        const CIDADES = [
-            "Vitória, ES", "Vila Velha, ES", "Serra, ES", "Cariacica, ES", "Guarapari, ES", "Colatina, ES", "Linhares, ES", "Afonso Cláudio, ES",
-            "Rio de Janeiro, RJ", "Niterói, RJ", "Petrópolis, RJ", "Búzios, RJ", "Angra dos Reis, RJ", "Duque de Caxias, RJ",
-            "São Paulo, SP", "Campinas, SP", "Santos, SP", "São Bernardo, SP", "Osasco, SP", "Ribeirão Preto, SP",
-            "Belo Horizonte, MG", "Uberlândia, MG", "Contagem, MG", "Juiz de Fora, MG", "Betim, MG", "Ipatinga, MG"
-        ];
+        const NOMES = ["André", "Beatriz", "Carlos", "Débora", "Enzo", "Flávia", "Gustavo", "Heloísa", "Igor", "Júlia"];
+        const CIDADES = ["São Paulo", "Rio de Janeiro", "BH", "Vitória", "Curitiba", "Salvador"];
 
-        const TIPOS_ACAO = [
-            { txt: "acabou de comprar!", icon: "ph-fill ph-shopping-cart", color: "#00FF88" },
-            { txt: "resgatou um cupom de 50%!", icon: "ph-fill ph-ticket", color: "#FF4500" },
-            { txt: "seguiu no Instagram!", icon: "ph-fill ph-instagram-logo", color: "#E1306C" },
-            { txt: "entrou no grupo VIP!", icon: "ph-fill ph-users-three", color: "#007AFF" }
-        ];
-
-        function renderProdutos() {
-            const grid = document.getElementById('productGrid');
-            grid.innerHTML = PRODUTOS.map(p => `
-                <div class="product-card">
-                    <span class="card-label">${p.tag}</span>
-                    <div class="product-img">
-                        <img src="${p.img}" alt="${p.nome}" onerror="this.src='https://via.placeholder.com/500?text=Imagem+Indisponivel'">
-                    </div>
+        function render() {
+            document.getElementById('grid').innerHTML = PRODUTOS.map(p => `
+                <div class="card">
+                    <div class="img-box"><img src="${p.img}"></div>
                     <h3>${p.nome}</h3>
-                    <div class="prices">
-                        <span class="old-price">${p.precoAntigo}</span>
-                        <span class="new-price">${p.precoNovo}</span>
+                    <div class="price-tag">
+                        <span class="old">${p.old}</span>
+                        <span class="new">${p.new}</span>
                     </div>
-                    <a href="${p.link}" target="_blank" class="btn-buy">APROVEITAR AGORA</a>
+                    <a href="${p.link}" target="_blank" class="buy-btn">Resgatar Agora</a>
                 </div>
             `).join('');
         }
 
-        function triggerNotif() {
-            const toast = document.getElementById('liveToast');
-            const user = document.getElementById('toastUser');
-            const msg = document.getElementById('toastMsg');
-            const icon = document.getElementById('toastIcon');
-
-            const nome = NOMES[Math.floor(Math.random() * NOMES.length)];
-            const cidade = CIDADES[Math.floor(Math.random() * CIDADES.length)];
-            const acao = TIPOS_ACAO[Math.floor(Math.random() * TIPOS_ACAO.length)];
-
-            user.innerText = nome;
-            msg.innerText = `de ${cidade} ${acao.txt}`;
-            icon.style.backgroundColor = acao.color;
-            icon.innerHTML = `<i class="${acao.icon}"></i>`;
-
-            toast.classList.add('active');
-            setTimeout(() => toast.classList.remove('active'), 5000);
-            
-            setTimeout(triggerNotif, Math.random() * (15000 - 8000) + 8000);
+        function updateUsers() {
+            const base = 450;
+            const variation = Math.floor(Math.random() * 50);
+            document.getElementById('user-count').innerText = base + variation;
+            setTimeout(updateUsers, 5000);
         }
 
-        window.onload = () => {
-            renderProdutos();
-            setTimeout(triggerNotif, 3000);
-            
-            gsap.from(".hero h1", { opacity: 0, y: 100, duration: 1.2, ease: "power4.out" });
-            gsap.from(".product-card", { opacity: 0, y: 50, stagger: 0.2, duration: 1, delay: 0.5 });
+        function toast() {
+            const el = document.getElementById('toast');
+            document.getElementById('t-user').innerText = NOMES[Math.floor(Math.random()*NOMES.length)];
+            document.getElementById('t-msg').innerText = `de ${CIDADES[Math.floor(Math.random()*CIDADES.length)]} garantiu a oferta!`;
+            el.classList.add('active');
+            setTimeout(() => el.classList.remove('active'), 4000);
+            setTimeout(toast, 10000);
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            render();
+            updateUsers();
+            setTimeout(toast, 3000);
+        });
     </script>
 </body>
 </html>
