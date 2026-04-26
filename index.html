@@ -540,32 +540,16 @@ function ligarHud() {
         barraHud.style.width = p + "%";
     }, 1200);
 }
-
-document.addEventListener("DOMContentLoaded", ligarHud);
-function abrirInsta(){
-    document.getElementById("instaBox").classList.add("show");
-}
-
-function fecharInsta(){
-    document.getElementById("instaBox").classList.remove("show");
-
-    setTimeout(()=>{
-        abrirInsta();
-    },15000);
-}
-
-setTimeout(abrirInsta,3000);
-
-setInterval(()=>{
-    const box = document.getElementById("instaBox");
-
-    box.style.transform = "translateY(-8px)";
-
-    setTimeout(()=>{
-        box.style.transform = "translateY(0)";
-    },300);
-
-},7000);
+        // leve animação de "chamando atenção"
+setInterval(() => {
+    const box = document.querySelector(".insta-float");
+    if (box) {
+        box.style.transform = "translateY(-6px)";
+        setTimeout(() => {
+            box.style.transform = "translateY(0)";
+        }, 250);
+    }
+}, 5000);
     </script>
 <a href="https://www.instagram.com/uaiacheibr" target="_blank" class="insta-float">
     <i class="ph-fill ph-instagram-logo"></i>
