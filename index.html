@@ -193,6 +193,148 @@
             .toast { left: 15px; right: 15px; transform: translateY(200%); }
             .toast.active { transform: translateY(0); }
         }
+        /* --- ESTILO HUD ROBÓTICO CHIQUE --- */
+.hud-scanner {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    border-bottom: 1px solid #222;
+    padding: 5px 0 0 0;
+    font-family: 'monospace';
+    overflow: hidden;
+}
+
+.hud-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.hud-glitch-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 10px;
+    color: #888;
+}
+
+.hud-label {
+    color: #22c55e;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+}
+
+.hud-msg {
+    color: #eee;
+    text-transform: uppercase;
+    font-size: 11px;
+    min-width: 250px;
+}
+
+.hud-stats {
+    display: flex;
+    gap: 20px;
+    font-size: 9px;
+    color: #444;
+}
+
+.hud-data b { color: #888; }
+
+.pulse-green {
+    color: #22c55e !important;
+    animation: hud-blink 1s infinite;
+}
+
+/* Barra de progresso invisível/sutil */
+.hud-progress-wrap {
+    width: 100%;
+    height: 1px;
+    background: #111;
+    margin-top: 5px;
+}
+
+.hud-bar-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, #22c55e, transparent);
+    box-shadow: 0 0 10px #22c55e;
+}
+
+@keyframes hud-blink {
+    50% { opacity: 0.3; }
+}
+/* ---------------------------------- */
+.insta-float{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:9999;
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    background:linear-gradient(135deg,#833AB4,#FD1D1D,#F77737);
+    color:#fff;
+    text-decoration:none;
+
+    padding:14px 18px;
+    border-radius:18px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.45);
+    transition:.3s;
+    animation:instaPulse 2s infinite;
+}
+
+.insta-float:hover{
+    transform:translateY(-5px) scale(1.03);
+}
+
+.insta-float i{
+    font-size:28px;
+}
+
+.insta-text{
+    display:flex;
+    flex-direction:column;
+    line-height:1.1;
+}
+
+.insta-text small{
+    font-size:11px;
+    opacity:.9;
+}
+
+.insta-text strong{
+    font-size:14px;
+}
+
+@keyframes instaPulse{
+    50%{
+        transform:scale(1.04);
+    }
+}
+
+@media(max-width:768px){
+
+.insta-float{
+    right:15px;
+    bottom:15px;
+    padding:12px 15px;
+}
+
+.insta-text strong{
+    font-size:13px;
+}
+
+.insta-float i{
+    font-size:24px;
+}
+
+}
     </style>
 </head>
 <body>
@@ -204,10 +346,22 @@
 
     <header>
         <img src="https://i.postimg.cc/NfMGQByv/Chat-GPT-Image-24-de-abr-de-2026-11-15-07.png" class="logo-img">
-        <a href="https://www.instagram.com/uaiacheibr" target="_blank" class="insta-btn">
-            <i class="ph-fill ph-instagram-logo"></i>
-            UAIACHEIBR
-        </a>
+        <div class="hud-scanner">
+    <div class="hud-container">
+        <div class="hud-glitch-box">
+            <span class="hud-label">SISTEMA_ATIVO</span>
+            <span class="hud-sep">|</span>
+            <div id="hud-text" class="hud-msg">INICIALIZANDO VARREDURA...</div>
+        </div>
+        <div class="hud-stats">
+            <span class="hud-data">ONLINE: <b class="pulse-green">SIM</b></span>
+            <span class="hud-data">TAXA: <b id="hud-taxa">0.8s</b></span>
+        </div>
+    </div>
+    <div class="hud-progress-wrap">
+        <div id="hud-bar" class="hud-bar-fill"></div>
+    </div>
+</div>
     </header>
 
     <main>
@@ -219,6 +373,7 @@
             </div>
             <h1><b>As melhores ofertas do</b> <br><span>BRASIL</span></h1>
             <p>Nosso algoritmo escaneia <strong>bugs de preços</strong> e ofertas exclusivas a cada segundo. O menor preço do país, agora no seu radar.</p>
+            
         </section>
 
         <section class="catalog">
@@ -275,9 +430,6 @@
 
     <script>
         const PRODUTOS = [
-            
-
-
             { nome: "Torneira Inox - Com Chuveiro e Rotação 360°", old: "R$ 65,99", new: "R$ 23,99", img: "https://down-br.img.susercontent.com/file/br-11134207-820mf-mn8kuzlnln9cb3.webp", link: "https://s.shopee.com.br/16l5B8YGB" },
             { nome: "Suporte para Escova de Dentes com Dispensador", old: "R$ 37,99", new: "R$ 13,89", img: "https://down-br.img.susercontent.com/file/br-11134207-820lh-mn3pco1qhlac0a.webp", link: "https://s.shopee.com.br/1Lc8exX1QA" },
             { nome: "Moletom Masculino Canguru - BMW ", old: "R$ 99,90", new: "R$ 61,90", img: "https://down-br.img.susercontent.com/file/sg-11134201-7rdye-mdaknemyxmux4b@resize_w450_nl.webp", link: "https://s.shopee.com.br/3B3mnEbbYQ" },
@@ -338,6 +490,72 @@
             updateUsers();
             setTimeout(toast, 3000);
         });
+        // // MOTOR DO HUD "UAI ACHEI" // //
+function ligarHud() {
+    const textoHud = document.getElementById("hud-text");
+    const barraHud = document.getElementById("hud-bar");
+    const taxaHud = document.getElementById("hud-taxa");
+
+    const eventos = [
+        "Escaneando Base Shopee...",
+        "Rastreando Menor Preço...",
+        "Verificando Cupons Ativos...",
+        "Filtrando Melhores Ofertas...",
+        "Sincronizando Banco de Dados...",
+        "Analizando Feedback de Usuários...",
+        "IA: Detectando Variação de Preço..."
+    ];
+
+    let p = 0;
+
+    setInterval(() => {
+        p += Math.random() * 40;
+        
+        if (p >= 100) {
+            p = 0;
+            // Muda a mensagem
+            textoHud.innerText = eventos[Math.floor(Math.random() * eventos.length)];
+            // Muda a taxa de processamento simulada
+            taxaHud.innerText = (0.5 + Math.random()).toFixed(1) + "s";
+        }
+        
+        barraHud.style.width = p + "%";
+    }, 1200);
+}
+
+document.addEventListener("DOMContentLoaded", ligarHud);
+function abrirInsta(){
+    document.getElementById("instaBox").classList.add("show");
+}
+
+function fecharInsta(){
+    document.getElementById("instaBox").classList.remove("show");
+
+    setTimeout(()=>{
+        abrirInsta();
+    },15000);
+}
+
+setTimeout(abrirInsta,3000);
+
+setInterval(()=>{
+    const box = document.getElementById("instaBox");
+
+    box.style.transform = "translateY(-8px)";
+
+    setTimeout(()=>{
+        box.style.transform = "translateY(0)";
+    },300);
+
+},7000);
     </script>
+<a href="https://www.instagram.com/uaiacheibr" target="_blank" class="insta-float">
+    <i class="ph-fill ph-instagram-logo"></i>
+
+    <div class="insta-text">
+        <small>Siga nosso Insta</small>
+        <strong>@uaiacheibr</strong>
+    </div>
+</a>
 </body>
 </html>
