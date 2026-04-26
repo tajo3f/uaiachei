@@ -503,11 +503,13 @@ main{
             setTimeout(toast, 10000);
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            render();
-            updateUsers();
-            setTimeout(toast, 3000);
-        });
+ document.addEventListener('DOMContentLoaded', () => {
+    render();
+    updateUsers();
+    setTimeout(toast, 3000);
+
+    ligarHud(); // 👈 ESSA LINHA ATIVA O SISTEMA
+});
         // // MOTOR DO HUD "UAI ACHEI" // //
 function ligarHud() {
     const textoHud = document.getElementById("hud-text");
