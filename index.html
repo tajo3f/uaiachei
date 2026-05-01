@@ -1,48 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uai, Achei na Shopee | Ofertas Para Todo Brasil</title>
 
-    <!-- COLE DENTRO DO <head>, LOGO ABAIXO DO <title> -->
+    <meta name="description" content="Os melhores achadinhos da internet. Promoções reais, ofertas atualizadas e produtos baratos para todo Brasil. Uai, Achei na Shopee.">
+    <meta name="keywords" content="achadinhos, promoções, ofertas, shopee, produtos baratos, descontos, compras online, casa, feminino, utilidades, brasil">
+    <meta name="author" content="Uai, Achei na Shopee">
+    <meta name="theme-color" content="#FF4500">
 
-<meta name="description" content="Os melhores achadinhos da internet. Promoções reais, ofertas atualizadas e produtos baratos para todo Brasil. Uai, Achei na Shopee.">
-
-<meta name="keywords" content="achadinhos, promoções, ofertas, shopee, produtos baratos, descontos, compras online, casa, feminino, utilidades, brasil">
-
-<meta name="author" content="Uai, Achei na Shopee">
-<meta name="robots" content="index, follow">
-<meta name="language" content="pt-BR">
-<meta name="revisit-after" content="2 days">
-<meta name="theme-color" content="#FF4500">
-
-<!-- OPEN GRAPH (WHATSAPP / FACEBOOK) -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Uai, Achei na Shopee | Achadinhos e Promoções">
-<meta property="og:description" content="Achadinhos reais, promoções atualizadas e ofertas imperdíveis para todo Brasil.">
-<meta property="og:url" content="https://tajo3f.github.io/uaiachei/">
-<meta property="og:image" content="https://tajo3f.github.io/uaiachei/LOGOMARCA%20UAI%20ACHEI.png">
-<meta property="og:locale" content="pt_BR">
-<meta property="og:site_name" content="Uai, Achei na Shopee">
-
-<!-- TWITTER / X -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Uai, Achei na Shopee">
-<meta name="twitter:description" content="Promoções reais e os melhores achadinhos do Brasil.">
-<meta name="twitter:image" content="https://tajo3f.github.io/uaiachei/LOGOMARCA%20UAI%20ACHEI.png">
-
-<!-- FAVICON -->
-<link rel="icon" type="image/x-icon" href="LOGOMARCA-UAI-ACHEI.ico">
-
-<!-- CANONICAL -->
-<link rel="canonical" href="https://tajo3f.github.io/uaiachei/">
-
-    
+    <!-- FAVICON -->
+    <link rel="icon" type="image/x-icon" href="LOGOMARCA-UAI-ACHEI.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="LOGOMARCA-UAI-ACHEI.ico">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
@@ -60,299 +31,91 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background: var(--bg); color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-        /* HEADER */
         header {
             position: fixed; top: 0; width: 100%; z-index: 1000;
             background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px);
             padding: 0.8rem 6%; border-bottom: 1px solid var(--border);
-            display: flex; justify-content: space-between; align-items: center;
+            display: flex; flex-direction: column; align-items: center;
         }
+        @media (min-width: 768px) { header { flex-direction: row; justify-content: space-between; height: 70px; } }
+
         .logo-img { height: 32px; filter: drop-shadow(0 0 8px rgba(255,69,0,0.3)); }
         
-        .insta-btn { 
-            display: flex; align-items: center; gap: 8px;
-            color: #fff; text-decoration: none; font-weight: 700; font-size: 0.75rem; 
-            background: rgba(255, 255, 255, 0.05); border: 1px solid #333; 
-            padding: 8px 16px; border-radius: 100px; transition: 0.3s;
-        }
-        .insta-btn:hover { background: #fff; color: #000; }
-        .insta-btn i { font-size: 1.1rem; }
-
-        /* HERO */
-        .hero {
-            padding: 150px 6% 40px;
-            text-align: center;
-            max-width: 1000px;
-            margin: 0 auto;
-            position: relative;
-        }
-
+        .hero { padding: 150px 6% 40px; text-align: center; max-width: 1000px; margin: 0 auto; position: relative; }
         .algo-status {
             display: inline-flex; align-items: center; gap: 8px;
             background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border);
-            padding: 8px 16px; border-radius: 100px;
-            font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
-            letter-spacing: 1px; color: #fff; margin-bottom: 20px;
+            padding: 8px 16px; border-radius: 100px; font-size: 0.7rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px; color: #fff; margin-bottom: 20px;
         }
         
-        /* Contador de Usuários Online */
-        .online-counter {
-            display: flex; align-items: center; justify-content: center; gap: 6px;
-            font-size: 0.8rem; color: var(--success); font-weight: 600; margin-bottom: 30px;
-        }
+        .online-counter { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 0.8rem; color: var(--success); font-weight: 600; margin-bottom: 30px; }
         .dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; box-shadow: 0 0 12px var(--success); animation: pulse 2s infinite; }
-
         @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.5; } 100% { transform: scale(1); opacity: 1; } }
 
-        .hero h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2.4rem, 8vw, 4rem);
-            line-height: 0.95; font-weight: 700; letter-spacing: -3px;
-            margin-bottom: 25px;
-        }
+        .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.4rem, 8vw, 4rem); line-height: 0.95; font-weight: 700; letter-spacing: -3px; margin-bottom: 25px; }
         .hero h1 b { font-weight: 300; color: var(--text-dim); letter-spacing: -1px; }
-        .hero h1 span { 
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: block;
-        }
+        .hero h1 span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block; }
+        .hero p { font-size: 1.1rem; color: var(--text-dim); max-width: 600px; margin: 0 auto; }
 
-        .hero p {
-            font-size: 1.1rem; color: var(--text-dim); font-weight: 400; line-height: 1.6;
-            max-width: 600px; margin: 0 auto;
-        }
-
-        /* CATALOGO */
-        .catalog { padding: 20px 6% 60px; max-width: 1200px; margin: 0 auto; }
+        .catalog { padding: 20px 6% 80px; max-width: 1200px; margin: 0 auto; }
         .section-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
         .section-title i { color: var(--primary); }
 
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px; 
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
 
-        .card {
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: 20px; padding: 16px; 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex; flex-direction: column;
-        }
-        .card:hover { 
-            border-color: rgba(255, 69, 0, 0.4); 
-            transform: translateY(-8px); 
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-        }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 16px; transition: 0.4s; display: flex; flex-direction: column; position: relative; }
+        .card:hover { border-color: var(--primary); transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); }
 
-        .img-box { width: 100%; aspect-ratio: 1/1; border-radius: 12px; overflow: hidden; margin-bottom: 15px; }
+        .security-status { display: flex; align-items: center; gap: 6px; font-size: 10px; font-family: 'monospace'; color: #00ff41; background: rgba(0, 255, 65, 0.05); padding: 4px 8px; border-radius: 4px; margin-bottom: 10px; border: 1px solid rgba(0, 255, 65, 0.2); }
+        .status-pulse { width: 6px; height: 6px; background: #00ff41; border-radius: 50%; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .img-box { width: 100%; aspect-ratio: 1/1; border-radius: 12px; overflow: hidden; margin-bottom: 15px; position: relative; }
         .img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .img-box::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: rgba(0, 255, 65, 0.5); box-shadow: 0 0 10px #00ff41; animation: scanLine 3s infinite linear; }
+        @keyframes scanLine { 0% { top: 0; } 100% { top: 100%; } }
+
+        .tech-details { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; padding: 8px; background: rgba(255,255,255,0.02); border-radius: 8px; font-size: 10px; color: var(--text-dim); border: 1px dashed #333; }
+        .tech-item b { display: block; color: #fff; font-size: 11px; }
 
         .card h3 { font-size: 0.9rem; font-weight: 600; height: 2.6rem; overflow: hidden; margin-bottom: 12px; }
-        .old { font-size: 0.75rem; color: var(--text-dim); text-decoration: line-through; }
-        .new { font-size: 1.8rem; font-weight: 800; color: var(--success); display: block; line-height: 1; margin-bottom: 15px; }
+        .price-tag { margin-top: auto; }
+        .old { font-size: 0.75rem; color: var(--text-dim); text-decoration: line-through; opacity: 0.5; font-family: monospace; }
+        .new { font-size: 1.8rem; font-weight: 800; color: var(--success); display: block; line-height: 1; margin-bottom: 15px; font-family: 'Space Grotesk'; }
 
-        .buy-btn {
-            display: block; width: 100%; background: var(--gradient); color: #fff;
-            text-align: center; padding: 12px; border-radius: 12px;
-            font-size: 0.85rem; font-weight: 800; text-decoration: none; text-transform: uppercase;
-        }
+        .buy-btn { display: block; width: 100%; background: #111; border: 1px solid var(--primary); color: var(--primary); text-align: center; padding: 12px; border-radius: 12px; font-size: 0.85rem; font-weight: 800; text-decoration: none; text-transform: uppercase; transition: 0.3s; }
+        .buy-btn:hover { background: var(--primary) !important; color: #000 !important; box-shadow: 0 0 15px var(--primary); }
 
-        /* DEPOIMENTOS */
-        .testimonials { padding: 60px 6%; background: rgba(255,255,255,0.02); border-top: 1px solid var(--border); }
-        .testimonials-grid { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 20px; max-width: 1200px; margin: 0 auto;
-        }
-        .testi-card {
-            background: var(--card); border: 1px solid var(--border); padding: 20px; border-radius: 20px;
-        }
-        .testi-user { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-        .user-avatar { width: 40px; height: 40px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--primary); border: 1px solid var(--primary); }
-        .testi-text { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; font-style: italic; }
-        .testi-stars { color: #FFD700; font-size: 0.8rem; margin-top: 8px; }
+        /* HUD SCANNER */
+        .hud-scanner { width: 100%; background: rgba(0, 0, 0, 0.9); border-bottom: 1px solid #222; padding: 5px 0 0 0; font-family: 'monospace'; overflow: hidden; }
+        .hud-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        .hud-label { color: #22c55e; font-weight: 900; letter-spacing: 2px; }
+        .hud-msg { color: #eee; text-transform: uppercase; font-size: 11px; min-width: 250px; }
+        .hud-bar-fill { width: 0%; height: 1px; background: #22c55e; box-shadow: 0 0 10px #22c55e; transition: width 0.4s; }
 
-        /* FOOTER */
-        footer { padding: 40px 6%; text-align: center; border-top: 1px solid var(--border); }
-        .footer-text { font-size: 0.75rem; color: var(--text-dim); }
-
-        /* TOAST */
-        .toast {
-            position: fixed; bottom: 30px; left: 30px; background: #fff; color: #000;
-            padding: 12px 20px; border-radius: 16px; z-index: 2000;
-            display: flex; align-items: center; gap: 12px; font-size: 0.8rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6); transform: translateX(-180%); transition: 0.6s;
-        }
+        .toast { position: fixed; bottom: 30px; left: 30px; background: #fff; color: #000; padding: 12px 20px; border-radius: 16px; z-index: 2000; display: flex; align-items: center; gap: 12px; font-size: 0.8rem; box-shadow: 0 20px 40px rgba(0,0,0,0.6); transform: translateX(-180%); transition: 0.6s; }
         .toast.active { transform: translateX(0); }
 
+        .insta-float { position: fixed; right: 20px; bottom: 20px; z-index: 9999; display: flex; align-items: center; gap: 12px; background: linear-gradient(135deg,#833AB4,#FD1D1D,#F77737); color: #fff; text-decoration: none; padding: 14px 18px; border-radius: 18px; box-shadow: 0 15px 35px rgba(0,0,0,.45); transition: .3s; }
+        .insta-float:hover { transform: scale(1.05); }
+
         @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-            .hero h1 { font-size: 2.5rem; }
-            .testimonials-grid { grid-template-columns: 1fr; }
+            .grid { grid-template-columns: 1fr 1fr; }
+            .hero h1 { font-size: 2rem; }
             .toast { left: 15px; right: 15px; transform: translateY(200%); }
             .toast.active { transform: translateY(0); }
         }
-        /* --- ESTILO HUD ROBÓTICO CHIQUE --- */
-.hud-scanner {
-    width: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    border-bottom: 1px solid #222;
-    padding: 5px 0 0 0;
-    font-family: 'monospace';
-    overflow: hidden;
-}
-
-.hud-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-}
-
-.hud-glitch-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 10px;
-    color: #888;
-}
-
-.hud-label {
-    color: #22c55e;
-    font-weight: 900;
-    letter-spacing: 2px;
-    text-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
-}
-
-.hud-msg {
-    color: #eee;
-    text-transform: uppercase;
-    font-size: 11px;
-    min-width: 250px;
-}
-
-.hud-stats {
-    display: flex;
-    gap: 20px;
-    font-size: 9px;
-    color: #444;
-}
-
-.hud-data b { color: #888; }
-
-.pulse-green {
-    color: #22c55e !important;
-    animation: hud-blink 1s infinite;
-}
-
-/* Barra de progresso invisível/sutil */
-.hud-progress-wrap {
-    width: 100%;
-    height: 1px;
-    background: #111;
-    margin-top: 5px;
-}
-
-.hud-bar-fill {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, #22c55e, transparent);
-    box-shadow: 0 0 10px #22c55e;
-}
-
-@keyframes hud-blink {
-    50% { opacity: 0.3; }
-}
-/* ---------------------------------- */
-.insta-float{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    z-index:9999;
-
-    display:flex;
-    align-items:center;
-    gap:12px;
-
-    background:linear-gradient(135deg,#833AB4,#FD1D1D,#F77737);
-    color:#fff;
-    text-decoration:none;
-
-    padding:14px 18px;
-    border-radius:18px;
-
-    box-shadow:0 15px 35px rgba(0,0,0,.45);
-    transition:.3s;
-    animation:instaPulse 2s infinite;
-}
-
-.insta-float:hover{
-    transform:translateY(-5px) scale(1.03);
-}
-
-.insta-float i{
-    font-size:28px;
-}
-
-.insta-text{
-    display:flex;
-    flex-direction:column;
-    line-height:1.1;
-}
-
-.insta-text small{
-    font-size:11px;
-    opacity:.9;
-}
-
-.insta-text strong{
-    font-size:14px;
-}
-
-@keyframes instaPulse{
-    50%{
-        transform:scale(1.04);
-    }
-}
-
-@media(max-width:768px){
-
-.insta-float{
-    right:15px;
-    bottom:15px;
-    padding:12px 15px;
-}
-
-.insta-text strong{
-    font-size:13px;
-}
-
-.insta-float i{
-    font-size:24px;
-}
-
-}
-body{
-    display: block;
-}
-main{
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-        @media (max-width: 768px) {
-    main{
-        width:100%;
-        padding:10px;
-    }
-
-    .grid{
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
+        /* SEÇÃO DE DEPOIMENTOS */
+        .testimonials { padding: 60px 6%; background: rgba(255,255,255,0.02); border-top: 1px solid var(--border); }
+          .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
+        .testi-card { background: #0a0a0a; border: 1px solid #1a1a1a; padding: 20px; border-radius: 24px; transition: 0.3s; position: relative; }
+           .testi-card:hover { border-color: var(--primary); background: #0f0f0f; }
+        .testi-user { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+          .user-avatar { width: 40px; height: 40px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--primary); border: 1px solid var(--primary); }
+        .verified-badge { position: absolute; top: 20px; right: 20px; display: flex; align-items: center; gap: 5px; background: rgba(34, 197, 94, 0.1); color: #22c55e; padding: 4px 10px; border-radius: 100px; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+         .unboxing-img { width: 100%; height: 180px; object-fit: cover; border-radius: 16px; margin-top: 15px; border: 1px solid #222; }
+        .testi-text { font-size: 0.9rem; color: var(--text-dim); line-height: 1.5; }
     </style>
 </head>
 <body>
@@ -365,201 +128,171 @@ main{
     <header>
         <img src="https://i.postimg.cc/NfMGQByv/Chat-GPT-Image-24-de-abr-de-2026-11-15-07.png" class="logo-img">
         <div class="hud-scanner">
-    <div class="hud-container">
-        <div class="hud-glitch-box">
-            <span class="hud-label">ROBO UAI</span>
-            <span class="hud-sep">|</span>
-            <div id="hud-text" class="hud-msg">INICIALIZANDO VARREDURA...</div>
+            <div class="hud-container">
+                <div style="display:flex; gap:10px; font-size:10px;">
+                    <span class="hud-label">SISTEMA</span>
+                    <span id="hud-text" class="hud-msg">RASTREANDO OFERTAS...</span>
+                </div>
+                <div style="font-size:9px; color:#444;">PING: <b id="hud-taxa" style="color:#22c55e">12ms</b></div>
+            </div>
+            <div id="hud-bar" class="hud-bar-fill"></div>
         </div>
-        <div class="hud-stats">
-            <span class="hud-data">ONLINE: <b class="pulse-green">SIM</b></span>
-            <span class="hud-data">TAXA: <b id="hud-taxa">0.8s</b></span>
-        </div>
-    </div>
-    <div class="hud-progress-wrap">
-        <div id="hud-bar" class="hud-bar-fill"></div>
-    </div>
-</div>
     </header>
 
     <main>
         <section class="hero">
-            <div class="algo-status">Algoritmo Curador: ON</div>
+            <div class="algo-status">Filtro Ativo: Menor Preço</div>
             <div class="online-counter">
                 <span class="dot"></span>
-                <span id="user-count">...</span> usuários monitorando agora
+                <span id="user-count">...</span> pessoas online agora
             </div>
             <h1><b>As melhores ofertas do</b> <br><span>BRASIL</span></h1>
-            <p>Nosso algoritmo escaneia <strong>bugs de preços</strong> e ofertas exclusivas a cada segundo. O menor preço do país, agora no seu radar.</p>
-            
+            <p>Nossa inteligência artificial busca <strong>bugs e promoções</strong> reais em tempo real.</p>
         </section>
 
         <section class="catalog">
-            <h2 class="section-title"><i class="ph-fill ph-lightning"></i> Achados Recentes</h2>
+            <h2 class="section-title"><i class="ph-fill ph-lightning"></i> Achados do Momento</h2>
             <div class="grid" id="grid"></div>
         </section>
-
-        <section class="testimonials">
-            <h2 class="section-title" style="justify-content: center; margin-bottom: 40px;">
-                <i class="ph-fill ph-chat-circle-text"></i> O que dizem os caçadores
-            </h2>
-            <div class="testimonials-grid">
-                <div class="testi-card">
-                    <div class="testi-user">
-                        <div class="user-avatar">JP</div>
-                        <div>
-                            <p style="font-size: 0.9rem; font-weight: 700;">João Paulo</p>
-                            <div class="testi-stars">★★★★★</div>
-                        </div>
-                    </div>
-                    <p class="testi-text">"Vi o link do tênis aqui no site, comprei pra testar e chegou certinho. Pelo preço, valeu demais"</p>
-                </div>
-                <div class="testi-card">
-                    <div class="testi-user">
-                        <div class="user-avatar">TA</div>
-                        <div>
-                            <p style="font-size: 0.9rem; font-weight: 700;">Tamiris</p>
-                            <div class="testi-stars">★★★★★</div>
-                        </div>
-                    </div>
-                    <p class="testi-text">"Sempre fico de olho no algoritmo. Já economizei mais de 300 reais em compras de casa só esse mês."</p>
-                </div>
-                <div class="testi-card">
-                    <div class="testi-user">
-                        <div class="user-avatar">RF</div>
-                        <div>
-                            <p style="font-size: 0.9rem; font-weight: 700;">Rodrigo F.</p>
-                            <div class="testi-stars">★★★★★</div>
-                        </div>
-                    </div>
-                    <p class="testi-text">"O link direto facilita muito. Não precisa ficar procurando cupom, já cai no preço baixo."</p>
-                </div>
+    </main>
+<section class="testimonials">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <div class="algo-status" style="color: var(--success); border-color: var(--success);">FEEDBACK DOS USUÁRIOS</div>
+                <h2 class="section-title" style="justify-content: center; font-size: 2rem;">Relatórios de Entrega</h2>
+            </div>
+            <div class="testimonials-grid" id="testi-grid">
+                <!-- Preenchido pelo Script -->
             </div>
         </section>
-    </main>
-
     <footer>
-        <p class="footer-text">Uai, Achei na Shopee &copy; 2026 | Tecnologia e Monitoramento Nacional</p>
+        <p style="color: #444; font-size: 12px; text-align: center; padding: 40px;">Uai, Achei na Shopee &copy; 2026 | Monitoramento Nacional</p>
     </footer>
-
-
-
-
 
     <script>
         const PRODUTOS = [
-            { nome: "Torneira Inox - Com Chuveiro e Rotação 360°", old: "R$ 65,99", new: "R$ 23,99", img: "https://down-br.img.susercontent.com/file/br-11134207-820mf-mn8kuzlnln9cb3.webp", link: "https://s.shopee.com.br/16l5B8YGB" },
-            { nome: "Suporte para Escova de Dentes com Dispensador", old: "R$ 37,99", new: "R$ 13,89", img: "https://down-br.img.susercontent.com/file/br-11134207-820lh-mn3pco1qhlac0a.webp", link: "https://s.shopee.com.br/1Lc8exX1QA" },
-            { nome: "Moletom Masculino Canguru - BMW ", old: "R$ 99,90", new: "R$ 61,90", img: "https://down-br.img.susercontent.com/file/sg-11134201-7rdye-mdaknemyxmux4b@resize_w450_nl.webp", link: "https://s.shopee.com.br/3B3mnEbbYQ" },
+            { nome: "Torneira Inox - 360°", old: "R$ 65,99", new: "R$ 23,99", img: "https://down-br.img.susercontent.com/file/br-11134207-820mf-mn8kuzlnln9cb3.webp", link: "https://s.shopee.com.br/16l5B8YGB" },
+            { nome: "Suporte Escova Dispensador", old: "R$ 37,99", new: "R$ 13,89", img: "https://down-br.img.susercontent.com/file/br-11134207-820lh-mn3pco1qhlac0a.webp", link: "https://s.shopee.com.br/1Lc8exX1QA" },
+            { nome: "Moletom BMW Canguru", old: "R$ 99,90", new: "R$ 61,90", img: "https://down-br.img.susercontent.com/file/sg-11134201-7rdye-mdaknemyxmux4b@resize_w450_nl.webp", link: "https://s.shopee.com.br/3B3mnEbbYQ" },
             { nome: "Webcam Full HD Premium", old: "R$ 45,98", new: "R$ 29,99", img: "https://i.postimg.cc/CxmwMzj1/26D99B03-723F-4826-808C-498D91AAE71B.png", link: "https://s.shopee.com.br/5q4WycRaZ9" },
-            { nome: "Jogo de Lençol de 400 Fios Micropercal C/ Fronha em Ponto Palito", old: "R$ 27,87", new: "R$ 13,90", img: "https://down-br.img.susercontent.com/file/br-11134201-23010-zuqixt5g4xmv08", link: "https://s.shopee.com.br/qfpMrgjBj" },
-            { nome: "Mesa de Cabeceira Retrô Compacta", old: "R$ 49,90", new: "R$ 32,90", img: "https://i.postimg.cc/KzNkPPw6/IMG-7183.jpg", link: "https://s.shopee.com.br/7AZryCGwZr" },
-            { nome: "Tênis de Academia O2x Original - Confortável ", old: "R$ 79,90", new: "R$ 52,99", img: "https://i.postimg.cc/MGgjZZRd/IMG-7194.jpg", link: "https://s.shopee.com.br/4fsXoUWwXz" },
-            { nome: "Caixa de Ferramentas, KIT 40 / 46 PEÇAS", old: "R$ 74,59", new: "R$ 32,98", img: "https://i.postimg.cc/0ykZYjhT/IMG-7193.jpg", link: "https://s.shopee.com.br/2LUcwDgieC" },
-            { nome: "Corretor de Postura Premium – Suporte Lombar", old: "R$ 39,99", new: "R$ 14,88", img: "https://down-br.img.susercontent.com/file/br-11134207-7r98o-lwyhrg9sci4f9e.webp", link: "https://s.shopee.com.br/808zgWoItN" },
+            { nome: "Jogo de Lençol 400 Fios", old: "R$ 27,87", new: "R$ 13,90", img: "https://down-br.img.susercontent.com/file/br-11134201-23010-zuqixt5g4xmv08", link: "https://s.shopee.com.br/qfpMrgjBj" },
+            { nome: "Mesa Cabeceira Retrô", old: "R$ 49,90", new: "R$ 32,90", img: "https://i.postimg.cc/KzNkPPw6/IMG-7183.jpg", link: "https://s.shopee.com.br/7AZryCGwZr" },
+            { nome: "Tênis Academia O2x", old: "R$ 79,90", new: "R$ 52,99", img: "https://i.postimg.cc/MGgjZZRd/IMG-7194.jpg", link: "https://s.shopee.com.br/4fsXoUWwXz" },
+            { nome: "Kit Ferramentas 46 Peças", old: "R$ 74,59", new: "R$ 32,98", img: "https://i.postimg.cc/0ykZYjhT/IMG-7193.jpg", link: "https://s.shopee.com.br/2LUcwDgieC" },
+            { nome: "Corretor Postura Premium", old: "R$ 39,99", new: "R$ 14,88", img: "https://down-br.img.susercontent.com/file/br-11134207-7r98o-lwyhrg9sci4f9e.webp", link: "https://s.shopee.com.br/808zgWoItN" }
+        ];
 
-
-        ]
-        const NOMES = [  "André Borges", "Tata", "Tusca", "Débora", "Enzo", "Flávia", "Gustavo", "Heloísa", "Igor", "Júlia",
-    "Lucas", "Mariana", "Rafael", "Camila", "Pedro", "Larissa", "Bruno", "Isabela", "Felipe", "Aline",
-    "Matheus", "Paulin", "Vinícius Marques", "Vinicin", "Amanda", "Daniel", "Bianca", "Thiago", "Letícia", "Gabriel", "Natália",
-    "João", "Laura", "Ricardo", "Patrícia", "Eduardo", "Juliana", "Diego", "Fernanda", "Caio", "Manuela",
-    "Arthur", "Nicole", "Henrique", "Valentina", "Samuel", "Carolina", "Davi", "Vitória", "Miguel", "Isadora"];
-        const CIDADES = ["Vitória", "Vila Velha", "Serra-ES", "Cariacica", "Viana", "Guarapari",
-    "Linhares", "Cachoeiro de Itapemirim", "São Mateus", "Colatina", "Aracruz",
-    "Nova Venécia", "Marataízes", "Itapemirim", "Fundão", "Santa Teresa",
-    "Afonso Cláudio", "Laranja da Terra", "Venda Nova do Imigrante",
-    "Santa Maria de Jetibá", "Domingos Martins", "Castelo", "Marechal Floriano",
-    "Baixo Guandu", "Sooretama", "Pinheiros", "Iúna", "Jerônimo Monteiro",
-    "Iconha", "Rio Bananal", "Pancas", "Rio de Janeiro", "Niterói", "São Gonçalo", "Duque de Caxias", "Nova Iguaçu","São Paulo", "Campinas", "Santos", "São Bernardo do Campo", "Osasco", "Guarulhos","Belo Horizonte", "Curitiba", "Salvador", "Recife", "Fortaleza"];
+        const NOMES = ["Carlos", "Beatriz", "Felipe", "Sofia", "Ricardo", "Elena", "Vitor", "Bruna"];
+        const CIDADES = ["São Paulo", "Rio de Janeiro", "Curitiba", "Fortaleza", "Salvador"];
 
         function render() {
-            document.getElementById('grid').innerHTML = PRODUTOS.map(p => `
-                <div class="card">
-                    <div class="img-box"><img src="${p.img}"></div>
-                    <h3>${p.nome}</h3>
-                    <div class="price-tag">
-                        <span class="old">${p.old}</span>
-                        <span class="new">${p.new}</span>
-                    </div>
-                    <a href="${p.link}" target="_blank" class="buy-btn">Resgatar Agora</a>
-                </div>
-            `).join('');
+            document.getElementById('grid').innerHTML = PRODUTOS.map(p => {
+                const hash = Math.random().toString(36).substring(7).toUpperCase();
+                return `
+                    <div class="card">
+                        <div class="security-status"><div class="status-pulse"></div>LINK ANALISADO: OK_${hash}</div>
+                        <div class="img-box"><img src="${p.img}"></div>
+                        <h3>${p.nome}</h3>
+                        <div class="tech-details">
+                            <div class="tech-item">VERIFICAÇÃO<b>CONCLUÍDA</b></div>
+                            <div class="tech-item">OFERTA<b style="color:#00ff41">ATIVA</b></div>
+                        </div>
+                        <div class="price-tag">
+                            <span class="old">DE: ${p.old}</span>
+                            <span class="new">${p.new}</span>
+                        </div>
+                        <a href="${p.link}" target="_blank" class="buy-btn">VER NA SHOPEE</a>
+                    </div>`;
+            }).join('');
         }
 
-        function updateUsers() {
-            const base = 450;
-            const variation = Math.floor(Math.random() * 50);
-            document.getElementById('user-count').innerText = base + variation;
-            setTimeout(updateUsers, 5000);
+        function ligarHud() {
+            const textoHud = document.getElementById("hud-text");
+            const barraHud = document.getElementById("hud-bar");
+            const eventos = ["ESCANEANDO...", "FILTRANDO BUGS...", "PREÇOS CHECADOS", "SERVIDORES OK"];
+            let p = 0;
+            setInterval(() => {
+                p += 10;
+                if (p > 100) { p = 0; textoHud.innerText = eventos[Math.floor(Math.random()*eventos.length)]; }
+                barraHud.style.width = p + "%";
+            }, 800);
         }
 
         function toast() {
             const el = document.getElementById('toast');
             document.getElementById('t-user').innerText = NOMES[Math.floor(Math.random()*NOMES.length)];
-            document.getElementById('t-msg').innerText = `de ${CIDADES[Math.floor(Math.random()*CIDADES.length)]} garantiu a oferta!`;
+            document.getElementById('t-msg').innerText = `acaba de aproveitar uma oferta!`;
             el.classList.add('active');
             setTimeout(() => el.classList.remove('active'), 4000);
             setTimeout(toast, 10000);
         }
 
- document.addEventListener('DOMContentLoaded', () => {
-    render();
-    updateUsers();
-    setTimeout(toast, 3000);
-
-    ligarHud(); // 👈 ESSA LINHA ATIVA O SISTEMA
-});
-        // // MOTOR DO HUD "UAI ACHEI" // //
-function ligarHud() {
-    const textoHud = document.getElementById("hud-text");
-    const barraHud = document.getElementById("hud-bar");
-    const taxaHud = document.getElementById("hud-taxa");
-
-const eventos = [
-    "Sincronizando base de dados em tempo real...",
-    "Monitorando variações de preço no catálogo...",
-    "Processando novas ofertas disponíveis...",
-    "Validando consistência dos cupons ativos...",
-    "Atualizando índice de melhores oportunidades...",
-    "Analisando histórico de preços recentes...",
-    "Detectando movimentação incomum de valores..."
-];
-
-    let p = 0;
-
-    setInterval(() => {
-        p += Math.random() * 40;
-        
-        if (p >= 100) {
-            p = 0;
-            // Muda a mensagem
-            textoHud.innerText = eventos[Math.floor(Math.random() * eventos.length)];
-            // Muda a taxa de processamento simulada
-            taxaHud.innerText = (0.5 + Math.random()).toFixed(1) + "s";
+        function updateUsers() {
+            document.getElementById('user-count').innerText = 320 + Math.floor(Math.random()*60);
+            setTimeout(updateUsers, 5000);
         }
-        
-        barraHud.style.width = p + "%";
-    }, 1200);
-}
-        // leve animação de "chamando atenção"
-setInterval(() => {
-    const box = document.querySelector(".insta-float");
-    if (box) {
-        box.style.transform = "translateY(-6px)";
-        setTimeout(() => {
-            box.style.transform = "translateY(0)";
-        }, 250);
-    }
-}, 5000);
-    </script>
-<a href="https://www.instagram.com/uaiacheibr" target="_blank" class="insta-float">
-    <i class="ph-fill ph-instagram-logo"></i>
 
-    <div class="insta-text">
-        <small>Siga nosso Insta</small>
-        <strong>@uaiacheibr</strong>
-    </div>
-</a>
+        document.addEventListener('DOMContentLoaded', () => {
+            render();
+            updateUsers();
+            ligarHud();
+            setTimeout(toast, 3000);
+        });
+        const DEPOIMENTOS = [
+            { 
+                nome: "Marcos Vinícius", 
+                cidade: "São Paulo, SP", 
+                texto: "Peguei a torneira inox por 23 reais aqui no link. Chegou em 5 dias, qualidade absurda pelo preço!", 
+                avatar: "MV", 
+                foto: "https://down-br.img.susercontent.com/file/br-11134207-820mf-mn8kuzlnln9cb3.webp" 
+            },
+            { 
+                nome: "Leticia S.", 
+                cidade: "Curitiba, PR", 
+                texto: "O moletom da BMW é muito quente e o tamanho veio certinho. O rastreio do site ajudou muito.", 
+                avatar: "LS", 
+                foto: "https://down-br.img.susercontent.com/file/sg-11134201-7rdye-mdaknemyxmux4b@resize_w450_nl.webp" 
+            },
+            { 
+                nome: "Ricardo Paiva", 
+                cidade: "Vitória, ES", 
+                texto: "A webcam full hd quebrou um galhão pro meu home office. Preço de bug mesmo, valeu demais!", 
+                avatar: "RP", 
+                foto: "https://i.postimg.cc/CxmwMzj1/26D99B03-723F-4826-808C-498D91AAE71B.png" 
+            }
+        ];
+
+        function renderTestimonials() {
+            document.getElementById('testi-grid').innerHTML = DEPOIMENTOS.map(t => `
+                <div class="testi-card">
+                    <div class="verified-badge"><i class="ph-fill ph-check-circle"></i> Recebido</div>
+                    <div class="testi-user">
+                        <div class="user-avatar">${t.avatar}</div>
+                        <div style="display:flex; flex-direction:column;">
+                            <span style="font-weight:700;">${t.nome}</span>
+                            <span style="font-size:10px; color:#555;">${t.cidade}</span>
+                        </div>
+                    </div>
+                    <p class="testi-text">"${t.texto}"</p>
+                    <img src="${t.foto}" class="unboxing-img">
+                </div>`).join('');
+        }
+
+        // Adicione renderTestimonials() dentro do seu document.addEventListener:
+        document.addEventListener('DOMContentLoaded', () => {
+            render();
+            renderTestimonials(); // Nova função aqui
+            updateUsers();
+            ligarHud();
+            setTimeout(toast, 3000);
+        });
+    </script>
+
+    <a href="https://www.instagram.com/uaiacheibr" target="_blank" class="insta-float">
+        <i class="ph-fill ph-instagram-logo" style="font-size:24px;"></i>
+        <div style="display:flex; flex-direction:column; line-height:1;">
+            <small style="font-size:10px;">Instagram</small>
+            <strong style="font-size:14px;">@uaiacheibr</strong>
+        </div>
+    </a>
 </body>
 </html>
